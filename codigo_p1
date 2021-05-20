@@ -7,7 +7,7 @@ Analisis de las condiciones de vida de la poblacion inmigrante venezolana en el 
 Integrantes(Codigo, Lider):
 
 -Aaron Naif Gonzales Torres      /   201820092        /
--
+-Jean Carlos Colmenares Vera Portocarrero  / 201820128 /
 -
 -
 -
@@ -21,7 +21,7 @@ V9 / UBIGEO (discreta de caracteres)
 V16 / P101 TIPO DE VIVIENDA (numérica discreta)
 V23 / P108 LA VIVIENDA ES (numérica discreta)
 V47 / ESTRATO_SOCIOECONOMICO (numérica discreta)
-P107/ Grupos en vivienda(númerico discreta)
+P107/ Grupos en vivienda (númerico discreta)
 
 
 

@@ -21,7 +21,7 @@ V9 / UBIGEO (discreta de caracteres)
 V16 / P101 TIPO DE VIVIENDA (numérica discreta)
 V23 / P108 LA VIVIENDA ES (numérica discreta)
 V47 / ESTRATO_SOCIOECONOMICO (numérica discreta)
-
+P107/ Grupos en vivienda(númerico discreta)
 
 
 

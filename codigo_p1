@@ -18,10 +18,11 @@ De la tabla anterior, con respecto al capitulo 100, considero que las variables 
 
 V4 / NOMBDEPA (departamento, discreta de caracteres) 
 V9 / UBIGEO (discreta de caracteres)
-V16 / P101 TIPO DE VIVIENDA (numérica discreta)
-V23 / P108 LA VIVIENDA ES (numérica discreta)
-V47 / ESTRATO_SOCIOECONOMICO (numérica discreta)
-P107/ Grupos en vivienda (númerico discreta)
+V16 / P101 TIPO DE VIVIENDA (numerica discreta)
+V23 / P108 LA VIVIENDA ES (numerica discreta)
+V47 / ESTRATO_SOCIOECONOMICO (numerica discreta)
+P107/ Grupos en vivienda (numerico discreta)
+P106 / CUANTAS HABITACIONES SE USAN EXCLUSIVAMENTE PARA DORMIR? (numerica discreta)
 
 
 

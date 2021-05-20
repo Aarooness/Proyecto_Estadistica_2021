@@ -43,4 +43,77 @@ DF <- read_csv("DataDelProyecto.csv")
 ```{r}
 DFclean <- DF %>% rename("TIPO DE VIVIENDA"=P101,"MATERIAL DE PAREDES"=P102,"MATERIAL DE TECHO   "=P103,"Material PISO"=P104,"HABITACIONES EN TOTAL SIN CONTAR EL BAÑO"=P105,"HABITACIONES EXCLUSIVAS PARA DORMIR"=P106,"LA VIVIENDA ES   "=P108," PROCEDENCIA DEL AGUA  "=P110,"ENERGIA PARA COCINAR "=P111)
 ```
+Limpiando TIPO DE VIVIENDA AKA P101
+```{r}
+DFclean <- DF %>% mutate(P101=str_replace_all(P101,"1","Casa Independiente"))
+DFclean <- DF %>% mutate(P101=str_replace_all(P101,"2","Departamento en edificio"))
+DFclean <- DF %>% mutate(P101=str_replace_all(P101,"3","Vivienda en quinta"))
+DFclean <- DF %>% mutate(P101=str_replace_all(P101,"4","Vivienda en casa de vecindad"))
+DFclean <- DF %>% mutate(P101=str_replace_all(P101,"5","Choza o cabaña"))
+DFclean <- DF %>% mutate(P101=str_replace_all(P101,"6","Vivienda Improvisada"))
+DFclean <- DF %>% mutate(P101=str_replace_all(P101,"7","Local no destinado para habitación humana"))
+DFclean <- DF %>% mutate(P101=str_replace_all(P101,"8","Otro"))
+```
+LIMPIANDO MATERIAL DE PAREDES AKA P102
+```{r}
+DFclean <- DF %>% mutate(P102=str_replace_all(P102,"1","Ladrillo o bloque de cemento "))
+DFclean <- DF %>% mutate(P102=str_replace_all(P102,"2","Piedra, sillar con cal o cemento "))
+DFclean <- DF %>% mutate(P102=str_replace_all(P102,"3","Adobe "))
+DFclean <- DF %>% mutate(P102=str_replace_all(P102,"4","Tapia "))
+DFclean <- DF %>% mutate(P102=str_replace_all(P102,"5","Quincha (caña con barro) "))
+DFclean <- DF %>% mutate(P102=str_replace_all(P102,"6","Piedra con barro"))
+DFclean <- DF %>% mutate(P102=str_replace_all(P102,"7","Madera "))
+DFclean <- DF %>% mutate(P102=str_replace_all(P102,"8","Estera/ triplay/ calamina "))
+DFclean <- DF %>% mutate(P102=str_replace_all(P102,"9","Otro materia "))
+```
+LIMPIANDO MATERIAL DE TECHO AKA P103
+```{r}
+DFclean <- DF %>% mutate(P103=str_replace_all(P103,"1","Concreto armado"))
+DFclean <- DF %>% mutate(P103=str_replace_all(P103,"2","Madera"))
+DFclean <- DF %>% mutate(P103=str_replace_all(P103,"3","Tejas"))
+DFclean <- DF %>% mutate(P103=str_replace_all(P103,"4","Planchas de calamina, fibra de cemento o similares"))
+DFclean <- DF %>% mutate(P103=str_replace_all(P103,"5","Caña o estera con torta de barro o cemento"))
+DFclean <- DF %>% mutate(P103=str_replace_all(P103,"6","Triplay/ Estera/carrizo"))
+DFclean <- DF %>% mutate(P103=str_replace_all(P103,"7","Paja, hojas de palmera, etc"))
+DFclean <- DF %>% mutate(P103=str_replace_all(P103,"8","Otro material"))
+```
+LIMPIANDO MATERRAIL DE PISO AKA 104
+```{r}
+DFclean <- DF %>% mutate(P104=str_replace_all(P104,"1","Parquet o madera pulida"))
+DFclean <- DF %>% mutate(P104=str_replace_all(P104,"2","Laminas asfálticas, vinilicos o similares"))
+DFclean <- DF %>% mutate(P104=str_replace_all(P104,"3","Losetas, terrazos o similares"))
+DFclean <- DF %>% mutate(P104=str_replace_all(P104,"4","Madera (pona, tornillo,etc.)"))
+DFclean <- DF %>% mutate(P104=str_replace_all(P104,"5","Cemento"))
+DFclean <- DF %>% mutate(P104=str_replace_all(P104,"6","Tierra"))
+DFclean <- DF %>% mutate(P104=str_replace_all(P104,"7","Otro material"))
+```
+LIMPIANDO LA VIVIENDA ES AKA 108
+```{r}
+DFclean <- DF %>% mutate(P108=str_replace_all(P108,"1","Alquilada"))
+DFclean <- DF %>% mutate(P108=str_replace_all(P108,"2","Hogar temporal"))
+DFclean <- DF %>% mutate(P108=str_replace_all(P108,"3","Cedida por otro hogar"))
+DFclean <- DF %>% mutate(P108=str_replace_all(P108,"4","Vivienda propia"))
+DFclean <- DF %>% mutate(P108=str_replace_all(P108,"5","Albergue"))
+DFclean <- DF %>% mutate(P108=str_replace_all(P108,"6","Otro"))
+```
+PROCEDENCIA DEL AGUA AKA 110
+```{r}
+DFclean <- DF %>% mutate(P110=str_replace_all(P110,"1","Red publica, dentro de la vivienda"))
+DFclean <- DF %>% mutate(P110=str_replace_all(P110,"2","Red publica, fuera de la vivienda pero dentro del edificio"))
+DFclean <- DF %>% mutate(P110=str_replace_all(P110,"3","Pilon o pileta de uso publico"))
+DFclean <- DF %>% mutate(P110=str_replace_all(P110,"4","Camión cisterna u otro simila"))
+DFclean <- DF %>% mutate(P110=str_replace_all(P110,"5","Pozo"))
+DFclean <- DF %>% mutate(P110=str_replace_all(P110,"6","Manantial o puquio"))
+DFclean <- DF %>% mutate(P110=str_replace_all(P110,"7","Rio, acequia, lago, laguna"))
+DFclean <- DF %>% mutate(P110=str_replace_all(P110,"8","Otro"))
+
+```
+ENERGIA PARA COCINAR AKA 110
+```{r}
+DFclean <- DF %>% mutate(P111=str_replace_all(P111,"1","Electricidad"))
+DFclean <- DF %>% mutate(P111=str_replace_all(P111,"2","Gas"))
+DFclean <- DF %>% mutate(P111=str_replace_all(P111,"3","Gas natural"))
+DFclean <- DF %>% mutate(P111=str_replace_all(P111,"4","Otro"))
+DFclean <- DF %>% mutate(P111=str_replace_all(P111,"5","NO COCINAN"))
+```
 

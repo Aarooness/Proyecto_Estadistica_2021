@@ -118,7 +118,7 @@ DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"4","Otro"))
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"5","NO COCINAN"))
 ```
-=====================================================
+
 DESCRIPTORES NUMERICOS
 
 1.Moda y media de las habitaciones usadas para dormir
@@ -140,7 +140,7 @@ La mediana del numero de grupos que habitan un tipo de vivienda es de solo uno p
 
 
 
-=====================================================
+
 
 DESCRIPTORES GRAFICOS
 

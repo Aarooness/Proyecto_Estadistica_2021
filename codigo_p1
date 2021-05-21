@@ -144,17 +144,32 @@ La mediana del numero de grupos que habitan un tipo de vivienda es de solo uno p
 
 DESCRIPTORES GRAFICOS
 
-Tabla de frecuancias de tipo de vivienda
+1.Tabla de frecuancias de tipo de vivienda
 ```{r}
-
 sum(table(DFclean$`TIPO_VIVIENDA`))->n
 
 rf<-table(DFclean$`TIPO_VIVIENDA`)/n
 
 barplot(rf,las=2,main = "Tabla de frecuancias de tipo de vivienda",cex.lab=0.5)
-
 ```
-Caja de bigotes de habitaciones para dormir y gupos familiares en una vivienda
+
+2. Mosaico del numero de grupos en la vivida por el tipo de vivienda
+
+```{r}
+AB <- table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS)
+AB
+Colores<-{}
+Colores["1"]<-"lightblue"
+Colores["2"]<-"lightyellow"
+Colores["3"]<-"lightgreen"
+Colores["4"]<-"grey"
+Colores["5"]<-"chocolate4"
+
+mosaicplot(table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS),col=Colores[dimnames(AB)[[2]]],main="Numero de grupos VS Viviendas")
+```
+
+
+3. Caja de bigotes de habitaciones para dormir y gupos familiares en una vivienda
 ```{r}
 boxplot(DFclean$"HAB_DORMIR" ~ DFclean$"NUB_GRUPOS",ylab = "Habitacion para dormir",xlab = "Grupos de personas")
 

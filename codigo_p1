@@ -1,36 +1,48 @@
 
 
-Analisis de las condiciones de vida de la poblacion inmigrante venezolana en el ultimo mes del año 2018
+Análisis de las condiciones de vida de la población inmigrante venezolana en el ultimo mes del año 2018
 
-=====================================================
+
 
 Integrantes(Codigo, Lider):
 
 -Aaron Naif Gonzales Torres                 / 201820092 /
+
 -Jean Carlos Colmenares Vera Portocarrero   / 201820128 /
+
 -Andre Brian Bejarano Oliveira              / 201820035 /
--Hector Alexis Retamozo Ccorahua            / 201820108 /            
+
+-Hector Alexis Retamozo Ccorahua            / 201820108 /  Líder   
+
 -Viviana Maria Chacchi Guillen              / 201820039 /
 
-=====================================================
+
 INTRODUCCION 
-Actualmente Venezuela atraviesa una crisis socioeconómica y politica caracterizada por pobreza, escasez de alimentos y medicinas, aumento de la violencia 
-e inseguridad. Esro ha generado una migracion masiva a diferentes paises epara buscar mejores oportunidades. De esta forma, se estima que entre el 2015 y 2018
-emigraron alrededor de 3 millones de venezolanos, de los cuales 450.000 ingresaron al Peru, convirtiendose en el segundo pais que ha recibido mayor cantidad de 
+
+
+Actualmente Venezuela atraviesa una crisis socioeconómica y política caracterizada por pobreza, escasez de alimentos y medicinas, aumento de la violencia 
+e inseguridad. Esto ha generado una migración masiva a diferentes países para buscar mejores oportunidades. De esta forma, se estima que entre el 2015 y 2018
+emigraron alrededor de 3 millones de venezolanos, de los cuales 450.000 ingresaron al Peru, convirtiéndose en el segundo país que ha recibido mayor cantidad de 
 venezolanos luego de Colombia. Lo cual se vio reflejado en el censo del año posterior del 2017, cuya población del Perú aumentó alrededor de 1 millón de habitantes, 
 de los cuales alrededor de 300 000 eran peruanos, y el resto eran inmigrantes de Venezuela. No cabe duda de que la situación de los refugiados venezolanos y la 
-inmigración en Perú en 2021 enfrentará una serie de importantes desafios. Por ello, el Plan Internacional sigue trabajando con estas comunidades para promover el 
+inmigración en Perú en 2021 enfrentará una serie de importantes desafíos. Por ello, el Plan Internacional sigue trabajando con estas comunidades para promover el 
 desarrollo infantil y juvenil, la igualdad de género y la protección frente a todo tipo de violencia, y contribuir a una mejor convivencia e integración con el país.
+El tamaño de la muestra total es de 3 611 viviendas con población venezolana. El 48,2% (1 740) de la muestra corresponde a la provincia de Lima. 
+
+La fuente es extraída de la base de datos de la INEI de Perú.
+
+Muestreo por conveniencia
 
 
-OBJETIVO
-Este trabajo de investigación busca evidenciar la calidad de vida de los inmigrantes venezolanos en función del número de personas que conviven en cada familia.
-También se busca Informar sobre los tipos de materiales que utilizan en sus residencias en el Perú.
+OBJETIVOS
 
+- Se busca evidenciar la calidad de vida de los inmigrantes venezolanos en funcion del numero de personas que conviven en cada familia.
 
+- Recopilar informacion sobre los tipos de materiales de los que estan hechas sus residencias en el Peru.
 
+- Identificar el numero de habitantes venezolanos por cada vivienda y sus respectivas condiciones.
 
-//Aquí actualizaen constantemente los puntos correspondientes a la p1
+//Aquí actualizan constantemente los puntos correspondientes a la p1
 ```{r}
 library(readr)
 library(dplyr)
@@ -40,21 +52,20 @@ library(stringr)
 ```{r}
 DF <- read_csv("DataDelProyecto.csv")
 DF
+
 ```
 
 VARIABLES DE ESTUDIO
 
 Con respecto a la data obtenida, las variables significativas, así como sus diferentes atributos, se describen en la siguiente tabla. 
 
-Las librerías _data.table_ y _formattable_ son útiles para elaborar esta tabla, por lo que a continuación se cargan. Si no se tienen disponibles, es necesario instalarlas antes.
+Las librerías _data.table_ y _formattable_ son útiles para elaborar esta tabla, por lo que a continuación se instalan y cargan
 ```{r}
 library(data.table)
 library(formattable)
 ```
 
-**ESTO LO BORRAN CUANDO HAYAN REVISADO ESTO** 
 
-Hay variables, como el material de las paredes o el del tipo de vivienda, en el que se podría pensar que son de tipo categórico. Sin embargo, en las encuestas se le asignan valores a las respuestas en donde, por ejemplo, un _1_ equivaldría a _Alquilado_. En este sentido, consideré a estas variables del primer tipo pero con restricciones de valor numérico)
 
 A continuación se muestra la elaboración de la tabla
 ```{r}
@@ -72,14 +83,12 @@ formattable(x,align=c('c','c','c'))
 
 En esta parte se renombran las variables a trabajar de la tabla de datos __DF__
 
-```{r}
-DF= rename(DF,c(P101="TIPO_VIVIENDA",P102="MAT_PAREDES",P103="MAT_TECHO",P104="MAT_PISO",P105="HAB_SIN_BAÑO",P106="HAB_DORMIR",P108="VIVIENDA_ES",P110="PROCEDENCIA_AGUA",P111="ENERGIA_COCINAR",P107="NUM_GRUPOS"))-> DFclean
-DFclean
-```
+
 ```{r}
 DF= rename(DF,c("TIPO_VIVIENDA"=P101,"MAT_PAREDES"=P102,"MAT_TECHO"=P103,"MAT_PISO"=P104,"HAB_SIN_BAÑO"=P105,"HAB_DORMIR"=P106,"VIVIENDA_ES"=P108,"PROCEDENCIA_AGUA"=P110,"ENERGIA_COCINAR"=P111,"NUM_GRUPOS"=P107))-> DFclean
 DFclean
 ```
+
 
 Limpiando TIPO DE VIVIENDA AKA P101.
 ```{r}
@@ -157,15 +166,15 @@ DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR
 
 DESCRIPTORES NUMERICOS
 
-1.Moda y media de las habitaciones usadas para dormir
+1.Moda y mediana de las habitaciones usadas para dormir
 
 ```{r}
 summary(DFclean$HAB_DORMIR,na.rm=TRUE)
 table(DFclean$HAB_DORMIR)
 ```
-Se aprecia que el numero de habitaciones que los encuestados utilizan exclusivamente para dormir, independientemente del numero de grupos que habitan la vivienda, es mayormente de una sola habitación.
+Se aprecia que el número de habitaciones que los encuestados utilizan exclusivamente para dormir, independientemente del numero de grupos que habitan la vivienda, es mayormente de una sola habitación.
 
-2. Moda y media del número de grupos que habitan la vivienda
+2. Moda y mediana del número de grupos que habitan la vivienda
 
 ```{r}
 summary(DFclean$NUM_GRUPOS,na.rm=TRUE)
@@ -180,7 +189,7 @@ La mediana del numero de grupos que habitan un tipo de vivienda es de solo uno p
 
 DESCRIPTORES GRAFICOS
 
-1.Tabla de frecuancias de tipo de vivienda
+1.Tabla de frecuencias de tipo de vivienda
 ```{r}
 sum(table(DFclean$TIPO_VIVIENDA))->n
 

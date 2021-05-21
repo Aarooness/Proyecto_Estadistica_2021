@@ -1,7 +1,8 @@
-Presentación 1
+Presentacion 1
 ========================================================
-author: Equipo 09 Sección 02 EyP
+author: Equipo 09 Seccion 02 EyP
 date: 21/05/2021
+autosize: TRUE
 ---
 
 
@@ -10,28 +11,51 @@ Integrantes
 ========================================================
  --
  
-- André Bejarano
+- Andre Bejarano
 - Viviana Chacchi
 - Jean Colmenares
 - Aaron Gonzales
-- Hector Retamozo / __Líder__
+- Hector Retamozo / __Lider__
 
 
 Tema del proyecto
 ========================================================
-_Análisis de las condiciones de vida de la población migrante venezolana en el año 2018 en el Perú_
+_Analisis de las condiciones de vida de la poblacion migrante venezolana en el año 2018 en el Perú_
 
-Actualmente Venezuela atraviesa una crisis socioeconómica y política caracterizada por pobreza, escasez de alimentos y medicinas, aumento de la violencia e inseguridad. Esto ha generado una migración masiva a diferentes países para buscar mejores oportunidades. De esta forma, se estima que entre el 2015 y 2018 emigraron 
+Actualmente Venezuela atraviesa una crisis socioeconomica y politica con efectos multidimensionales. Esto ha generado una migracion masiva a diferentes paises para buscar una mejor calidad de vida. De esta forma, se estima que entre el 2015 y 2018 emigraron alrededor de 3 millones de venezolanos, de los cuales 450.000 ingresaron al Peru.
 
-alrededor de 3 millones de venezolanos, de los cuales 450.000 ingresaron al Perú,
---
-
-convirtiéndose en el segundo país que ha recibido mayor cantidad de venezolanos luego de Colombia. Por ello, es importante analizar el impacto que ha tenido la migración en las condiciones de vida, en especial el lugar de vivienda.
-
+Por ello, es importante analizar el impacto que ha tenido la migracion en las condiciones de vida, en especial el lugar de vivienda.
 
 Objetivos del proyecto
 ========================================================
 
+Este trabajo de investigacion busca evidenciar la calidad de vida de los inmigrantes venezolanos en funcion del numero de personas que conviven en cada familia.
+Tambien se busca informar sobre los tipos de materiales que utilizan en sus residencias en el Peru.
 
-Objetivos del proyecto
+
+Librerias utilizadas
 ========================================================
+```{r,echo=TRUE}
+library(readr)
+library(dplyr)
+library(stringr)
+library(pander)
+library(data.table)
+library(formattable)
+library(knitr)
+```
+
+Variables de estudio
+========================================================
+```{r, echo=FALSE}
+c1<-c("DEPARTAMENTO","DISTRITO","ESTRATO_SOCIOECONOMICO","TIPO_VIVIENDA","MAT_PAREDES","MAT_TECHO","MAT_PISO","HAB_SIN_BAÑO","HAB_DORMIR","VIVIENDA_ES","PROCEDENCIA_AGUA","ENERGIA_COCINAR","NUM_GRUPOS")
+
+c2<-c("Categorica ordinal","Categorica ordinal","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Categorico ordinal","Numerica discreta","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Numerica discreta")
+
+c3 <-c("Arequipa, Callao, Cusco, La Libertad, Lima, Tumbes","Distritos de cada provincia","Entero no negativo menor a 4","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo","Entero no negativo","Entero no negativo menor a 7","Entero no negativo menor a 10","Entero no negativo menor a 6","Entero no negativo")
+
+
+x<-data.table("Nombre_de_la_variable"=c1,"Tipo_de_la_variable"=c2,"Restricciones"=c3)
+formattable(x,align=c('c','c','c'))
+```
+

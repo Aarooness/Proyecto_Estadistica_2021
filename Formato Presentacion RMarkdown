@@ -1,8 +1,7 @@
-Presentacion 1
+Presentacion P1
 ========================================================
 author: Equipo 09 Seccion 02 EyP
 date: 21/05/2021
-autosize: TRUE
 ---
 
 
@@ -20,42 +19,194 @@ Integrantes
 
 Tema del proyecto
 ========================================================
-_Analisis de las condiciones de vida de la poblacion migrante venezolana en el año 2018 en el Perú_
+_Analisis de las condiciones de vida de la poblacion migrante venezolana en el año 2018 en el Peru_
 
-Actualmente Venezuela atraviesa una crisis socioeconomica y politica con efectos multidimensionales. Esto ha generado una migracion masiva a diferentes paises para buscar una mejor calidad de vida. De esta forma, se estima que entre el 2015 y 2018 emigraron alrededor de 3 millones de venezolanos, de los cuales 450.000 ingresaron al Peru.
+Actualmente Venezuela atraviesa una crisis socioeconomica y politica con efectos multidimensionales. Esto ha generado una migracion masiva a diferentes paises para buscar una mejor calidad de vida. Se estima que entre el 2015 y 2018, 450.000 ingresaron al Peru.
 
-Por ello, es importante analizar el impacto que ha tenido la migracion en las condiciones de vida, en especial el lugar de vivienda.
+El tamaño de la muestra total es de 3 611 viviendas con poblacion venezolana. El 48,2% (1 740) de la muestra corresponde a la provincia de Lima. 
+
+La fuente es extraida de la base de datos de la INEI de Peru.
+
+Muestreo por conveniencia
+--
+
 
 Objetivos del proyecto
 ========================================================
 
-Este trabajo de investigacion busca evidenciar la calidad de vida de los inmigrantes venezolanos en funcion del numero de personas que conviven en cada familia.
-Tambien se busca informar sobre los tipos de materiales que utilizan en sus residencias en el Peru.
+- Se busca evidenciar la calidad de vida de los inmigrantes venezolanos en funcion del numero de personas que conviven en cada familia.
+
+- Recopilar informacion sobre los tipos de materiales de los que estan hechas sus residencias en el Peru.
+
+- Identificar el numero de habitantes venezolanos por cada vivienda y sus respectivas condiciones.
 
 
-Librerias utilizadas
+Inicializamos los datos
 ========================================================
-```{r,echo=TRUE}
+
+```{r}
 library(readr)
 library(dplyr)
 library(stringr)
-library(pander)
 library(data.table)
 library(formattable)
-library(knitr)
+
+```
+```{r}
+DF <- read_csv("DataDelProyecto.csv")
+
 ```
 
 Variables de estudio
 ========================================================
-```{r, echo=FALSE}
+- Con respecto a la data obtenida, las variables significativas, asi como sus diferentes atributos, se describen en la siguiente tabla. 
+```{r,echo=FALSE}
 c1<-c("DEPARTAMENTO","DISTRITO","ESTRATO_SOCIOECONOMICO","TIPO_VIVIENDA","MAT_PAREDES","MAT_TECHO","MAT_PISO","HAB_SIN_BAÑO","HAB_DORMIR","VIVIENDA_ES","PROCEDENCIA_AGUA","ENERGIA_COCINAR","NUM_GRUPOS")
 
-c2<-c("Categorica ordinal","Categorica ordinal","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Categorico ordinal","Numerica discreta","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Numerica discreta")
+c2<-c("Categorica_ordinal","Categorica ordinal","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Categorico ordinal","Numerica discreta","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Numerica discreta")
 
 c3 <-c("Arequipa, Callao, Cusco, La Libertad, Lima, Tumbes","Distritos de cada provincia","Entero no negativo menor a 4","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo","Entero no negativo","Entero no negativo menor a 7","Entero no negativo menor a 10","Entero no negativo menor a 6","Entero no negativo")
-
-
 x<-data.table("Nombre_de_la_variable"=c1,"Tipo_de_la_variable"=c2,"Restricciones"=c3)
 formattable(x,align=c('c','c','c'))
 ```
+Limpieza de datos
+========================================================
 
+- Nuestro dataframe contiene 50 variables y 3713 observaciones.
+
+- Utilizamos el comando "rename" y asignamos nuestra data frame DF a un nuevo data frame "DFclean"
+```{r}
+DF= rename(DF,c("TIPO_VIVIENDA"=P101,"MAT_PAREDES"=P102,"MAT_TECHO"=P103,"MAT_PISO"=P104,"HAB_SIN_BAÑO"=P105,"HAB_DORMIR"=P106,"VIVIENDA_ES"=P108,"PROCEDENCIA_AGUA"=P110,"ENERGIA_COCINAR"=P111,"NUM_GRUPOS"=P107))-> DFclean
+
+```
+
+```{r,echo=FALSE}
+DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"1","Casa Independiente"))
+DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"2","Departamento en edificio"))
+DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"3","Vivienda en quinta"))
+DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"4","Vivienda en casa de vecindad"))
+DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"5","Choza o cabaña"))
+DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"6","Vivienda Improvisada"))
+DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"7","Local no destinado para habitación humana"))
+DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"8","Otro"))
+```
+
+```{r,echo=FALSE}
+DFclean <- DFclean %>% mutate(`MAT_PAREDES`=str_replace_all(`MAT_PAREDES`,"1","Ladrillo o bloque de cemento "))
+DFclean <- DFclean %>% mutate(`MAT_PAREDES`=str_replace_all(`MAT_PAREDES`,"2","Piedra, sillar con cal o cemento "))
+DFclean <- DFclean %>% mutate(`MAT_PAREDES`=str_replace_all(`MAT_PAREDES`,"3","Adobe "))
+DFclean <- DFclean %>% mutate(`MAT_PAREDES`=str_replace_all(`MAT_PAREDES`,"4","Tapia "))
+DFclean <- DFclean %>% mutate(`MAT_PAREDES`=str_replace_all(`MAT_PAREDES`,"5","Quincha (caña con barro) "))
+DFclean <- DFclean %>% mutate(`MAT_PAREDES`=str_replace_all(`MAT_PAREDES`,"6","Piedra con barro"))
+DFclean <- DFclean %>% mutate(`MAT_PAREDES`=str_replace_all(`MAT_PAREDES`,"7","Madera "))
+DFclean <- DFclean %>% mutate(`MAT_PAREDES`=str_replace_all(`MAT_PAREDES`,"8","Estera/ triplay/ calamina "))
+DFclean <- DFclean %>% mutate(`MAT_PAREDES`=str_replace_all(`MAT_PAREDES`,"9","Otro materia "))
+```
+
+```{r,echo=FALSE}
+DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"1","Concreto armado"))
+DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"2","Madera"))
+DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"3","Tejas"))
+DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"4","Planchas de calamina, fibra de cemento o similares"))
+DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"5","Caña o estera con torta de barro o cemento"))
+DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"6","Triplay/ Estera/carrizo"))
+DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"7","Paja, hojas de palmera, etc"))
+DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"8","Otro material"))
+```
+
+```{r,echo=FALSE}
+DFclean <- DFclean %>% mutate(`MAT_PISO`=str_replace_all(`MAT_PISO`,"1","Parquet o madera pulida"))
+DFclean <- DFclean %>% mutate(`MAT_PISO`=str_replace_all(`MAT_PISO`,"2","Laminas asfálticas, vinilicos o similares"))
+DFclean <- DFclean %>% mutate(`MAT_PISO`=str_replace_all(`MAT_PISO`,"3","Losetas, terrazos o similares"))
+DFclean <- DFclean %>% mutate(`MAT_PISO`=str_replace_all(`MAT_PISO`,"4","Madera (pona, tornillo,etc.)"))
+DFclean <- DFclean %>% mutate(`MAT_PISO`=str_replace_all(`MAT_PISO`,"5","Cemento"))
+DFclean <- DFclean %>% mutate(`MAT_PISO`=str_replace_all(`MAT_PISO`,"6","Tierra"))
+DFclean <- DFclean %>% mutate(`MAT_PISO`=str_replace_all(`MAT_PISO`,"7","Otro material"))
+```
+
+```{r,echo=FALSE}
+DFclean <- DFclean %>% mutate(`VIVIENDA_ES`=str_replace_all(`VIVIENDA_ES`,"1","Alquilada"))
+DFclean <- DFclean %>% mutate(`VIVIENDA_ES`=str_replace_all(`VIVIENDA_ES`,"2","Hogar temporal"))
+DFclean <- DFclean %>% mutate(`VIVIENDA_ES`=str_replace_all(`VIVIENDA_ES`,"3","Cedida por otro hogar"))
+DFclean <- DFclean %>% mutate(`VIVIENDA_ES`=str_replace_all(`VIVIENDA_ES`,"4","Vivienda propia"))
+DFclean <- DFclean %>% mutate(`VIVIENDA_ES`=str_replace_all(`VIVIENDA_ES`,"5","Albergue"))
+DFclean <- DFclean %>% mutate(`VIVIENDA_ES`=str_replace_all(`VIVIENDA_ES`,"6","Otro"))
+```
+
+```{r,echo=FALSE}
+DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AGUA`,"1","Red publica, dentro de la vivienda"))
+DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AGUA`,"2","Red publica, fuera de la vivienda pero dentro del edificio"))
+DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AGUA`,"3","Pilon o pileta de uso publico"))
+DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AGUA`,"4","Camión cisterna u otro simila"))
+DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AGUA`,"5","Pozo"))
+DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AGUA`,"6","Manantial o puquio"))
+DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AGUA`,"7","Rio, acequia, lago, laguna"))
+DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AGUA`,"8","Otro"))
+
+```
+
+```{r,echo=FALSE}
+DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"1","Electricidad"))
+DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"2","Gas"))
+DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"3","Gas natural"))
+DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"4","Otro"))
+DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"5","NO COCINAN"))
+```
+Descriptores Numericos
+========================================================
+
+
+Moda y mediana de las habitaciones usadas para dormir
+========================================================
+
+
+```{r,echo=FALSE}
+summary(DFclean$HAB_DORMIR,na.rm=TRUE)
+table(DFclean$HAB_DORMIR)
+```
+- Se aprecia que el numero de habitaciones que los encuestados utilizan exclusivamente para dormir, independientemente del numero de grupos que habitan la vivienda, es mayormente de una sola habitacion.
+
+Moda y mediana del numero de grupos que habitan la vivienda
+========================================================
+
+```{r,echo=FALSE}
+summary(DFclean$NUM_GRUPOS,na.rm=TRUE)
+table(DFclean$NUM_GRUPOS)
+```
+- La mediana del numero de grupos que habitan un tipo de vivienda es de solo uno por vivienda.
+
+Descriptores Graficos
+========================================================
+
+Tabla de frecuancias de tipo de vivienda
+========================================================
+```{r,echo=FALSE}
+sum(table(DFclean$TIPO_VIVIENDA))->n
+
+rf<-table(DFclean$TIPO_VIVIENDA)/n
+
+barplot(rf,las=2,main = "Tabla de frecuancias de tipo de vivienda",cex.lab=0.5)
+```
+
+
+Mosaico numero de grupos en la vivienda por el tipo de vivienda
+========================================================
+```{r,echo=FALSE}
+AB <- table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS)
+
+Colores<-{}
+Colores["1"]<-"lightblue"
+Colores["2"]<-"lightyellow"
+Colores["3"]<-"lightgreen"
+Colores["4"]<-"grey"
+Colores["5"]<-"chocolate4"
+
+mosaicplot(table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS),col=Colores[dimnames(AB)[[2]]],main="Numero de grupos VS Viviendas")
+```
+
+Caja de bigotes de habitaciones para dormir y grupos familiares en una vivienda
+========================================================
+```{r,echo=FALSE}
+boxplot(DFclean$HAB_DORMIR ~ DFclean$NUM_GRUPOS,ylab = "Habitacion para dormir",xlab = "Grupos de personas")
+
+```

@@ -8,6 +8,8 @@ date: 21/05/2021
 
 Integrantes
 ========================================================
+ --
+ 
 - André Bejarano
 - Viviana Chacchi
 - Jean Colmenares
@@ -15,17 +17,21 @@ Integrantes
 - Hector Retamozo / __Líder__
 
 
-Slide With Code
+Tema del proyecto
+========================================================
+_Análisis de las condiciones de vida de la población migrante venezolana en el año 2018 en el Perú_
+
+Actualmente Venezuela atraviesa una crisis socioeconómica y política caracterizada por pobreza, escasez de alimentos y medicinas, aumento de la violencia e inseguridad. Esto ha generado una migración masiva a diferentes países para buscar mejores oportunidades. De esta forma, se estima que entre el 2015 y 2018 emigraron 
+
+alrededor de 3 millones de venezolanos, de los cuales 450.000 ingresaron al Perú,
+--
+
+convirtiéndose en el segundo país que ha recibido mayor cantidad de venezolanos luego de Colombia. Por ello, es importante analizar el impacto que ha tenido la migración en las condiciones de vida, en especial el lugar de vivienda.
+
+
+Objetivos del proyecto
 ========================================================
 
-```{r}
-summary(cars)
-```
 
-Slide With Plot
+Objetivos del proyecto
 ========================================================
-
-```{r, echo=FALSE}
-plot(cars)
-```
-

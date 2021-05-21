@@ -14,17 +14,6 @@ Integrantes(Codigo, Lider):
 
 =====================================================
 
-De la tabla anterior, con respecto al capitulo 100, considero que las variables importantes son las siguientes:
-
-V4 / NOMBDEPA (departamento, discreta de caracteres) 
-V9 / UBIGEO (discreta de caracteres)
-V16 / P101 TIPO DE VIVIENDA (numerica discreta)
-V23 / P108 LA VIVIENDA ES (numerica discreta)
-V47 / ESTRATO_SOCIOECONOMICO (numerica discreta)
-P107/ Grupos en vivienda (numerico discreta)
-P106 / CUANTAS HABITACIONES SE USAN EXCLUSIVAMENTE PARA DORMIR? (numerica discreta)
-
-
 
 //Aquí actualizaen constantemente los puntos correspondientes a la p1
 ```{r}
@@ -38,11 +27,42 @@ DF <- read_csv("DataDelProyecto.csv")
 DF
 ```
 
+VARIABLES DE ESTUDIO
+
+Con respecto a la data obtenida, las variables significativas, así como sus diferentes atributos, se describen en la siguiente tabla. 
+
+Las librerías _data.table_ y _formattable_ son útiles para elaborar esta tabla, por lo que a continuación se instalan y cargan
+```{r}
+install.packages("data.table")
+install.packages("formattable")
+library(data.table)
+libraty(formattable)
+```
+
+**ESTO LO BORRAN CUANDO HAYAN REVISADO ESTO** 
+
+Hay variables, como el material de las paredes o el del tipo de vivienda, en el que se podría pensar que son de tipo categórico. Sin embargo, en las encuestas se le asignan valores a las respuestas en donde, por ejemplo, un _1_ equivaldría a _Alquilado_. En este sentido, consideré a estas variables del primer tipo pero con restricciones de valor numérico)
+
+A continuación se muestra la elaboración de la tabla
+```{r}
+
+c1<-c("DEPARTAMENTO","DISTRITO","ESTRATO_SOCIOECONOMICO","TIPO_VIVIENDA","MAT_PAREDES","MAT_TECHO","MAT_PISO","HAB_SIN_BAÑO","HAB_DORMIR","VIVIENDA_ES","PROCEDENCIA_AGUA","ENERGIA_COCINAR","NUM_GRUPOS")
+
+c2<-c("Categorica_ordinal","Categorica ordinal","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Categorico ordinal","Numerica discreta","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Numerica discreta")
+
+c3 <-c("Arequipa, Callao, Cusco, La Libertad, Lima, Tumbes","Distritos de cada provincia","Entero no negativo menor a 4","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo","Entero no negativo","Entero no negativo menor a 7","Entero no negativo menor a 10","Entero no negativo menor a 6","Entero no negativo")
+
+
+x<-data.table("Nombre_de_la_variable"=c1,"Tipo_de_la_variable"=c2,"Restricciones"=c3)
+formattable(x,align=c('c','c','c'))
+```
+
+En esta parte se renombran las variables a trabajar de la tabla de datos __DF__
+
 ```{r}
 DF= rename(DF,c(P101="TIPO_VIVIENDA",P102="MAT_PAREDES",P103="MAT_TECHO",P104="MAT_PISO",P105="HAB_SIN_BAÑO",P106="HAB_DORMIR",P108="VIVIENDA_ES",P110="PROCEDENCIA_AGUA",P111="ENERGIA_COCINAR",P107="NUM_GRUPOS"))-> DFclean
 DFclean
 ```
-
 
 
 Limpiando TIPO DE VIVIENDA AKA P101.

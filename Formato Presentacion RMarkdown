@@ -1,0 +1,49 @@
+---
+title: "Modelo de Presentacion"
+subtitle: "Equipo 09 Sec. 02"
+output: powerpoint_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(formattable)
+library(readr)
+library(dplyr)
+```
+
+
+#Integrantes
+
+//1 # es un titulo que va solo en la diapo, 2 # son titulos que van con texto
+
+## Equipo 09
+
+- Andre Bejarano
+- Viviana Chacchi
+- Jean Colmenares
+- Aaron Gonzales
+- Hector Retamozo
+
+
+#Condiciones de vivienda de los migrantes venezolanos
+
+## Variables de estudio
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+//Aqui trate de hacer que la tabla que yo tenia guardada en el archivo subiera, pero por alguna razon no pude
+```{r}
+knitr::kable(x)
+```
+
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+

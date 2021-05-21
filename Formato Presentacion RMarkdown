@@ -1,49 +1,31 @@
+Presentación 1
+========================================================
+author: Equipo 09 Sección 02 EyP
+date: 21/05/2021
 ---
-title: "Modelo de Presentacion"
-subtitle: "Equipo 09 Sec. 02"
-output: powerpoint_presentation
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-library(formattable)
-library(readr)
-library(dplyr)
-```
 
 
-#Integrantes
 
-//1 # es un titulo que va solo en la diapo, 2 # son titulos que van con texto
-
-## Equipo 09
-
-- Andre Bejarano
+Integrantes
+========================================================
+- André Bejarano
 - Viviana Chacchi
 - Jean Colmenares
 - Aaron Gonzales
-- Hector Retamozo /Lider
+- Hector Retamozo / __Líder__
 
 
-#Condiciones de vivienda de los migrantes venezolanos
+Slide With Code
+========================================================
 
-## Variables de estudio
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-## Slide with R Output
-
-//Aqui trate de hacer que la tabla que yo tenia guardada en el archivo subiera, pero por alguna razon no pude
 ```{r}
-knitr::kable(x)
+summary(cars)
 ```
 
+Slide With Plot
+========================================================
 
-## Slide with Plot
-
-```{r pressure}
-plot(pressure)
+```{r, echo=FALSE}
+plot(cars)
 ```
 

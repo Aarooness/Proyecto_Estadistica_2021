@@ -146,9 +146,9 @@ DESCRIPTORES GRAFICOS
 
 1.Tabla de frecuancias de tipo de vivienda
 ```{r}
-sum(table(DFclean$`TIPO_VIVIENDA`))->n
+sum(table(DFclean$TIPO_VIVIENDA))->n
 
-rf<-table(DFclean$`TIPO_VIVIENDA`)/n
+rf<-table(DFclean$TIPO_VIVIENDA)/n
 
 barplot(rf,las=2,main = "Tabla de frecuancias de tipo de vivienda",cex.lab=0.5)
 ```
@@ -171,7 +171,12 @@ mosaicplot(table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS),col=Colores[dimnames(AB
 
 3. Caja de bigotes de habitaciones para dormir y gupos familiares en una vivienda
 ```{r}
-boxplot(DFclean$"HAB_DORMIR" ~ DFclean$"NUB_GRUPOS",ylab = "Habitacion para dormir",xlab = "Grupos de personas")
+boxplot(DFclean$HAB_DORMIR ~ DFclean$NUM_GRUPOS,ylab = "Habitacion para dormir",xlab = "Grupos de personas")
 
-abline(h=mean(DFclean$"HAB_DORMIR",na.rm = TRUE,col="blue"))
+abline(h=mean(DFclean$HAB_DORMIR,na.rm = TRUE,col="blue"))
+```
+4. Caja de bigotes del número de habitacion en la vivienda, sin incluir baño, y el numero de grupo de personas en la vivienda
+```{r}
+boxplot(DFclean$HAB_SIN_BAÑO ~ DFclean$NUM_GRUPOS,ylab = "Habitacion en la vivienda",xlab = "Grupos de personas")
+
 ```

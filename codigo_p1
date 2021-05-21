@@ -19,6 +19,12 @@ En el censo del año posterior del 2017, la población del Perú aumentó alrede
 peruanos, y el resto eran inmigrantes de Venezuela. 
 
 
+
+
+OBJETIVO
+
+
+
 //Aquí actualizaen constantemente los puntos correspondientes a la p1
 ```{r}
 library(readr)

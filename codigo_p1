@@ -29,11 +29,8 @@ P106 / CUANTAS HABITACIONES SE USAN EXCLUSIVAMENTE PARA DORMIR? (numerica discre
 //Aquí actualizaen constantemente los puntos correspondientes a la p1
 ```{r}
 library(readr)
-library(janitor)
-library(skimr)
 library(dplyr)
 library(stringr)
-library(plyr)
 
 ```
 ```{r}
@@ -121,3 +118,28 @@ DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"4","Otro"))
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"5","NO COCINAN"))
 ```
+=====================================================
+DESCRIPTORES NUMERICOS
+
+1.Moda y media de las habitaciones usadas para dormir
+
+```{r}
+summary(DFclean$HAB_DORMIR,na.rm=TRUE)
+table(DFclean$HAB_DORMIR)
+```
+Se aprecia que el numero de habitaciones que los encuestados utilizan exclusivamente para dormir, independientemente del numero de grupos que habitan la vivienda, es mayormente de una sola habitación.
+
+2. Moda y media del número de grupos que habitan la vivienda
+
+```{r}
+summary(DFclean$NUM_GRUPOS,na.rm=TRUE)
+table(DFclean$NUM_GRUPOS)
+```
+
+La mediana del numero de grupos que habitan un tipo de vivienda es de solo uno por vivienda.
+
+
+
+=====================================================
+
+DESCRIPTORES GRAFICOS

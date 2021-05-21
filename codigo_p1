@@ -42,10 +42,8 @@ VARIABLES DE ESTUDIO
 
 Con respecto a la data obtenida, las variables significativas, así como sus diferentes atributos, se describen en la siguiente tabla. 
 
-Las librerías _data.table_ y _formattable_ son útiles para elaborar esta tabla, por lo que a continuación se instalan y cargan
+Las librerías _data.table_ y _formattable_ son útiles para elaborar esta tabla, por lo que a continuación se cargan. Si no se tienen disponibles, es necesario instalarlas antes.
 ```{r}
-install.packages("data.table")
-install.packages("formattable")
 library(data.table)
 library(formattable)
 ```

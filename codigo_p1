@@ -36,7 +36,7 @@ Las librerías _data.table_ y _formattable_ son útiles para elaborar esta tabla
 install.packages("data.table")
 install.packages("formattable")
 library(data.table)
-libraty(formattable)
+library(formattable)
 ```
 
 **ESTO LO BORRAN CUANDO HAYAN REVISADO ESTO** 

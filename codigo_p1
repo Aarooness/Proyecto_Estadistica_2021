@@ -2,7 +2,6 @@
 title: "Informe 01 G9"
 output: html_notebook
 ---
-
 ## Análisis de las condiciones de vida de la población inmigrante venezolana entre Noviembre y Diciembre del año 2018
 
 ---
@@ -164,44 +163,46 @@ DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"4","Otro"))
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"5","NO COCINAN"))
 ```
----
 
-## TERCERA PARTE
+TERCERA PARTE
 
 A continuación se describen los datos obtenidos en función de los descriptores gráficos: 
 
-### Descriptores numéricos
+DESCRIPTORES NUMERICOS
 
-_1.Moda y mediana de las habitaciones usadas para dormir_
+1.Moda y media de las habitaciones usadas para dormir
 
 ```{r}
 summary(DFclean$HAB_DORMIR,na.rm=TRUE)
 table(DFclean$HAB_DORMIR)
 ```
-Se aprecia que el número de habitaciones que los encuestados utilizan exclusivamente para dormir. Independientemente del número de grupos que habitan la vivienda, es mayormente de una sola habitación.
+Se aprecia que el numero de habitaciones que los encuestados utilizan exclusivamente para dormir, independientemente del numero de grupos que habitan la vivienda, es mayormente de una sola habitación.
 
-_2. Moda y mediana del número de grupos que habitan la vivienda_
+2. Moda y media del número de grupos que habitan la vivienda
 
 ```{r}
 summary(DFclean$NUM_GRUPOS,na.rm=TRUE)
 table(DFclean$NUM_GRUPOS)
-``
-La mediana del número de grupos que habitan un tipo de vivienda es de sólo un grupo por vivienda.
+```
+
+La mediana del numero de grupos que habitan un tipo de vivienda es de solo uno por vivienda.
 
 
-### Descriptores gráficos
 
-_1.Tabla de frecuencias de tipo de vivienda_
 
+
+DESCRIPTORES GRAFICOS
+
+1.Tabla de frecuancias de tipo de vivienda
 ```{r}
 sum(table(DFclean$TIPO_VIVIENDA))->n
 
 rf<-table(DFclean$TIPO_VIVIENDA)/n
 
-barplot(rf,las=2,main = "Tabla de frecuencias de tipo de vivienda",cex.lab=0.5)
+barplot(rf,las=2,main = "Tabla de frecuancias de tipo de vivienda",cex.lab=0.5)
 ```
 
-_2. Mosaico del número de grupos en la vivieda por el tipo de vivienda_
+2. Mosaico del numero de grupos en la vivida por el tipo de vivienda
 
 ```{r}
 AB <- table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS)
@@ -213,21 +214,48 @@ Colores["3"]<-"lightgreen"
 Colores["4"]<-"grey"
 Colores["5"]<-"chocolate4"
 
-mosaicplot(table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS),col=Colores[dimnames(AB)[[2]]],main="Número de grupos VS Viviendas")
+mosaicplot(table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS),col=Colores[dimnames(AB)[[2]]],main="Numero de grupos VS Viviendas")
 ```
 
 
-_3. Caja de bigotes de habitaciones para dormir y grupos familiares en una vivienda_
+3. Caja de bigotes de habitaciones para dormir y gupos familiares en una vivienda
 ```{r}
-boxplot(DFclean$HAB_DORMIR ~ DFclean$NUM_GRUPOS,ylab = "Habitación para dormir",xlab = "Grupos de personas")
+boxplot(DFclean$HAB_DORMIR ~ DFclean$NUM_GRUPOS,ylab = "Habitacion para dormir",xlab = "Grupos de personas")
 
 ```
 
-_4. Caja de bigotes del número de habitacion en la vivienda, sin incluir baño, y el número de grupo de personas en la vivienda_
+4. Caja de bigotes del número de habitacion en la vivienda, sin incluir baño, y el numero de grupo de personas en la vivienda
 ```{r}
-boxplot(DFclean$HAB_SIN_BAÑO ~ DFclean$NUM_GRUPOS,ylab = "Habitación en la vivienda",xlab = "Grupos de personas")
+boxplot(DFclean$HAB_SIN_BAÑO ~ DFclean$NUM_GRUPOS,ylab = "Habitacion en la vivienda",xlab = "Grupos de personas")
 
 ```
+Diagrama de Gantt para el proyecto
 
+```{r}
+library(DiagrammeR)
+
+mermaid("
+gantt
+dateFormat  YYYY-MM-DD
+title Condiciones de vida de inmigrantes venezolanos
+
+section P1-P4
+Recopilación             :done,          first_1,    2014-01-06, 2014-01-08
+Limpieza de datos                :active,        first_2,    2014-01-09, 3d
+Análisis de variables                 :               first_3,    after first_2, 5d
+Relaciones entre variables            :               first_4,    after first_3, 5d
+
+section P3-P4
+Patrones de comportamiento      :crit, done,    import_1,   2014-01-06,24h
+Predicciones      :crit, done,    import_2,   after import_1, 2d
+Gráficas complejas :crit, active,  import_3,   after import_2, 3d
+Resultados            :crit,          import_4,   after import_3, 5d
+
+section P5
+Profundización en los comportamientos entre variables                  :active,        extras_1,   after import_4,  3d
+Resultados finales                :               extras_2,   after extras_1, 20h
+Estudio concluído            :               extras_3,   after extras_1, 48h
+")
+```
 [id]: https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1666/libro.pdf
 

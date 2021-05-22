@@ -168,7 +168,7 @@ DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR
 
 ## TERCERA PARTE
 
-A continuación se describen los datos obtenidos en función de los descriptores gráficos a continuación: 
+A continuación se describen los datos obtenidos en función de los descriptores gráficos: 
 
 ### Descriptores numéricos
 

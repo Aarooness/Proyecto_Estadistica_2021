@@ -17,66 +17,64 @@ output: html_notebook
 
 - Aaron Naif Gonzales Torres                 / 201820092 /
 
--Hector Alexis Retamozo Ccorahua            / 201820108 /  _Líder_
+- Hector Alexis Retamozo Ccorahua            / 201820108 /  _Líder_
 
 --- 
+## PRIMERA PARTE 
 
-### INTRODUCCIÓN 
+### Introducción
 
+Actualmente Venezuela atraviesa una crisis socioeconómica y política multidimensional Esto ha generado una migración masiva a diferentes países para buscar mejores oportunidades. Se estima que entre los años 2015 y 2018 emigraron alrededor de 3 millones de venezolanos, de los cuales 450.000 ingresaron al Perú, convirtiéndose en el segundo país que ha recibido mayor cantidad de venezolanos. Por ello, es relevante analizar las condiciones de vivienda de los inmigrantes venezolanos y cómo se ha visto su situación de vida en el país. En este sentido, este proyecto busca contextualizar la situación de vivienda para proponer planes o soluciones que permitan a la población venezolana mejorar su calidad de vida en  con sociedad peruana.
 
-Actualmente Venezuela atraviesa una crisis socioeconómica y política caracterizada por pobreza, escasez de alimentos y medicinas, aumento de la violencia 
-e inseguridad. Esto ha generado una migración masiva a diferentes países para buscar mejores oportunidades. De esta forma, se estima que entre el 2015 y 2018
-emigraron alrededor de 3 millones de venezolanos, de los cuales 450.000 ingresaron al Peru, convirtiéndose en el segundo país que ha recibido mayor cantidad de 
-venezolanos luego de Colombia. Lo cual se vio reflejado en el censo del año posterior del 2017, cuya población del Perú aumentó alrededor de 1 millón de habitantes, 
-de los cuales alrededor de 300 000 eran peruanos, y el resto eran inmigrantes de Venezuela. No cabe duda de que la situación de los refugiados venezolanos y la 
-inmigración en Perú en 2021 enfrentará una serie de importantes desafíos. Por ello, el Plan Internacional sigue trabajando con estas comunidades para promover el 
-desarrollo infantil y juvenil, la igualdad de género y la protección frente a todo tipo de violencia, y contribuir a una mejor convivencia e integración con el país.
-El tamaño de la muestra total es de 3 611 viviendas con población venezolana. El 48,2% (1 740) de la muestra corresponde a la provincia de Lima. 
+### Objetivos
 
-La fuente es extraída de la base de datos de la INEI de Perú.
+- Evidenciar la calidad de vida de los inmigrantes venezolanos en funció del numero de personas que conviven en cada familia.
 
-Muestreo por conveniencia
+- Recopilar información sobre los tipos de materiales de los que están hechas sus residencias en el paí
 
+- Identificar el nuúmero de habitantes venezolanos por cada vivienda y sus respectivas condiciones.
 
-OBJETIVOS
+--- 
+## SEGUNDA PARTE
 
-- Se busca evidenciar la calidad de vida de los inmigrantes venezolanos en funcion del numero de personas que conviven en cada familia.
+### Muestreo
 
-- Recopilar informacion sobre los tipos de materiales de los que estan hechas sus residencias en el Peru.
+La base de datos usada para este proyecto viene de un estudio previo en el año 2018 ([INEI,2018][id]). Dicho estudio tiene dos unidades muestrales: las _manzanas_ y las _viviendas_ de las mismas. La primera se define como el _área geográfica delimitada por calles, parques, entre otras construcciones_, mientras que la segunda se define como el _lugar construido para el alojamiento de una o más personas_.
 
-- Identificar el numero de habitantes venezolanos por cada vivienda y sus respectivas condiciones.
+EL muestreo usado es de tipo aleatorio y estratificado.
 
-//Aquí actualizan constantemente los puntos correspondientes a la p1
+- Por un lado, se determinó el número de manzanas a estudiar a partir de las direcciones de las personas de nacionalidad venezolana obtenidas de bases de datos como el Censo de Población y Vivienda del año 2017 y del sitio oficial de MIGRACIONES. 
+
+- Posteriormente, se escogieron las manzanas según los directorios buscados, y éstas se separaron en tres grupos según la cantidad de viviendas en ella; de 1 a 5, de 6 a 10 y más de 10. Por último, se procedieron a seleccionar las viviendas en las que vivía al menos una persona venezolana, y luego se entrevistaron los miembros de cada una de las que hayan sido seleccionada.
+
+Luego de recopilar los datos, el tamaño de la muestra terminó siendo de 3,611 viviendas con población venezolana. El 48.2% (1 ,40) de la muestra corresponde a la provincia de Lima. La tabla de datos a utilizar se muestra a continuación:
+
+Primero, se cargan las librerías correspondientes:
+
 ```{r}
 library(readr)
 library(dplyr)
 library(stringr)
-
+library(data.table)
+library(formattable)
 ```
+Posteriormente, se abre el archivo con los datos:
+
 ```{r}
 DF <- read_csv("DataDelProyecto.csv")
 DF
 
 ```
 
-VARIABLES DE ESTUDIO
+### Variables de estudio
 
-Con respecto a la data obtenida, las variables significativas, así como sus diferentes atributos, se describen en la siguiente tabla. 
+Con respecto a la tabla de datos obtenida, las variables significativas, así como sus diferentes atributos, se describen en la siguiente tabla. 
 
-Las librerías _data.table_ y _formattable_ son útiles para elaborar esta tabla, por lo que a continuación se instalan y cargan
-```{r}
-library(data.table)
-library(formattable)
-```
-
-
-
-A continuación se muestra la elaboración de la tabla
 ```{r}
 
 c1<-c("DEPARTAMENTO","DISTRITO","ESTRATO_SOCIOECONOMICO","TIPO_VIVIENDA","MAT_PAREDES","MAT_TECHO","MAT_PISO","HAB_SIN_BAÑO","HAB_DORMIR","VIVIENDA_ES","PROCEDENCIA_AGUA","ENERGIA_COCINAR","NUM_GRUPOS")
 
-c2<-c("Categorica_ordinal","Categorica ordinal","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Categorico ordinal","Numerica discreta","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Numerica discreta")
+c2<-c("Categorica ordinal","Categorica ordinal","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Categorico ordinal","Numerica discreta","Numerica discreta","Categorica ordinal","Categorica ordinal","Categorica ordinal","Numerica discreta")
 
 c3 <-c("Arequipa, Callao, Cusco, La Libertad, Lima, Tumbes","Distritos de cada provincia","Entero no negativo menor a 4","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo menor a 10","Entero no negativo","Entero no negativo","Entero no negativo menor a 7","Entero no negativo menor a 10","Entero no negativo menor a 6","Entero no negativo")
 
@@ -85,16 +83,15 @@ x<-data.table("Nombre_de_la_variable"=c1,"Tipo_de_la_variable"=c2,"Restricciones
 formattable(x,align=c('c','c','c'))
 ```
 
-En esta parte se renombran las variables a trabajar de la tabla de datos __DF__
 
+En esta parte se renombran las variables a trabajar de la tabla de datos __DF__
 
 ```{r}
 DF= rename(DF,c("TIPO_VIVIENDA"=P101,"MAT_PAREDES"=P102,"MAT_TECHO"=P103,"MAT_PISO"=P104,"HAB_SIN_BAÑO"=P105,"HAB_DORMIR"=P106,"VIVIENDA_ES"=P108,"PROCEDENCIA_AGUA"=P110,"ENERGIA_COCINAR"=P111,"NUM_GRUPOS"=P107))-> DFclean
 DFclean
 ```
 
-
-Limpiando TIPO DE VIVIENDA AKA P101.
+LIMPIANDO TIPO DE VIVIENDA AKA P101.
 ```{r}
 DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"1","Casa Independiente"))
 DFclean <- DFclean %>% mutate(`TIPO_VIVIENDA`=str_replace_all(`TIPO_VIVIENDA`,"2","Departamento en edificio"))
@@ -128,7 +125,7 @@ DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"6","Tripl
 DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"7","Paja, hojas de palmera, etc"))
 DFclean <- DFclean %>% mutate(`MAT_TECHO`=str_replace_all(`MAT_TECHO`,"8","Otro material"))
 ```
-LIMPIANDO MATERRAIL DE PISO AKA 104.
+LIMPIANDO MATERIALL DE PISO AKA 104.
 ```{r}
 DFclean <- DFclean %>% mutate(`MAT_PISO`=str_replace_all(`MAT_PISO`,"1","Parquet o madera pulida"))
 DFclean <- DFclean %>% mutate(`MAT_PISO`=str_replace_all(`MAT_PISO`,"2","Laminas asfálticas, vinilicos o similares"))
@@ -159,7 +156,7 @@ DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AG
 DFclean <- DFclean %>% mutate(`PROCEDENCIA_AGUA`=str_replace_all(`PROCEDENCIA_AGUA`,"8","Otro"))
 
 ```
-ENERGIA PARA COCINAR AKA 110.
+ENERGÍA PARA COCINAR AKA 110.
 ```{r}
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"1","Electricidad"))
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"2","Gas"))
@@ -167,42 +164,44 @@ DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"4","Otro"))
 DFclean <- DFclean %>% mutate(`ENERGIA_COCINAR`=str_replace_all(`ENERGIA_COCINAR`,"5","NO COCINAN"))
 ```
+---
 
-DESCRIPTORES NUMERICOS
+## TERCERA PARTE
 
-1.Moda y mediana de las habitaciones usadas para dormir
+A continuación se describen los datos obtenidos en función de los descriptores gráficos a continuación: 
+
+### Descriptores numéricos
+
+_1.Moda y mediana de las habitaciones usadas para dormir_
 
 ```{r}
 summary(DFclean$HAB_DORMIR,na.rm=TRUE)
 table(DFclean$HAB_DORMIR)
 ```
-Se aprecia que el número de habitaciones que los encuestados utilizan exclusivamente para dormir, independientemente del numero de grupos que habitan la vivienda, es mayormente de una sola habitación.
+Se aprecia que el número de habitaciones que los encuestados utilizan exclusivamente para dormir. Independientemente del número de grupos que habitan la vivienda, es mayormente de una sola habitación.
 
-2. Moda y mediana del número de grupos que habitan la vivienda
+_2. Moda y mediana del número de grupos que habitan la vivienda_
 
 ```{r}
 summary(DFclean$NUM_GRUPOS,na.rm=TRUE)
 table(DFclean$NUM_GRUPOS)
-```
-
-La mediana del numero de grupos que habitan un tipo de vivienda es de solo uno por vivienda.
-
+``
+La mediana del número de grupos que habitan un tipo de vivienda es de sólo un grupo por vivienda.
 
 
+### Descriptores gráficos
 
+_1.Tabla de frecuencias de tipo de vivienda_
 
-DESCRIPTORES GRAFICOS
-
-1.Tabla de frecuencias de tipo de vivienda
 ```{r}
 sum(table(DFclean$TIPO_VIVIENDA))->n
 
 rf<-table(DFclean$TIPO_VIVIENDA)/n
 
-barplot(rf,las=2,main = "Tabla de frecuancias de tipo de vivienda",cex.lab=0.5)
+barplot(rf,las=2,main = "Tabla de frecuencias de tipo de vivienda",cex.lab=0.5)
 ```
 
-2. Mosaico del numero de grupos en la vivida por el tipo de vivienda
+_2. Mosaico del número de grupos en la vivieda por el tipo de vivienda_
 
 ```{r}
 AB <- table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS)
@@ -214,18 +213,21 @@ Colores["3"]<-"lightgreen"
 Colores["4"]<-"grey"
 Colores["5"]<-"chocolate4"
 
-mosaicplot(table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS),col=Colores[dimnames(AB)[[2]]],main="Numero de grupos VS Viviendas")
+mosaicplot(table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS),col=Colores[dimnames(AB)[[2]]],main="Número de grupos VS Viviendas")
 ```
 
 
-3. Caja de bigotes de habitaciones para dormir y gupos familiares en una vivienda
+_3. Caja de bigotes de habitaciones para dormir y grupos familiares en una vivienda_
 ```{r}
-boxplot(DFclean$HAB_DORMIR ~ DFclean$NUM_GRUPOS,ylab = "Habitacion para dormir",xlab = "Grupos de personas")
+boxplot(DFclean$HAB_DORMIR ~ DFclean$NUM_GRUPOS,ylab = "Habitación para dormir",xlab = "Grupos de personas")
 
 ```
 
-4. Caja de bigotes del número de habitacion en la vivienda, sin incluir baño, y el numero de grupo de personas en la vivienda
+_4. Caja de bigotes del número de habitacion en la vivienda, sin incluir baño, y el número de grupo de personas en la vivienda_
 ```{r}
-boxplot(DFclean$HAB_SIN_BAÑO ~ DFclean$NUM_GRUPOS,ylab = "Habitacion en la vivienda",xlab = "Grupos de personas")
+boxplot(DFclean$HAB_SIN_BAÑO ~ DFclean$NUM_GRUPOS,ylab = "Habitación en la vivienda",xlab = "Grupos de personas")
 
 ```
+
+[id]: https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1666/libro.pdf
+

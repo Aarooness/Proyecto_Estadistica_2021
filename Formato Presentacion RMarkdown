@@ -19,26 +19,37 @@ Integrantes
 
 Tema del proyecto
 ========================================================
-_Analisis de las condiciones de vida de la poblacion migrante venezolana en el año 2018 en el Peru_
+_Análisis de las condiciones de vida de la población inmigrante venezolana entre Noviembre y Diciembre del año 2018_
 
-Actualmente Venezuela atraviesa una crisis socioeconomica y politica con efectos multidimensionales. Esto ha generado una migracion masiva a diferentes paises para buscar una mejor calidad de vida. Se estima que entre el 2015 y 2018, 450.000 ingresaron al Peru.
+Actualmente Venezuela atraviesa una crisis socioeconómica y política multidimensional Esto ha generado una migración masiva a diferentes países para buscar mejores oportunidades. Se estima que entre los años 2015 y 2018 emigraron alrededor de 3 millones de venezolanos, de los cuales 450.000 ingresaron al Perú, convirtiéndose en el segundo país que ha recibido mayor cantidad de venezolanos. Por ello, es relevante analizar las condiciones de vivienda de los inmigrantes venezolanos y cómo se ha visto su situación de vida en el país. En este sentido, este proyecto busca contextualizar la situación de vivienda para proponer planes o soluciones que permitan a la población venezolana mejorar su calidad de vida en  con sociedad peruana
 
-El tamaño de la muestra total es de 3 611 viviendas con poblacion venezolana. El 48,2% (1 740) de la muestra corresponde a la provincia de Lima. 
-
-La fuente es extraida de la base de datos de la INEI de Peru.
-
-Muestreo por conveniencia
---
 
 
 Objetivos del proyecto
 ========================================================
 
-- Se busca evidenciar la calidad de vida de los inmigrantes venezolanos en funcion del numero de personas que conviven en cada familia.
+- Evidenciar la calidad de vida de los inmigrantes venezolanos en funció del numero de personas que conviven en cada familia.
 
-- Recopilar informacion sobre los tipos de materiales de los que estan hechas sus residencias en el Peru.
+- Recopilar información sobre los tipos de materiales de los que están hechas sus residencias en el paí
 
-- Identificar el numero de habitantes venezolanos por cada vivienda y sus respectivas condiciones.
+- Identificar el nuúmero de habitantes venezolanos por cada vivienda y sus respectivas condiciones.
+
+
+Muestreo
+========================================================
+La base de datos usada para este proyecto viene de un estudio previo en el año 2018 ([INEI,2018][id]). Dicho estudio tiene dos unidades muestrales: las _manzanas_ y las _viviendas_ de las mismas. La primera se define como el _área geográfica delimitada por calles, parques, entre otras construcciones_, mientras que la segunda se define como el _lugar construido para el alojamiento de una o más personas_.
+
+========================================================
+
+EL muestreo usado es de tipo aleatorio y estratificado.
+
+- Por un lado, se determinó el número de manzanas a estudiar a partir de las direcciones de las personas de nacionalidad venezolana obtenidas de bases de datos como el Censo de Población y Vivienda del año 2017 y del sitio oficial de MIGRACIONES. 
+
+- Posteriormente, se escogieron las manzanas según los directorios buscados, y éstas se separaron en tres grupos según la cantidad de viviendas en ella; de 1 a 5, de 6 a 10 y más de 10. Por último, se procedieron a seleccionar las viviendas en las que vivía al menos una persona venezolana, y luego se entrevistaron los miembros de cada una de las que hayan sido seleccionada.
+
+Luego de recopilar los datos, el tamaño de la muestra terminó siendo de 3,611 viviendas con población venezolana. El 48.2% (1 ,40) de la muestra corresponde a la provincia de Lima.
+
+
 
 
 Inicializamos los datos
@@ -59,7 +70,8 @@ DF <- read_csv("DataDelProyecto.csv")
 
 Variables de estudio
 ========================================================
-- Con respecto a la data obtenida, las variables significativas, asi como sus diferentes atributos, se describen en la siguiente tabla. 
+- Con respecto a la tabla de datos obtenida, las variables significativas, así como sus diferentes atributos, se describen en la siguiente tabla. 
+
 ```{r,echo=FALSE}
 c1<-c("DEPARTAMENTO","DISTRITO","ESTRATO_SOCIOECONOMICO","TIPO_VIVIENDA","MAT_PAREDES","MAT_TECHO","MAT_PISO","HAB_SIN_BAÑO","HAB_DORMIR","VIVIENDA_ES","PROCEDENCIA_AGUA","ENERGIA_COCINAR","NUM_GRUPOS")
 
@@ -164,21 +176,21 @@ Moda y mediana de las habitaciones usadas para dormir
 summary(DFclean$HAB_DORMIR,na.rm=TRUE)
 table(DFclean$HAB_DORMIR)
 ```
-- Se aprecia que el numero de habitaciones que los encuestados utilizan exclusivamente para dormir, independientemente del numero de grupos que habitan la vivienda, es mayormente de una sola habitacion.
+- Se aprecia que el número de habitaciones que los encuestados utilizan exclusivamente para dormir, independientemente del numero de grupos que habitan la vivienda, es mayormente de una sola habitación.
 
-Moda y mediana del numero de grupos que habitan la vivienda
+Moda y mediana del número de grupos que habitan la vivienda
 ========================================================
 
 ```{r,echo=FALSE}
 summary(DFclean$NUM_GRUPOS,na.rm=TRUE)
 table(DFclean$NUM_GRUPOS)
 ```
-- La mediana del numero de grupos que habitan un tipo de vivienda es de solo uno por vivienda.
+- La mediana del número de grupos que habitan un tipo de vivienda es de solo uno por vivienda.
 
-Descriptores Graficos
+Descriptores Gráficos
 ========================================================
 
-Tabla de frecuancias de tipo de vivienda
+Tabla de frecuencias de tipo de vivienda
 ========================================================
 ```{r,echo=FALSE}
 sum(table(DFclean$TIPO_VIVIENDA))->n
@@ -189,7 +201,7 @@ barplot(rf,las=2,main = "Tabla de frecuancias de tipo de vivienda",cex.lab=0.5)
 ```
 
 
-Mosaico numero de grupos en la vivienda por el tipo de vivienda
+Mosaico número de grupos en la vivienda por el tipo de vivienda
 ========================================================
 ```{r,echo=FALSE}
 AB <- table(DFclean$VIVIENDA_ES,DFclean$NUM_GRUPOS)

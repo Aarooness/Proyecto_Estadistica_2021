@@ -1,1 +1,25 @@
 
+Analisis de rendimiento de jugadores en LOL
+
+```{r}
+library(readr)
+library(dplyr)
+```
+```{r}
+DF1 <- read_csv("lec_championdata.csv")
+DF1
+names(DF1)
+```
+```{r}
+DF2 <- read_csv("lec_playerdata.csv")
+DF2
+names(DF2)
+```
+
+VARIABLES
+
+KILLS   -> K
+POSITION -> Pos
+damage -> DMG%
+gold -> Gold%
+porcentaje de victorias -> W%

@@ -4,7 +4,7 @@
 
 AQUI PONGAN LAS NOTAS QUE REQUIERAN
 ////////////////////////////////////////////////////////////////////////////////////////////////
--Hector completa las partes de analisis que he colocado para las variables, chequea la p2 que he pasado y tomalo como referencia  IMPORTANTE///////
+-Vivi completa las partes de analisis que he colocado para las variables, chequea la p2 que he pasado y tomalo como referencia  IMPORTANTE///////
 -Andre mira, para cada relacion de variables que hagas tienes que responder una pregunta, por ejemplo haces una pregunta sobre el estudio que estamos realizando y lo respondes con la grafica entre dos variables, mira el ejemplo de la P2 que pase en wsp
 Haz minimo 4
 
@@ -120,7 +120,7 @@ names(DFpos)[1] <- "Posicion"
 DFpos$FreqRelativa <- round(DFpos$Freq/sum(DFpos$Freq),4)
 DFpos
 ```
-Análisis: ... HECTOR (de esta varaible se observa que...)
+Análisis: ... Vivi (de esta varaible se observa que...)
 
 - En adición a ello se comprueba un patrón de comportamiento entre la variable "Posición" y el número de "Asistencias" del jugador. "Asistencia" se define cuando un campeón tuvo una participación en la kill de un enemigo; mas no le dio el golpe final.
 

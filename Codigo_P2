@@ -2,7 +2,12 @@
 
 
 
-DMG% y GOLD% en lec_playerdata.csv
+AQUI PONGAN LAS NOTAS QUE REQUIERAN
+////////////////////////////////////////////////////////////////////////////////////////////////
+-Hector completa las partes de analisis que he colocado para las variables, chequea la p2 que he pasado y tomalo como referencia  IMPORTANTE///////
+-Andre mira, para cada relacion de variables que hagas tienes que responder una pregunta, por ejemplo haces una pregunta sobre el estudio que estamos realizando y lo respondes con la grafica entre dos variables, mira el ejemplo de la P2 que pase en wsp
+Haz minimo 4
+
 
 Andre
 KILL & ASSISTS vs pos en lec_playerdata.csv
@@ -10,9 +15,6 @@ KILL & ASSISTS vs pos en lec_playerdata.csv
 frec vs win% en lec_championdata.csv
 
 http://web.cs.wpi.edu/~imgd2905/d20/projects/proj1/#top
-
-
-
 demonios, no se el nombre de una variable, que hago ahora?
 Binevenido a Buscando varialbes 101
 Paso1
@@ -22,3 +24,148 @@ Paso2
 Genial ya tienes el significado de la variable
 Paso2-1
 En el caso que no te salga, preguntale a ANDRE,(btw el realizara los pasos 1 y 2 tambien, increible >:/)
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+## Análisis de rendimiento de jugadores en LOL
+ 
+---
+
+### Integrantes (Código, Líder):
+
+- Andre Brian Bejarano Oliveira              / 201820035 /    _Líder_
+
+- Viviana Maria Chacchi Guillen              / 201820039 /
+
+- Jean Carlos Colmenares Vera Portocarrero   / 201820128 /
+
+- Aaron Naif Gonzales Torres                 / 201820092 /
+
+- Hector Alexis Retamozo Ccorahua            / 201820108 /  
+
+--- 
+## PRIMERA PARTE 
+
+### Introducción
+
+
+
+### Objetivos
+
+
+### MUESTREO
+-GENTE HECTOR TIENE QUE PONER CUAL ES NUESTRA UNIDAD MUESTRAL Y RELACIONARLO CON EL OBJETIVO, ES ALGO QUE RECALCO EL PROFE EN LA P1 QUE DEBIMOS HACER, AUNQUE CLARO YA NO ES EL MISMO TEMA IGUAL HAY QUE HACERLO
+
+
+Se cargan las librerías correspondientes 
+```{r}
+library(readr)
+library(dplyr)
+library(stringr)
+library(data.table)
+library(formattable)
+```
+
+### Variables más relevantes del estudio
+championdata    WR5 ->"If you have a 12 team league, a WR1 would be a top 12 WR, a WR2 would be receivers 13-24, WR3 would be receivers 25-36, and so on. WR5 49-60"
+
+```{r}
+c1<-c("K","Pos","DMG%","Gold%","W%","<25 win percentage","40-45 win percentage")
+
+c2<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 partidas","Porcentaje de victorias de entre 40 y 45 partidas")
+
+c3 <-c("Player Data","Player Data","Player Data","Player Data","Player Data","Champion Data","Champion Data")
+
+
+x<-data.table("Nombre_de_la_variable"=c1,"Descripción_de_la_Variable"=c2,"Origen"=c3)
+formattable(x,align=c('c','c','c'))
+```
+
+
+
+Se asignan las bases de datos del "campeón" y del "jugador" a analizar a DF1 y DF2 respectivamente.
+
+```{r}
+DF1 <- read_csv("lec_championdata.csv")
+DF1
+names(DF1)
+```
+
+```{r}
+DF2 <- read_csv("lec_playerdata.csv")
+DF2
+names(DF2)
+```
+
+1RA PARTE
+
+Análisis de las variables mediante distintos descriptores.
+
+
+1. Posición que tomó el jugador en la partida (--Pos--)
+
+```{r}
+table(DF2$Pos)
+```
+```{r}
+barplot(height = table(DF2$Pos),beside = TRUE, main = "Gráfica de Posición", xlab = "Pos", ylab = "Frecuencia", ylim = c(0,71), col=c("lightgreen","burlywood1","lightblue", "yellow", "#9999cc"))
+```
+```{r}
+DFpos <- data.frame(table(DF2$Pos))
+names(DFpos)[1] <- "Posicion"
+DFpos$FreqRelativa <- round(DFpos$Freq/sum(DFpos$Freq),4)
+DFpos
+```
+Análisis: ... HECTOR (de esta varaible se observa que...)
+
+- En adición a ello se comprueba un patrón de comportamiento entre la variable "Posición" y el número de "Asistencias" del jugador. "Asistencia" se define cuando un campeón tuvo una participación en la kill de un enemigo; mas no le dio el golpe final.
+
+```{r}
+boxplot(DF2$A~DF2$Pos,col=c("lightgreen","burlywood1","lightblue", "yellow", "#9999cc"))
+```
+
+2. Porcentaje de victorias por jugador (--W%--)
+
+```{r}
+summary(DF2$`W%`)
+```
+```{r}
+boxplot(DF2$`W%`,col=c("#99cc99"),main="Porcentaje de victorias en el torneo")
+abline(h=mean(DF2$`W%`),col="red",lwd=2)
+```
+Análisis: Se aprecia que los jugadores tienen un rendimiento similar y BLABLA.............
+
+3. Porcentaje de victorias para "n" partidas 
+
+- En este punto se realiza una pequeña comparativa entre 2 variables similares, pero con distinto número de casos para cada una.
+
+a. Porcentaje de victorias para menos de 25 partidas
+
+```{r}
+summary(DF1$`25-30 win percentage`)
+```
+
+```{r}
+boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 partidas")
+abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)
+```
+Análisis: ..................
+
+
+
+b. Porcentaje de victorias de entre 40 y 45 partidas
+
+```{r}
+table(DF1$`40-45 win percentage`)
+```
+
+```{r}
+boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victorias entre 40 y 45 partidas")
+abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
+```
+Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon se llega como minimo a 40 victorias segidas y BLABLABLA.......................
+

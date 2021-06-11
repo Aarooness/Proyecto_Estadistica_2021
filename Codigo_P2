@@ -186,12 +186,12 @@ Análisis:En las graficas se puede observar que el porcentaje de oro vs el porce
 Hipotesis: Lo que podemos deducir de la gráfica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, 
 el porcentaje de daño sería mayor. Por otro lado, también deducimos que al tener un mayor porcentaje de oro genera mas kills, logrando el objetivo del juego.
 
-- Importancia de obtener gol pasivamente(súbditos) ¿Es importante Obtener oro pasivamente?
+- Importancia de obtener gold pasivamente(súbditos) ¿Es importante Obtener oro pasivamente?
 
 ```{r}
 plot(DF2$`Gold%`~DF2$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
 ```
-- ¿Obtener oro pasivamente influencia en el daño?
+- ¿Obtener oro pasivamente influye en el daño?
 ```{r}
 plot(DF2$CSPM~DF2$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
 ```
@@ -201,7 +201,7 @@ Hipotesis:
 
 
 
-3.¿Influye el rol seleccionado por el jugador en las "kills" que realiza?
+3.¿Influye el rol seleccionado por el jugador en los "kills" que realiza?
 
 
 -¿Por qué el ADC tiene mas Kills?

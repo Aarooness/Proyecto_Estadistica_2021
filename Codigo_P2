@@ -168,7 +168,8 @@ boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victor
 abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 ```
 Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon llega como minimo a 40 victorias segidas
-mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, por lo que el porcentaje de victorias de un campeon baja 
+mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, 
+por lo que el porcentaje de victorias de un campeon baja.
 
 2. ¿Qué relación se obtiene del porcentaje de oro y el porcentaje de daño realizado por el jugador?
 
@@ -196,46 +197,59 @@ abline(v=mean(DF2[DFmid,]$`Gold%`),col="orange")
 abline(v=mean(DF2[DFtop,]$`Gold%`))
 ```
 
-Impotancia de obtener gol pasivamente(subditos)
-Es importante Obtener oro pasivamente?
+Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
+
+Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, 
+el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro genera mas kills, logrando el objetivo del juego.
+
+- Importancia de obtener gol pasivamente(súbditos) ¿Es importante Obtener oro pasivamente?
+
 ```{r}
-plot(DF1$`Gold%`~DF1$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
+plot(DF2$`Gold%`~DF2$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
 ```
-Obtener oro pasivamente influencia en el daño?
+- ¿Obtener oro pasivamente influencia en el daño?
 ```{r}
-plot(DF$CSPM~DF$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
+plot(DF2$CSPM~DF2$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
 ```
 
-Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. Asimismo, 
-
-Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro general mas kills, logrando el objetivo del juego.
 
 
 
 
 
 
-3.Grafica de asesinatos por rol
-Poruqe el ADC tiene mas Kills?
+
+
+
+
+3.¿Influye el rol seleccionado por el jugador en las "kills" que realiza?
+
+
+-¿Por qué el ADC tiene mas Kills?
+
 ```{r}
-datkill<-data.frame(kills=c(sum(DF1[DFtop,]$`K`),sum(DF1[DFjg,]$`K`),sum(DF1[DFmid,]$`K`),sum(DF1[DFadc,]$`K`),sum(DF1[DFsupp,]$`K`)),
+datkill<-data.frame(kills=c(sum(DF2[DFtop,]$`K`),sum(DF2[DFjg,]$`K`),sum(DF2[DFmid,]$`K`),sum(DF2[DFadc,]$`K`),sum(DF2[DFsupp,]$`K`)),
 Pos = as.factor(c("Top", "Jg", "Mid","Adc","Supp")))
 
 barplot(datkill$kills~datkill$Pos,xlab = "Rol",ylab = "Asesinatos")
 ```
-Grafica de asistencias del la linea BOT donde estan ADC y Supp
-Porque el Supp tiene mas asistencias que el ADC?
+
+
+- Gráfica de asistencias de la linea BOT donde están ADC y Supp
+- ¿Por qué el Supp tiene mas asistencias que el ADC?
 ```{r}
-datAss<-data.frame(kills=c(sum(DF1[DFadc,]$`A`),sum(DF1[DFsupp,]$`A`)),
+datAss<-data.frame(kills=c(sum(DF2[DFadc,]$`A`),sum(DF2[DFsupp,]$`A`)),
 Pos = as.factor(c("Adc","Supp")))
 barplot(datAss$kills~datAss$Pos,xlab = "Rol",ylab = "Asistencias")
 ```
-Grafica de ADC(que jugadores son mejores o peores)
-Podemos definir que jugadores son mejores o peores con el porcentaje de daño u muerte?
+
+
+- ¿Podemos definir que jugadores son mejores o peores con el porcentaje de daño u muerte?
+- Gráfica de ADC(que jugadores son mejores o peores)
 ```{r}
-plot(DF1[DFadc,]$`DMG%` ~ DF1[DFadc,]$`DTH%`) 
-abline(h=mean(DF1[DFadc,]$`DMG%`),col="red")
-abline(v=mean(DF1[DFadc,]$`DTH%`),col="red")
+plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`) 
+abline(h=mean(DF2[DFadc,]$`DMG%`),col="red")
+abline(v=mean(DF2[DFadc,]$`DTH%`),col="red")
 ```
 
 
@@ -244,10 +258,12 @@ abline(v=mean(DF1[DFadc,]$`DTH%`),col="red")
 
 
 
-4.Graficas de KD y Porcentaje de victorias(Idea:a mas kda mas se gana)
- Mientras mas KDA tenga un jugador, mas juegos ganara?
+
+4. Gráfica de KD y Porcentaje de victorias("Entre más KDA más se gana")
+
+- ¿Mientras mas KDA tenga un jugador, mas juegos ganará?
 ```{r}
-DF1 %>% filter(GP>=10)->DFGPok
+DF2 %>% filter(GP>=10)->DFGPok
 DFPokadc<-which(DFGPok$Pos=="ADC")
 DFPoktop<-which(DFGPok$Pos=="Top")
 DFPokjg<-which(DFGPok$Pos=="Jungle")
@@ -255,23 +271,23 @@ DFPokmid<-which(DFGPok$Pos=="Middle")
 DFPoksupp<-which(DFGPok$Pos=="Support")
 
 ```
-Graficas de KD y Porcentaje de victorias ADC
+- Gráfica de KD y Porcentaje de victorias ADC
 ```{r}
 plot(DFGPok[DFPokadc,]$`KDA` ~ DFGPok[DFPokadc,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias ADC")
 ```
-Graficas de KD y Porcentaje de victorias SUPP
+- Gráfica de KD y Porcentaje de victorias SUPP
 ```{r}
 plot(DFGPok[DFPoksupp,]$`KDA` ~ DFGPok[DFPoksupp,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias SUPP")
 ```
-Graficas de KD y Porcentaje de victorias MID
+- Gráfica de KD y Porcentaje de victorias MID
 ```{r}
 plot(DFGPok[DFPokmid,]$`KDA` ~ DFGPok[DFPokmid,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias MID")
 ```
-Graficas de KD y Porcentaje de victorias JG
+- Gráfica de KD y Porcentaje de victorias JG
 ```{r}
 plot(DFGPok[DFPokjg,]$`KDA` ~ DFGPok[DFPokjg,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias JG")
 ```
-Graficas de KD y Porcentaje de victorias TOP
+- Gráfica de KD y Porcentaje de victorias TOP
 ```{r}
 plot(DFGPok[DFPoktop,]$`KDA` ~ DFGPok[DFPoktop,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias TOP")
 ```

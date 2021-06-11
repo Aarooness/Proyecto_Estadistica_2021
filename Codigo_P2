@@ -36,8 +36,10 @@ En el caso que no te salga, preguntale a ANDRE,(btw el realizara los pasos 1 y 2
 --- 
 ## PRIMERA PARTE 
 
-### Introducción
-
+## Introducción
+League of legends es un juego multijugadir en linea cuyo objetivo es trabajar en equipo para defender una base propia y derrotar a los enemigos. 
+El juego se destaca por la variedad de personajes y las posibles combinaciones de estos durante una partida. Por ello, se han llevado a cabo torneos y de estos se 
+ha recopilado data para ser analizada en este proyecto se busca observar patrones relacionados al desempeño tanto individual como colectivo en las partidas de un torneo.  
 
 
 ### Objetivos
@@ -53,7 +55,11 @@ En el caso que no te salga, preguntale a ANDRE,(btw el realizara los pasos 1 y 2
 5.
 
 ### MUESTREO
--GENTE HECTOR TIENE QUE PONER CUAL ES NUESTRA UNIDAD MUESTRAL Y RELACIONARLO CON EL OBJETIVO, ES ALGO QUE RECALCO EL PROFE EN LA P1 QUE DEBIMOS HACER, AUNQUE CLARO YA NO ES EL MISMO TEMA IGUAL HAY QUE HACERLO
+La base de datos usada para este proyecto viene de algunos datos capturados previamente del campeonato de Europa de League of Legens 2019, el 
+cual fue publicado por Stephen O'Farrel. 
+En este caso se trabajara con 2 datas Frame. El primero que viene a ser el lec_championdata el cual tiene como unidad muestral al campeón. 
+El segundo viene a ser el lec_playerdata el cual tiene como unidad
+muestral a los jugadores agrupados en equipo.
 
 
 Se cargan las librerías correspondientes 

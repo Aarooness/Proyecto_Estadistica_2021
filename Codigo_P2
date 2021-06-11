@@ -163,3 +163,27 @@ abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 ```
 Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon se llega como minimo a 40 victorias segidas y BLABLABLA.......................
 mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, por lo que el porcentaje de victorias de un campeon baja 
+
+////////////////////////Graficas de Andre///////////////////////////
+```{r}
+DF1adc<-which(DF$Pos=="ADC")
+DF1top<-which(DF$Pos=="Top")
+DF1jg<-which(DF$Pos=="Jungle")
+DF1mid<-which(DF$Pos=="Middle")
+DF1supp<-which(DF$Pos=="Support")
+
+```
+Grafico de Gold 
+```{r}
+plot(DF1$`DMG%` ~ DF1$`Gold%`,ylab="Porcentaje de Daño",xlab="Porcentaje de Oro" )
+abline(h=mean(DF1[DFadc,]$`DMG%`),col="brown")
+abline(h=mean(DF1[DFsupp,]$`DMG%`),col="green")
+abline(h=mean(DF1[DFjg,]$`DMG%`),col="purple")
+abline(h=mean(DF1[DFmid,]$`DMG%`),col="orange")
+abline(h=mean(DF1[DFtop,]$`DMG%`))
+abline(v=mean(DF1[DFadc,]$`Gold%`),col="brown")
+abline(v=mean(DF1[DFsupp,]$`Gold%`),col="green")
+abline(v=mean(DF1[DFjg,]$`Gold%`),col="purple")
+abline(v=mean(DF1[DFmid,]$`Gold%`),col="orange")
+abline(v=mean(DF1[DFtop,]$`Gold%`))
+```

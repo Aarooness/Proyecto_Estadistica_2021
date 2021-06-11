@@ -155,8 +155,8 @@ summary(DF1$`25-30 win percentage`)
 boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 partidas")
 abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)
 ```
-Análisis: 
-
+Análisis: Se pude observar que dentro del boxplot el porcentaje de vitorias es variado pero tambien se puede observar que hay campeones con el 100% de victorias, esto se debe a que adentro del parche en el que se juega un tornbeo internacional existe los campeones "meta".
+campeones "meta" = campeones mas fuertes que otros dentro del torneo (mejores "picks")
 
 b. Porcentaje de victorias de entre 40 y 45 partidas
 
@@ -169,4 +169,4 @@ boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victor
 abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 ```
 Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon se llega como minimo a 40 victorias segidas y BLABLABLA.......................
-
+mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, por lo que el porcentaje de victorias de un campeon baja 

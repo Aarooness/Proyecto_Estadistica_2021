@@ -150,7 +150,7 @@ summary(DF1$`25-30 win percentage`)
 ```
 
 ```{r}
-boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 min.")
+boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 minutos")
 abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)
 ```
 Análisis: Se pude observar que dentro del boxplot el porcentaje de victorias es variado, ademas se observa tambien que hay campeones con el 100% de victorias, 
@@ -163,11 +163,11 @@ table(DF1$`40-45 win percentage`)
 ```
 
 ```{r}
-boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victorias entre 40 y 45 min.")
+boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victorias entre 40 y 45 minutos")
 abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 ```
-Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon llega como minimo a 40 victorias segidas
-mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, 
+Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon llega como minimo a 40 victorias seguidas
+mientras que vas subiendo en el torneo los jugadores profesionales saben a qué elegir en contra de un campeon específico, 
 por lo que el porcentaje de victorias de un campeon baja.
 
 2. ¿Qué relación se obtiene del porcentaje de oro y el porcentaje de daño realizado por el jugador?
@@ -196,24 +196,24 @@ abline(v=mean(DF2[DFmid,]$`Gold%`),col="orange")
 abline(v=mean(DF2[DFtop,]$`Gold%`))
 ```
 
-Análisis: En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
+Análisis: En las gráficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
 
-Hipotesis: Lo que podemos deducir de la gráfica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, 
-el porcentaje de daño sería mayor. Por otro lado, también deducimos que al tener un mayor porcentaje de oro genera mas kills, logrando el objetivo del juego.
+Hipótesis: Lo que podemos deducir de la gráfica es que al tener un mayor porcentaje de oro haremos más daño, es decir, 
+el porcentaje de daño sería mayor. Por otro lado, también deducimos que al tener un mayor porcentaje de oro genera más kills, logrando el objetivo del juego.
 
 - Importancia de obtener gold pasivamente(súbditos) ¿Es importante Obtener oro pasivamente?
 
 ```{r}
-plot(DF2$`Gold%`~DF2$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
+plot(DF2$`Gold%`~DF2$CSPM,ylab="Porcentaje de Oro",xlab="Súbditos por Minuto")
 ```
 - ¿Obtener oro pasivamente influye en el daño?
 ```{r}
-plot(DF2$CSPM~DF2$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
+plot(DF2$CSPM~DF2$`DMG%`,ylab="Súbditos por Minuto",xlab="Porcentaje de Daño")
 ```
 
-Análisis: Se observa que la grafica que mientras mas porcentaje de subditos obtengas mayor porcentaje de oro obtendras. De la misma manera en la 2da grafica se observa que mientras mayor sea el porcentaje de daño mayor sera el porcentaje de subditos. (comportamiento lineal)
+Análisis: Se observa que la gráfica que mientras más porcentaje de súbditos obtengas mayor porcentaje de oro obtendrás. De la misma manera en la 2da gráfica se observa que mientras mayor sea el porcentaje de daño mayor será el porcentaje de súbditos. (comportamiento lineal)
 
-Hipotesis: Una de las formas de ganar oro es pasivamente, lo que equivale a 1 oro por segundo. 
+Hipótesis: Una de las formas de ganar oro es pasivamente, lo que equivale a 1 oro por segundo. 
 Aunque no se gane pasivamente igual se puede hacer daño al equipo oponente, lo cual evidencia que no es realmente importante obtener oro de esta manera.
 
 
@@ -239,7 +239,7 @@ barplot(datAss$kills~datAss$Pos,xlab = "Rol",ylab = "Asistencias")
 ```
 
 
-- ¿Podemos definir que jugadores son mejores o peores con el porcentaje de daño y muerte?
+- ¿Podemos definir qué jugadores son mejores o peores con el porcentaje de daño y muerte?
 - Gráfica de ADC(qué jugadores son mejores o peores)
 ```{r}
 plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`,ylab="Porcentaje de daño",xlab="Porcentaje de Muertes") 
@@ -248,13 +248,13 @@ abline(v=mean(DF2[DFadc,]$`DTH%`),col="red")
 ```
 
 
-Análisis : en la primera grafica podemos observar los roles en genral vs los asesinato En la grafica se observa (mientras menos muertos tenga mayor daño hacen )(2do cuadrante mayor KDA y 4to cuadramte menor KDP)
-Hipotesis: Se puede evidenciarque por graficos que el rol  ADC hace mas daño, logrando mayor asesinatos. Por ende, gana mas oro y al tener mayor porcentaje de oro genera mas kills.
+Análisis : En la primera gráfica podemos observar los roles en genral vs los asesinatos. En la gráfica se observa (mientras menos muertos tenga mayor daño hacen )(2do cuadrante mayor KDA y 4to cuadrante menor KDP)
+Hipótesis: Se puede evidenciarque por gráficos que el rol  ADC hace mas daño, logrando mayor asesinatos. Por ende, gana más oro y al tener mayor porcentaje de oro genera más kills.
 
 
 4. Gráfica de KDA y Porcentaje de victorias("Entre más KDA más se gana")
 
-- ¿Mientras mas KDA tenga un jugador, mas juegos ganará?
+- ¿Mientras más KDA tenga un jugador, más juegos ganará?
 ```{r}
 DF2 %>% filter(GP>=10)->DFGPok
 DFPokadc<-which(DFGPok$Pos=="ADC")
@@ -285,8 +285,8 @@ plot(DFGPok[DFPokjg,]$`KDA` ~ DFGPok[DFPokjg,]$`W%`,ylab="KDA",xlab="Porcentaje 
 plot(DFGPok[DFPoktop,]$`KDA` ~ DFGPok[DFPoktop,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias TOP")
 ```
 
-Análisis : Se puede observar por graficas el comportamiento del porcentaje de victorias top vs KDA en cada juego 
-Hipotesis: El KDA de cada jugador se analiza por una formula donde k es directamente proporcial a A e inversamente proporcial a D. Por lo cual concluimos que al tener mayor KDA tenga el jugador mayor victorias obtendra.
+Análisis : Se puede observar por gráficas el comportamiento del porcentaje de victorias top vs KDA en cada juego 
+Hipótesis: El KDA de cada jugador se analiza por una fórmula donde k es directamente proporcial a A e inversamente proporcial a D. Por lo cual concluimos que al tener mayor KDA tenga el jugador mayor victorias obtendrá.
 
 
 

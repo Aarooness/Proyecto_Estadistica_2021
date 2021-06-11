@@ -5,6 +5,11 @@ author: Equipo 09 Seccion 02 EyP
 date: 10/06/2021
 ---
 
+<style>
+.reveal .slides section .slideContent{
+    font-size: 1pt;
+}
+</style>
 
 
 Integrantes
@@ -25,7 +30,7 @@ _Análisis del rendimiento estadístico de jugadores y campeones en LOL_
 
 
 
-Objetivos del proyecto
+Objetivos del proyecto 
 ========================================================
 
 1. Analizar las variables que mejor describen el comportamiento y rendimiento de los campeones y jugadores respectivamente.
@@ -63,14 +68,14 @@ library(formattable)
 
 Data Frame de los Campeones en LOL
 
-```{r,echo=FALSE}
+```{r}
 DF1 <- read_csv("lec_championdata.csv")
 
 ```
 
 
 Data Frame de los jugadores del torneo en LOL
-```{r,echo=FALSE}
+```{r}
 DF2 <- read_csv("lec_playerdata.csv")
 
 ```
@@ -94,9 +99,8 @@ formattable(x,align=c('c','c','c'))
 
 1. Análisis de las variables mediante distintos descriptores.
 ========================================================
-
 a. Posición que tomó el jugador en la partida (--Pos--)
-========================================================
+
 -- 
 
 ```{r,echo=FALSE}
@@ -125,6 +129,61 @@ b. Porcentaje de victorias por jugador "W%"
 boxplot(DF2$`W%`,col=c("#99cc99"),main="Porcentaje de victorias en el torneo")
 abline(h=mean(DF2$`W%`),col="red",lwd=2)
 ```
+
+Análisis: Se aprecia que los jugadores tienen un rendimiento similar debido a que se encuentran en un torneo a nivel internacional. Ademas, en estos torneos se juegan 3 partidas contra un equipo rival para poder llegar a la final del torneo.
+
+
+
+c. Porcentaje de victorias para "n" intervalo de tiempo 
+========================================================
+- En este punto se realiza una pequeña comparativa entre 2 variables similares, pero con distinto número de casos para cada una.
+
+C.1. Ratio de victorias para menos de 25 min.
+
+
+```{r,echo=FALSE}
+boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 partidas")
+abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)
+```
+
+
+C.2. Ratio de victorias de entre 40 y 45 min.
+========================================================
+
+```{r,echo=FALSE}
+boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victorias entre 40 y 45 partidas")
+abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
+```
+
+2. ¿Qué relación se obtiene del porcentaje de oro y el porcentaje de daño realizado por el jugador?
+========================================================
+
+```{r,echo=FALSE}
+DFadc<-which(DF2$Pos=="ADC")
+DFtop<-which(DF2$Pos=="Top")
+DFjg<-which(DF2$Pos=="Jungle")
+DFmid<-which(DF2$Pos=="Middle")
+DFsupp<-which(DF2$Pos=="Support")
+
+```
+Grafico de Gold 
+```{r,echo=FALSE}
+plot(DF2$`DMG%` ~ DF2$`Gold%`,ylab="Porcentaje de Daño",xlab="Porcentaje de Oro" )
+abline(h=mean(DF2[DFadc,]$`DMG%`),col="brown")
+abline(h=mean(DF2[DFsupp,]$`DMG%`),col="green")
+abline(h=mean(DF2[DFjg,]$`DMG%`),col="purple")
+abline(h=mean(DF2[DFmid,]$`DMG%`),col="orange")
+abline(h=mean(DF2[DFtop,]$`DMG%`))
+abline(v=mean(DF2[DFadc,]$`Gold%`),col="brown")
+abline(v=mean(DF2[DFsupp,]$`Gold%`),col="green")
+abline(v=mean(DF2[DFjg,]$`Gold%`),col="purple")
+abline(v=mean(DF2[DFmid,]$`Gold%`),col="orange")
+abline(v=mean(DF2[DFtop,]$`Gold%`))
+```
+
+
+
+
 
 Análisis: Se aprecia que los jugadores tienen un rendimiento similar debido a que se encuentran en un torneo a nivel internacional. Ademas, en estos torneos se juegan 3 partidas contra un equipo rival para poder llegar a la final del torneo.
 

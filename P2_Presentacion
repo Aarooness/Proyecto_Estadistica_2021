@@ -1,0 +1,60 @@
+Presentacion P2
+========================================================
+author: Equipo 09 Seccion 02 EyP
+date: 21/05/2021
+---
+
+
+
+Integrantes
+========================================================
+ --
+ 
+- Andre Bejarano    / __Lider__
+- Viviana Chacchi
+- Jean Colmenares
+- Aaron Gonzales
+- Hector Retamozo 
+
+
+Tema del proyecto
+========================================================
+_Análisis del rendimiento estadístico de jugadores y campeones en LOL_
+
+
+
+
+Objetivos del proyecto
+========================================================
+
+- 
+
+
+Muestreo
+========================================================
+
+
+
+
+
+
+
+
+Inicializamos los datos
+========================================================
+
+Se cargan las librerías correspondientes 
+```{r}
+library(readr)
+library(dplyr)
+library(stringr)
+library(data.table)
+library(formattable)
+```
+
+Data Frame de los Campeones en LOL
+```{r}
+DF1 <- read_csv("lec_championdata.csv")
+DF1
+names(DF1)
+```

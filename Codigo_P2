@@ -48,11 +48,9 @@ ha recopilado data para ser analizada en este proyecto se busca observar patrone
 
 2. Comprobar el tipo de relación entre el daño que generan los jugadores y el oro que obtienen en la partida.
 
-3.
+3. Determinar la existencia de una influencia en el rol seleccionado por el jugador y su desempeño, en "kills" por ejemplo.
 
-4.
-
-5.
+4. Determinar la relación entre la variable "KDA" y el porcentaje de victorias.
 
 ### MUESTREO
 La base de datos usada para este proyecto viene de algunos datos capturados previamente del campeonato de Europa de League of Legens 2019, el 
@@ -252,7 +250,7 @@ Analisis : en la primera grafica podemos observar los roles en genral vs los ase
 Hipotesis:
 
 
-4. Gráfica de KD y Porcentaje de victorias("Entre más KDA más se gana")
+4. Gráfica de KDA y Porcentaje de victorias("Entre más KDA más se gana")
 
 - ¿Mientras mas KDA tenga un jugador, mas juegos ganará?
 ```{r}

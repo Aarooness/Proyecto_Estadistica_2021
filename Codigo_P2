@@ -168,8 +168,7 @@ boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victor
 abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 ```
 Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon llega como minimo a 40 victorias segidas
-mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, 
-por lo que el porcentaje de victorias de un campeon baja.
+mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, por lo que el porcentaje de victorias de un campeon baja 
 
 2. ¿Qué relación se obtiene del porcentaje de oro y el porcentaje de daño realizado por el jugador?
 
@@ -197,12 +196,7 @@ abline(v=mean(DF2[DFmid,]$`Gold%`),col="orange")
 abline(v=mean(DF2[DFtop,]$`Gold%`))
 ```
 
-Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
-
-Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, 
-el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro genera mas kills, logrando el objetivo del juego.
-
-Impotancia de obtener gold pasivamente(subditos)
+Impotancia de obtener gol pasivamente(subditos)
 Es importante Obtener oro pasivamente?
 ```{r}
 plot(DF1$`Gold%`~DF1$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
@@ -212,9 +206,9 @@ Obtener oro pasivamente influencia en el daño?
 plot(DF$CSPM~DF$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
 ```
 
+Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. Asimismo, 
 
-
-
+Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro general mas kills, logrando el objetivo del juego.
 
 
 

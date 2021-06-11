@@ -1,7 +1,8 @@
-Presentacion P2
+P2_presentacion
+
 ========================================================
 author: Equipo 09 Seccion 02 EyP
-date: 21/05/2021
+date: 10/06/2021
 ---
 
 
@@ -27,7 +28,15 @@ _Análisis del rendimiento estadístico de jugadores y campeones en LOL_
 Objetivos del proyecto
 ========================================================
 
-- 
+1. Analizar las variables que mejor describen el comportamiento y rendimiento de los campeones y jugadores respectivamente.
+
+2. Comprobar el tipo de relación entre el daño que generan los jugadores y el oro que obtienen en la partida.
+
+3.
+
+4.
+
+5.
 
 
 Muestreo
@@ -53,8 +62,81 @@ library(formattable)
 ```
 
 Data Frame de los Campeones en LOL
-```{r}
+
+```{r,echo=FALSE}
 DF1 <- read_csv("lec_championdata.csv")
-DF1
-names(DF1)
+
 ```
+
+
+Data Frame de los jugadores del torneo en LOL
+```{r,echo=FALSE}
+DF2 <- read_csv("lec_playerdata.csv")
+
+```
+
+Variables de estudio
+========================================================
+
+
+```{r,echo=FALSE}
+c1<-c("K","Pos","DMG%","Gold%","W%","<25 win percentage","40-45 win percentage")
+
+c2<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 partidas","Porcentaje de victorias de entre 40 y 45 partidas")
+
+c3 <-c("Player Data","Player Data","Player Data","Player Data","Player Data","Champion Data","Champion Data")
+
+
+x<-data.table("Nombre_de_la_variable"=c1,"Descripción_de_la_Variable"=c2,"Origen"=c3)
+formattable(x,align=c('c','c','c'))
+```
+
+
+1. Análisis de las variables mediante distintos descriptores.
+========================================================
+
+a. Posición que tomó el jugador en la partida (--Pos--)
+========================================================
+-- 
+
+```{r,echo=FALSE}
+barplot(height = table(DF2$Pos),beside = TRUE, main = "Gráfica de Posición", xlab = "Pos", ylab = "Frecuencia", ylim = c(0,71), col=c("lightgreen","burlywood1","lightblue", "yellow", "#9999cc"))
+```
+
+Tabla de frecuencias para la variable "Posición"
+========================================================
+
+```{r,echo=FALSE}
+DFpos <- data.frame(table(DF2$Pos))
+names(DFpos)[1] <- "Posicion"
+DFpos$FreqRelativa <- round(DFpos$Freq/sum(DFpos$Freq),4)
+DFpos
+```
+```{r,echo=FALSE}
+table(DF2$Pos)
+```
+- En adición a ello se comprueba un patrón de comportamiento entre la variable "Posición" y el número de "Asistencias" del jugador. "Asistencia" se define cuando un campeón tuvo una participación en la kill de un enemigo; mas no le dio el golpe final.
+
+
+b. Porcentaje de victorias por jugador "W%"
+========================================================
+
+```{r,echo=FALSE}
+boxplot(DF2$`W%`,col=c("#99cc99"),main="Porcentaje de victorias en el torneo")
+abline(h=mean(DF2$`W%`),col="red",lwd=2)
+```
+
+Análisis: Se aprecia que los jugadores tienen un rendimiento similar debido a que se encuentran en un torneo a nivel internacional. Ademas, en estos torneos se juegan 3 partidas contra un equipo rival para poder llegar a la final del torneo.
+
+
+
+c. Porcentaje de victorias para "n" partidas 
+========================================================
+- En este punto se realiza una pequeña comparativa entre 2 variables similares, pero con distinto número de casos para cada una.
+
+c.1. Porcentaje de victorias para menos de 25 partidas
+
+
+```{r,echo=FALSE}
+boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 partidas")
+abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)

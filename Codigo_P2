@@ -60,7 +60,7 @@ championdata    WR5 ->"If you have a 12 team league, a WR1 would be a top 12 WR,
 ```{r}
 c1<-c("K","Pos","DMG%","Gold%","W%","<25 win percentage","40-45 win percentage")
 
-c2<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 partidas","Porcentaje de victorias de entre 40 y 45 partidas")
+c2<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 minutos","Porcentaje de victorias de entre 40 y 45 minutos")
 
 c3 <-c("Player Data","Player Data","Player Data","Player Data","Player Data","Champion Data","Champion Data")
 
@@ -74,11 +74,11 @@ formattable(x,align=c('c','c','c'))
 A continuación se adjunta una tabla con los modelos de variables aleatorias posibles para algunas de las variables de estudio:
 
 ```{r}
-c1<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 partidas","Porcentaje de victorias de entre 40 y 45 partidas")
+c1<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 minutos","Porcentaje de victorias de entre 40 y 45 minutos")
 
 
 
-c2<-c("Bernoulli","Geométrica","","","","","")
+c2<-c("Bernoulli","Geométrica","","","","Bernoulli","Bernoulli")
 
 c3 <-c("Player Data","Player Data","Player Data","Player Data","Player Data","Champion Data","Champion Data")
 

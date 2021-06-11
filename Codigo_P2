@@ -1,4 +1,22 @@
 
+
+http://web.cs.wpi.edu/~imgd2905/d20/projects/proj1/#top
+demonios, no se el nombre de una variable, que hago ahora?
+Binevenido a Buscando varialbes 101
+Paso1
+Vas a google y pones "what does [varialbe que no conosco] in lol means? 
+La fuente mas comun y fiable es "reddit"
+Paso2
+Genial ya tienes el significado de la variable
+Paso2-1
+En el caso que no te salga, preguntale a ANDRE,(btw el realizara los pasos 1 y 2 tambien, increible >:/)
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 ## Análisis de rendimiento de jugadores en LOL
  
 ---
@@ -184,7 +202,7 @@ Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcen
 Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, 
 el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro genera mas kills, logrando el objetivo del juego.
 
-- Importancia de obtener gold pasivamente(súbditos) ¿Es importante Obtener oro pasivamente?
+- Importancia de obtener gol pasivamente(súbditos) ¿Es importante Obtener oro pasivamente?
 
 ```{r}
 plot(DF2$`Gold%`~DF2$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
@@ -194,6 +212,8 @@ plot(DF2$`Gold%`~DF2$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
 plot(DF2$CSPM~DF2$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
 ```
 
+Analisis 
+Hipotesis:
 
 
 
@@ -228,6 +248,8 @@ abline(v=mean(DF2[DFadc,]$`DTH%`),col="red")
 ```
 
 
+Analisis : en la primera grafica podemos observar los roles en genral vs los asesinato 
+Hipotesis:
 
 
 4. Gráfica de KD y Porcentaje de victorias("Entre más KDA más se gana")
@@ -262,3 +284,7 @@ plot(DFGPok[DFPokjg,]$`KDA` ~ DFGPok[DFPokjg,]$`W%`,ylab="KDA",xlab="Porcentaje 
 ```{r}
 plot(DFGPok[DFPoktop,]$`KDA` ~ DFGPok[DFPoktop,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias TOP")
 ```
+
+Analisis 
+Hipotesis:
+

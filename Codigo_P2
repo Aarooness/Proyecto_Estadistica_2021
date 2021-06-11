@@ -69,7 +69,23 @@ x<-data.table("Nombre_de_la_variable"=c1,"Descripción_de_la_Variable"=c2,"Orige
 formattable(x,align=c('c','c','c'))
 ```
 
+###Modelos de variables aleatorias en el estudio
 
+A continuación se adjunta una tabla con los modelos de variables aleatorias posibles para algunas de las variables de estudio:
+
+```{r}
+c1<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 partidas","Porcentaje de victorias de entre 40 y 45 partidas")
+
+
+
+c2<-c("Bernoulli","Geométrica","")
+
+c3 <-c("Player Data","Player Data","Player Data","Player Data","Player Data","Champion Data","Champion Data")
+
+
+x<-data.table("Descripción_de_la _variable"=c1,"Modelo_escogido"=c2,"Origen"=c3)
+formattable(x,align=c('c','c','c'))
+```
 
 Se asignan las bases de datos del "campeón" y del "jugador" a analizar a DF1 y DF2 respectivamente.
 

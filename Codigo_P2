@@ -77,8 +77,7 @@ A continuación se adjunta una tabla con los modelos de variables aleatorias pos
 c1<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 minutos","Porcentaje de victorias de entre 40 y 45 minutos")
 
 
-
-c2<-c("Bernoulli","Geométrica","","","","Bernoulli","Bernoulli")
+c2<-c("Bernoulli","Geométrica","-","-","Bernoulli","Bernoulli","Bernoulli")
 
 c3 <-c("Player Data","Player Data","Player Data","Player Data","Player Data","Champion Data","Champion Data")
 
@@ -288,5 +287,6 @@ plot(DFGPok[DFPoktop,]$`KDA` ~ DFGPok[DFPoktop,]$`W%`,ylab="KDA",xlab="Porcentaj
 
 Análisis : Se puede observar por graficas el comportamiento del porcentaje de victorias top vs KDA en cada juego 
 Hipotesis: El KDA de cada jugador se analiza por una formula donde k es directamente proporcial a A e inversamente proporcial a D. Por lo cual concluimos que al tener mayor KDA tenga el jugador mayor victorias obtendra.
+
 
 

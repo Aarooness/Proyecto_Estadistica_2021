@@ -89,7 +89,7 @@ Variables de estudio
 ```{r,echo=FALSE}
 c1<-c("K","Pos","DMG%","Gold%","W%","<25 win percentage","40-45 win percentage")
 
-c2<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 partidas","Porcentaje de victorias de entre 40 y 45 partidas")
+c2<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 minutos","Porcentaje de victorias de entre 40 y 45 minutos")
 
 c3 <-c("Player Data","Player Data","Player Data","Player Data","Player Data","Champion Data","Champion Data")
 
@@ -105,7 +105,7 @@ Modelos de variables aleatorias en el estudio
 A continuación se adjunta una tabla con los modelos de variables aleatorias posibles para algunas de las variables de estudio:
 
 ```{r,echo=FALSE}
-c1<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 partidas","Porcentaje de victorias de entre 40 y 45 partidas")
+c1<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 minutos","Porcentaje de victorias de entre 40 y 45 minutos")
 
 
 
@@ -159,11 +159,11 @@ c. Porcentaje de victorias para "n" intervalo de tiempo
 ========================================================
 - En este punto se realiza una pequeña comparativa entre 2 variables similares, pero con distinto número de casos para cada una.
 
-C.1. Ratio de victorias para menos de 25 min.
+C.1. Ratio de victorias de entre 25 y 30 min.
 
 
 ```{r,echo=FALSE}
-boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 partidas")
+boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 minutos")
 abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)
 ```
 
@@ -172,7 +172,7 @@ C.2. Ratio de victorias de entre 40 y 45 min.
 ========================================================
 
 ```{r,echo=FALSE}
-boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victorias entre 40 y 45 partidas")
+boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victorias entre 40 y 45 minutos")
 abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 ```
 

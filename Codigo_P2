@@ -234,7 +234,7 @@ abline(v=mean(DF2[DFadc,]$`DTH%`),col="red")
 
 
 Análisis : en la primera grafica podemos observar los roles en genral vs los asesinato 
-Hipotesis:
+Hipotesis: Se puede evidenciarque por graficos que el rol  ADC hace mas daño, logrando mayor asesinatos. Por ende, gana mas oro y al tener mayor porcentaje de oro genera mas kills.
 
 
 4. Gráfica de KDA y Porcentaje de victorias("Entre más KDA más se gana")
@@ -270,6 +270,7 @@ plot(DFGPok[DFPokjg,]$`KDA` ~ DFGPok[DFPokjg,]$`W%`,ylab="KDA",xlab="Porcentaje 
 plot(DFGPok[DFPoktop,]$`KDA` ~ DFGPok[DFPoktop,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias TOP")
 ```
 
-Análisis 
-Hipotesis:
+Análisis : ----------En la grafica se observa (mientras menos muertos tenga mayor daño hacen )(2do cuadrante mayor KDA y 4to cuadramte menor KDP)
+Hipotesis: El KDA de cada jugador se analiza por una formula donde k es directamente proporcial a A e inversamente proporcial a D. Por lo cual concluimos que al tener mayor KDA tenga el jugador mayor victorias obtendra.
+
 

@@ -116,7 +116,6 @@ DFpos$FreqRelativa <- round(DFpos$Freq/sum(DFpos$Freq),4)
 DFpos
 ```
 - Análisis: Estas tablas o graficas nos ayudan para determinar el impacto de cada posicion durante la partida. 
-- En adición a ello se comprueba un patrón de comportamiento entre la variable "Posición" y el número de "Asistencias" del jugador. "Asistencia" se define cuando un campeón tuvo una participación en la kill de un enemigo; mas no le dio el golpe final.
 
 ```{r}
 boxplot(DF2$A~DF2$Pos,col=c("lightgreen","burlywood1","lightblue", "yellow", "#9999cc"),main="Posición vs. Asistencias",ylab="Asistencias",xlab="Posición del jugador")

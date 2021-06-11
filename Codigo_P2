@@ -37,9 +37,7 @@ En el caso que no te salga, preguntale a ANDRE,(btw el realizara los pasos 1 y 2
 ## PRIMERA PARTE 
 
 ### Introducción
-League of legends es un juego multijugadir en linea cuyo objetivo es trabajar en equipo para defender una base propia y derrotar a los enemigos. 
-El juego se destaca por la variedad de personajes y las posibles combinaciones de estos durante una partida. Por ello, se han llevado a cabo torneos y de estos se 
-ha recopilado data para ser analizada en este proyecto se busca observar patrones relacionados al desempeño tanto individual como colectivo en las partidas de un torneo.  
+
 
 
 ### Objetivos
@@ -165,30 +163,85 @@ abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon se llega como minimo a 40 victorias segidas y BLABLABLA.......................
 mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, por lo que el porcentaje de victorias de un campeon baja 
 
-
-
-2. ¿Qué relación se obtiene del porcentaje de oro y el porcentaje de daño realizado por el jugador?
-
-
+////////////////////////Graficas de Andre///////////////////////////
 ```{r}
-DFadc<-which(DF2$Pos=="ADC")
-DFtop<-which(DF2$Pos=="Top")
-DFjg<-which(DF2$Pos=="Jungle")
-DFmid<-which(DF2$Pos=="Middle")
-DFsupp<-which(DF2$Pos=="Support")
+DFadc<-which(DF1$Pos=="ADC")
+DFtop<-which(DF1$Pos=="Top")
+DFjg<-which(DF1$Pos=="Jungle")
+DFmid<-which(DF1$Pos=="Middle")
+DFsupp<-which(DF1$Pos=="Support")
 
 ```
 Grafico de Gold 
 ```{r}
-plot(DF2$`DMG%` ~ DF2$`Gold%`,ylab="Porcentaje de Daño",xlab="Porcentaje de Oro" )
-abline(h=mean(DF2[DFadc,]$`DMG%`),col="brown")
-abline(h=mean(DF2[DFsupp,]$`DMG%`),col="green")
-abline(h=mean(DF2[DFjg,]$`DMG%`),col="purple")
-abline(h=mean(DF2[DFmid,]$`DMG%`),col="orange")
-abline(h=mean(DF2[DFtop,]$`DMG%`))
-abline(v=mean(DF2[DFadc,]$`Gold%`),col="brown")
-abline(v=mean(DF2[DFsupp,]$`Gold%`),col="green")
-abline(v=mean(DF2[DFjg,]$`Gold%`),col="purple")
-abline(v=mean(DF2[DFmid,]$`Gold%`),col="orange")
-abline(v=mean(DF2[DFtop,]$`Gold%`))
+plot(DF1$`DMG%` ~ DF1$`Gold%`,ylab="Porcentaje de Daño",xlab="Porcentaje de Oro" )
+abline(h=mean(DF1[DFadc,]$`DMG%`),col="brown")
+abline(h=mean(DF1[DFsupp,]$`DMG%`),col="green")
+abline(h=mean(DF1[DFjg,]$`DMG%`),col="purple")
+abline(h=mean(DF1[DFmid,]$`DMG%`),col="orange")
+abline(h=mean(DF1[DFtop,]$`DMG%`))
+abline(v=mean(DF1[DFadc,]$`Gold%`),col="brown")
+abline(v=mean(DF1[DFsupp,]$`Gold%`),col="green")
+abline(v=mean(DF1[DFjg,]$`Gold%`),col="purple")
+abline(v=mean(DF1[DFmid,]$`Gold%`),col="orange")
+abline(v=mean(DF1[DFtop,]$`Gold%`))
+```
+Impotancia de obtener gol pasivamente(subditos)
+```{r}
+plot(DF1$`Gold%`~DF1$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
+```
+Jugdadores puden obtener alto % de dano consigueindo CPM
+```{r}
+plot(DF$CSPM~DF$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
+```
+Grafica de asesinatos por rol
+```{r}
+datkill<-data.frame(kills=c(sum(DF1[DFtop,]$`K`),sum(DF1[DFjg,]$`K`),sum(DF1[DFmid,]$`K`),sum(DF1[DFadc,]$`K`),sum(DF1[DFsupp,]$`K`)),
+Pos = as.factor(c("Top", "Jg", "Mid","Adc","Supp")))
+
+barplot(datkill$kills~datkill$Pos,xlab = "Rol",ylab = "Asesinatos")
+```
+Grafica de asistencias del la linea BOT donde estan ADC y Supp
+
+```{r}
+datAss<-data.frame(kills=c(sum(DF1[DFadc,]$`A`),sum(DF1[DFsupp,]$`A`)),
+Pos = as.factor(c("Adc","Supp")))
+barplot(datAss$kills~datAss$Pos,xlab = "Rol",ylab = "Asistencias")
+```
+Grafica de ADC(que jugadores son mejores o peores)
+
+```{r}
+plot(DF1[DFadc,]$`DMG%` ~ DF1[DFadc,]$`DTH%`) 
+abline(h=mean(DF1[DFadc,]$`DMG%`),col="red")
+abline(v=mean(DF1[DFadc,]$`DTH%`),col="red")
+```
+ Graficas de KD y Porcentaje de victorias(Idea:a mas kda mas se gana)
+```{r}
+DF1 %>% filter(GP>=10)->DFGPok
+DFPokadc<-which(DFGPok$Pos=="ADC")
+DFPoktop<-which(DFGPok$Pos=="Top")
+DFPokjg<-which(DFGPok$Pos=="Jungle")
+DFPokmid<-which(DFGPok$Pos=="Middle")
+DFPoksupp<-which(DFGPok$Pos=="Support")
+
+```
+Graficas de KD y Porcentaje de victorias ADC
+```{r}
+plot(DFGPok[DFPokadc,]$`KDA` ~ DFGPok[DFPokadc,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias ADC")
+```
+Graficas de KD y Porcentaje de victorias SUPP
+```{r}
+plot(DFGPok[DFPoksupp,]$`KDA` ~ DFGPok[DFPoksupp,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias SUPP")
+```
+Graficas de KD y Porcentaje de victorias MID
+```{r}
+plot(DFGPok[DFPokmid,]$`KDA` ~ DFGPok[DFPokmid,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias MID")
+```
+Graficas de KD y Porcentaje de victorias JG
+```{r}
+plot(DFGPok[DFPokjg,]$`KDA` ~ DFGPok[DFPokjg,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias JG")
+```
+Graficas de KD y Porcentaje de victorias TOP
+```{r}
+plot(DFGPok[DFPoktop,]$`KDA` ~ DFGPok[DFPoktop,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias TOP")
 ```

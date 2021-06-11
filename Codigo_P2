@@ -166,7 +166,7 @@ DFmid<-which(DF2$Pos=="Middle")
 DFsupp<-which(DF2$Pos=="Support")
 
 ```
-Grafico de Gold 
+Gráfico de Gold 
 ```{r}
 plot(DF2$`DMG%` ~ DF2$`Gold%`,ylab="Porcentaje de Daño",xlab="Porcentaje de Oro" )
 abline(h=mean(DF2[DFadc,]$`DMG%`),col="brown")
@@ -181,10 +181,10 @@ abline(v=mean(DF2[DFmid,]$`Gold%`),col="orange")
 abline(v=mean(DF2[DFtop,]$`Gold%`))
 ```
 
-Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
+Análisis:En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
 
-Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, 
-el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro genera mas kills, logrando el objetivo del juego.
+Hipotesis: Lo que podemos deducir de la gráfica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, 
+el porcentaje de daño sería mayor. Por otro lado, también deducimos que al tener un mayor porcentaje de oro genera mas kills, logrando el objetivo del juego.
 
 - Importancia de obtener gol pasivamente(súbditos) ¿Es importante Obtener oro pasivamente?
 
@@ -196,7 +196,7 @@ plot(DF2$`Gold%`~DF2$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
 plot(DF2$CSPM~DF2$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
 ```
 
-Analisis 
+Análisis 
 Hipotesis:
 
 
@@ -224,7 +224,7 @@ barplot(datAss$kills~datAss$Pos,xlab = "Rol",ylab = "Asistencias")
 
 
 - ¿Podemos definir que jugadores son mejores o peores con el porcentaje de daño u muerte?
-- Gráfica de ADC(que jugadores son mejores o peores)
+- Gráfica de ADC(qué jugadores son mejores o peores)
 ```{r}
 plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`) 
 abline(h=mean(DF2[DFadc,]$`DMG%`),col="red")
@@ -232,7 +232,7 @@ abline(v=mean(DF2[DFadc,]$`DTH%`),col="red")
 ```
 
 
-Analisis : en la primera grafica podemos observar los roles en genral vs los asesinato 
+Análisis : en la primera grafica podemos observar los roles en genral vs los asesinato 
 Hipotesis:
 
 
@@ -269,6 +269,6 @@ plot(DFGPok[DFPokjg,]$`KDA` ~ DFGPok[DFPokjg,]$`W%`,ylab="KDA",xlab="Porcentaje 
 plot(DFGPok[DFPoktop,]$`KDA` ~ DFGPok[DFPoktop,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias TOP")
 ```
 
-Analisis 
+Análisis 
 Hipotesis:
 

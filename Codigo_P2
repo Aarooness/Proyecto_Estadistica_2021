@@ -153,8 +153,9 @@ summary(DF1$`25-30 win percentage`)
 boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 partidas")
 abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)
 ```
-Análisis: Se pude observar que dentro del boxplot el porcentaje de victorias es variado, ademas se observa tambien que hay campeones con el 100% de victorias, lo cual se debe a que adentro del parche en el que se juega en un torneo internacional existe los campeones "meta".
-definicion de campeones "meta" = campeones mas fuertes que otros dentro del torneo (mejores "picks")
+Análisis: Se pude observar que dentro del boxplot el porcentaje de victorias es variado, ademas se observa tambien que hay campeones con el 100% de victorias, 
+lo cual se debe a que adentro del parche en el que se juega en un torneo internacional existe los campeones "meta".
+Definición de campeones "meta" = campeones mas fuertes que otros dentro del torneo (mejores "picks")
 
 c.2. Porcentaje de victorias de entre 40 y 45 partidas
 
@@ -166,7 +167,7 @@ table(DF1$`40-45 win percentage`)
 boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victorias entre 40 y 45 partidas")
 abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 ```
-Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon se llega como minimo a 40 victorias segidas y BLABLABLA.......................
+Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon llega como minimo a 40 victorias segidas
 mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, por lo que el porcentaje de victorias de un campeon baja 
 
 2. ¿Qué relación se obtiene del porcentaje de oro y el porcentaje de daño realizado por el jugador?

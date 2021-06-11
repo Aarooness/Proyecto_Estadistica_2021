@@ -195,10 +195,6 @@ abline(v=mean(DF2[DFmid,]$`Gold%`),col="orange")
 abline(v=mean(DF2[DFtop,]$`Gold%`))
 ```
 
-Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
-
-Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro general mas kills, logrando el objetivo del juego.
-
 Impotancia de obtener gol pasivamente(subditos)
 Es importante Obtener oro pasivamente?
 ```{r}
@@ -211,10 +207,9 @@ plot(DF$CSPM~DF$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
 
 
 
+Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
 
-
-
-
+Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro general mas kills, logrando el objetivo del juego.
 
 
 

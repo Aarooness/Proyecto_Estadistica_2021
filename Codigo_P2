@@ -163,30 +163,36 @@ abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon se llega como minimo a 40 victorias segidas y BLABLABLA.......................
 mientras que vas subiendo en el torneo los jugadores profesionales saben que elegir en contra de un campeon especifico, por lo que el porcentaje de victorias de un campeon baja 
 
-////////////////////////Graficas de Andre///////////////////////////
+2. ¿Qué relación se obtiene del porcentaje de oro y el porcentaje de daño realizado por el jugador?
+
+
 ```{r}
-DFadc<-which(DF1$Pos=="ADC")
-DFtop<-which(DF1$Pos=="Top")
-DFjg<-which(DF1$Pos=="Jungle")
-DFmid<-which(DF1$Pos=="Middle")
-DFsupp<-which(DF1$Pos=="Support")
+DFadc<-which(DF2$Pos=="ADC")
+DFtop<-which(DF2$Pos=="Top")
+DFjg<-which(DF2$Pos=="Jungle")
+DFmid<-which(DF2$Pos=="Middle")
+DFsupp<-which(DF2$Pos=="Support")
 
 ```
 Grafico de Gold 
-Los jugadores que con mas porcentaje de Daño, obtienen mas Oro? 
 ```{r}
-plot(DF1$`DMG%` ~ DF1$`Gold%`,ylab="Porcentaje de Daño",xlab="Porcentaje de Oro" )
-abline(h=mean(DF1[DFadc,]$`DMG%`),col="brown")
-abline(h=mean(DF1[DFsupp,]$`DMG%`),col="green")
-abline(h=mean(DF1[DFjg,]$`DMG%`),col="purple")
-abline(h=mean(DF1[DFmid,]$`DMG%`),col="orange")
-abline(h=mean(DF1[DFtop,]$`DMG%`))
-abline(v=mean(DF1[DFadc,]$`Gold%`),col="brown")
-abline(v=mean(DF1[DFsupp,]$`Gold%`),col="green")
-abline(v=mean(DF1[DFjg,]$`Gold%`),col="purple")
-abline(v=mean(DF1[DFmid,]$`Gold%`),col="orange")
-abline(v=mean(DF1[DFtop,]$`Gold%`))
+plot(DF2$`DMG%` ~ DF2$`Gold%`,ylab="Porcentaje de Daño",xlab="Porcentaje de Oro" )
+abline(h=mean(DF2[DFadc,]$`DMG%`),col="brown")
+abline(h=mean(DF2[DFsupp,]$`DMG%`),col="green")
+abline(h=mean(DF2[DFjg,]$`DMG%`),col="purple")
+abline(h=mean(DF2[DFmid,]$`DMG%`),col="orange")
+abline(h=mean(DF2[DFtop,]$`DMG%`))
+abline(v=mean(DF2[DFadc,]$`Gold%`),col="brown")
+abline(v=mean(DF2[DFsupp,]$`Gold%`),col="green")
+abline(v=mean(DF2[DFjg,]$`Gold%`),col="purple")
+abline(v=mean(DF2[DFmid,]$`Gold%`),col="orange")
+abline(v=mean(DF2[DFtop,]$`Gold%`))
 ```
+
+Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
+
+Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro general mas kills, logrando el objetivo del juego.
+
 Impotancia de obtener gol pasivamente(subditos)
 Es importante Obtener oro pasivamente?
 ```{r}
@@ -196,7 +202,17 @@ Obtener oro pasivamente influencia en el daño?
 ```{r}
 plot(DF$CSPM~DF$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
 ```
-Grafica de asesinatos por rol
+
+
+
+
+
+
+
+
+
+
+3.Grafica de asesinatos por rol
 Poruqe el ADC tiene mas Kills?
 ```{r}
 datkill<-data.frame(kills=c(sum(DF1[DFtop,]$`K`),sum(DF1[DFjg,]$`K`),sum(DF1[DFmid,]$`K`),sum(DF1[DFadc,]$`K`),sum(DF1[DFsupp,]$`K`)),
@@ -218,7 +234,14 @@ plot(DF1[DFadc,]$`DMG%` ~ DF1[DFadc,]$`DTH%`)
 abline(h=mean(DF1[DFadc,]$`DMG%`),col="red")
 abline(v=mean(DF1[DFadc,]$`DTH%`),col="red")
 ```
- Graficas de KD y Porcentaje de victorias(Idea:a mas kda mas se gana)
+
+
+
+
+
+
+
+4.Graficas de KD y Porcentaje de victorias(Idea:a mas kda mas se gana)
  Mientras mas KDA tenga un jugador, mas juegos ganara?
 ```{r}
 DF1 %>% filter(GP>=10)->DFGPok

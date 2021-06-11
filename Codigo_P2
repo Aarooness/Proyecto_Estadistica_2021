@@ -166,11 +166,11 @@ mientras que vas subiendo en el torneo los jugadores profesionales saben que ele
 
 ////////////////////////Graficas de Andre///////////////////////////
 ```{r}
-DF1adc<-which(DF$Pos=="ADC")
-DF1top<-which(DF$Pos=="Top")
-DF1jg<-which(DF$Pos=="Jungle")
-DF1mid<-which(DF$Pos=="Middle")
-DF1supp<-which(DF$Pos=="Support")
+DFadc<-which(DF1$Pos=="ADC")
+DFtop<-which(DF1$Pos=="Top")
+DFjg<-which(DF1$Pos=="Jungle")
+DFmid<-which(DF1$Pos=="Middle")
+DFsupp<-which(DF1$Pos=="Support")
 
 ```
 Grafico de Gold 

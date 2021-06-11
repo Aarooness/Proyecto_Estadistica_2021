@@ -55,6 +55,13 @@ ha recopilado data para ser analizada en este proyecto se busca observar patrone
 5.
 
 ### MUESTREO
+La base de datos usada para este proyecto viene de algunos datos capturados previamente del campeonato de Europa de League of Legens 2019, el 
+cual fue publicado por Stephen O'Farrel. 
+En este caso se trabajara con 2 datas Frame. El primero que viene a ser el lec_championdata el cual tiene como unidad muestral al campeón. 
+El segundo viene a ser el lec_playerdata el cual tiene como unidad
+muestral a los jugadores agrupados en equipo.
+
+
 -GENTE HECTOR TIENE QUE PONER CUAL ES NUESTRA UNIDAD MUESTRAL Y RELACIONARLO CON EL OBJETIVO, ES ALGO QUE RECALCO EL PROFE EN LA P1 QUE DEBIMOS HACER, AUNQUE CLARO YA NO ES EL MISMO TEMA IGUAL HAY QUE HACERLO
 
 
@@ -192,6 +199,3 @@ abline(v=mean(DF2[DFjg,]$`Gold%`),col="purple")
 abline(v=mean(DF2[DFmid,]$`Gold%`),col="orange")
 abline(v=mean(DF2[DFtop,]$`Gold%`))
 ```
-analisis:en las graficas se puede observar que el porcentaje de oro vs el porcentaje de daño crecen linealmente. 
-Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tebner un mayor porcentaje de oro general mas kills, logrando el objetivo del juego.
-

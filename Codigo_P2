@@ -202,7 +202,7 @@ Analisis:En las graficas se puede observar que el porcentaje de oro vs el porcen
 Hipotesis: Lo que podemos deducir de la grafica es que al tener un mayor porcentaje de oro haremos mas daño, es decir, 
 el porcentaje de daño seria mayor. Por otro lado, tambien deducimos que al tener un mayor porcentaje de oro genera mas kills, logrando el objetivo del juego.
 
-- Importancia de obtener gol pasivamente(súbditos) ¿Es importante Obtener oro pasivamente?
+- Importancia de obtener gold pasivamente(súbditos) ¿Es importante Obtener oro pasivamente?
 
 ```{r}
 plot(DF2$`Gold%`~DF2$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
@@ -211,13 +211,6 @@ plot(DF2$`Gold%`~DF2$CSPM,ylab="Porcentaje de Oro",xlab="Subditos por Minuto")
 ```{r}
 plot(DF2$CSPM~DF2$`DMG%`,ylab="Subditos por Minuto",xlab="Porcentaje de Daño")
 ```
-
-
-
-
-
-
-
 
 
 
@@ -251,10 +244,6 @@ plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`)
 abline(h=mean(DF2[DFadc,]$`DMG%`),col="red")
 abline(v=mean(DF2[DFadc,]$`DTH%`),col="red")
 ```
-
-
-
-
 
 
 

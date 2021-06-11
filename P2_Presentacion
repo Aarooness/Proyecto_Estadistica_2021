@@ -268,7 +268,7 @@ Modelos de variables aleatorias en el estudio
 
 A continuación se adjunta una tabla con los modelos de variables aleatorias posibles para algunas de las variables de estudio:
 
-```{r}
+```{r,echo=FALSE}
 c1<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 minutos","Porcentaje de victorias de entre 40 y 45 minutos")
 
 
@@ -280,4 +280,10 @@ c3 <-c("Player Data","Player Data","Player Data","Player Data","Player Data","Ch
 x<-data.table("Descripción_de_la _variable"=c1,"Modelo_escogido"=c2,"Origen"=c3)
 formattable(x,align=c('c','c','c'))
 ```
+
+
+========================================================
+Diagrama de Gantt
+
+![](C:/Users/PROPIETARIO/Downloads/Gantt.png)
 

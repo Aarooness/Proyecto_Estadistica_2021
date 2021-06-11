@@ -96,12 +96,12 @@ DF2
 names(DF2)
 ```
 
-1RA PARTE
-
-Análisis de las variables mediante distintos descriptores.
 
 
-1. Posición que tomó el jugador en la partida (--Pos--)
+1. Análisis de las variables mediante distintos descriptores.
+
+
+a. Posición que tomó el jugador en la partida (--Pos--)
 
 ```{r}
 table(DF2$Pos)
@@ -122,7 +122,7 @@ DFpos
 boxplot(DF2$A~DF2$Pos,col=c("lightgreen","burlywood1","lightblue", "yellow", "#9999cc"),main="Posición vs. Asistencias",ylab="Asistencias",xlab="Posición del jugador")
 ```
 
-2. Porcentaje de victorias por jugador (--W%--)
+b. Porcentaje de victorias por jugador (--W%--)
 
 ```{r}
 summary(DF2$`W%`)
@@ -134,11 +134,11 @@ abline(h=mean(DF2$`W%`),col="red",lwd=2)
 Análisis: Se aprecia que los jugadores tienen un rendimiento similar debido a que se encuentran en un torneo a nivel internacional. Ademas, en estos toneos se juegan 3 partidas contra un equipo rival para poder llegar a la final del torneo.
 
 
-3. Porcentaje de victorias para "n" partidas 
+c. Porcentaje de victorias para "n" partidas 
 
 - En este punto se realiza una pequeña comparativa entre 2 variables similares, pero con distinto número de casos para cada una.
 
-a. Porcentaje de victorias para menos de 25 partidas
+c.1. Porcentaje de victorias para menos de 25 partidas
 
 ```{r}
 summary(DF1$`25-30 win percentage`)
@@ -151,7 +151,7 @@ abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)
 Análisis: Se pude observar que dentro del boxplot el porcentaje de victorias es variado, ademas se observa tambien que hay campeones con el 100% de victorias, lo cual se debe a que adentro del parche en el que se juega en un torneo internacional existe los campeones "meta".
 definicion de campeones "meta" = campeones mas fuertes que otros dentro del torneo (mejores "picks")
 
-b. Porcentaje de victorias de entre 40 y 45 partidas
+c.2. Porcentaje de victorias de entre 40 y 45 partidas
 
 ```{r}
 table(DF1$`40-45 win percentage`)

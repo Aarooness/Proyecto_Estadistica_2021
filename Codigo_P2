@@ -241,10 +241,10 @@ barplot(datAss$kills~datAss$Pos,xlab = "Rol",ylab = "Asistencias")
 ```
 
 
-- ¿Podemos definir que jugadores son mejores o peores con el porcentaje de daño u muerte?
+- ¿Podemos definir que jugadores son mejores o peores con el porcentaje de daño y muerte?
 - Gráfica de ADC(qué jugadores son mejores o peores)
 ```{r}
-plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`) 
+plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`,ylab="Porcentaje de daño",xlab="Porcentaje de Muertes") 
 abline(h=mean(DF2[DFadc,]$`DMG%`),col="red")
 abline(v=mean(DF2[DFadc,]$`DTH%`),col="red")
 ```

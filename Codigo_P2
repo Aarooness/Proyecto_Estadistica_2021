@@ -122,6 +122,7 @@ DFpos
 ```
 Análisis: ... Vivi (de esta varaible se observa que...)
 
+- Análisis: Estas tablas o graficas nos ayudan para determinar el impacto de cada posicion durante la partida. 
 - En adición a ello se comprueba un patrón de comportamiento entre la variable "Posición" y el número de "Asistencias" del jugador. "Asistencia" se define cuando un campeón tuvo una participación en la kill de un enemigo; mas no le dio el golpe final.
 
 ```{r}
@@ -137,7 +138,8 @@ summary(DF2$`W%`)
 boxplot(DF2$`W%`,col=c("#99cc99"),main="Porcentaje de victorias en el torneo")
 abline(h=mean(DF2$`W%`),col="red",lwd=2)
 ```
-Análisis: Se aprecia que los jugadores tienen un rendimiento similar y BLABLA.............
+Análisis: Se aprecia que los jugadores tienen un rendimiento similar debido a que se encuentran en un torneo a nivel internacional. Ademas, en estos toneos se juegan 3 partidas contra un equipo rival para poder llegar a la final del torneo.
+
 
 3. Porcentaje de victorias para "n" partidas 
 
@@ -153,8 +155,7 @@ summary(DF1$`25-30 win percentage`)
 boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 partidas")
 abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)
 ```
-Análisis: ..................
-
+Análisis: 
 
 
 b. Porcentaje de victorias de entre 40 y 45 partidas

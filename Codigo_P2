@@ -150,7 +150,7 @@ summary(DF1$`25-30 win percentage`)
 ```
 
 ```{r}
-boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 partidas")
+boxplot(DF1$`25-30 win percentage`,col=c("lightcoral"),main="Porcentaje de victorias entre 25 y 30 min.")
 abline(h=mean(DF1$`25-30 win percentage`),col="red",lwd=2)
 ```
 Análisis: Se pude observar que dentro del boxplot el porcentaje de victorias es variado, ademas se observa tambien que hay campeones con el 100% de victorias, 
@@ -163,7 +163,7 @@ table(DF1$`40-45 win percentage`)
 ```
 
 ```{r}
-boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victorias entre 40 y 45 partidas")
+boxplot(DF1$`40-45 win percentage`,col=c("lightblue"),main="Porcentaje de victorias entre 40 y 45 min.")
 abline(h=mean(DF1$`40-45 win percentage`),col="red",lwd=2)
 ```
 Análisis: Se aprecia que la mediana es 0 porque con casi ningun campeon llega como minimo a 40 victorias segidas

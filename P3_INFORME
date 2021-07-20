@@ -21,15 +21,21 @@
 
 =======================================================================================
 
-### Objetivos
+### Objetivo Principal
 
-1. Analizar las variables que mejor describen el comportamiento y rendimiento de los campeones y jugadores respectivamente.
+- Analizar las variables que mejor describen el comportamiento y rendimiento de los campeones y jugadores respectivamente.
 
-2. Comprobar el tipo de relación entre el daño que generan los jugadores y el oro que obtienen en la partida.
+### Objetivos Secundarios
 
-3. Determinar la existencia de una influencia en el rol seleccionado por el jugador y su desempeño, en "kills" por ejemplo.
+1. Determinar la relación entre la variable "KDA" y el porcentaje de victorias.
 
-4. Determinar la relación entre la variable "KDA" y el porcentaje de victorias.
+2. Comprobar una relación existente entre el porcentaje de muertes de un jugador y el porcentaje de daño que realiza a los enemigos.
+
+3. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje de daño realizado.
+
+4. Corroborar si escoger un campeón del tipo "Support" determina un menor porcentaje de kills.
+
+
 
 ### Muestreo
 La base de datos usada para este proyecto viene de algunos datos capturados previamente del campeonato de Europa de League of Legens 2019, el 
@@ -94,36 +100,127 @@ DF2 <- read_csv("lec_playerdata.csv")
 DF2
 ```
 
-=======================================================================================
-
-2. Intervalos de confianza
 
 =======================================================================================
 
-2.1 Intervalos de confianza para la variable KDA
-
-2.2 Intervalos de confianza para la variable "subditos por minuto"
-
-2.3 Intervalos de confianza para la variable porcentaje de daño
-
-2.4 Intervalos de confianza para la variable porcentaje de oro
-
-2.5 Intervalos de confianza para la variable porcentaje de muertes
-
-
+2. Planteamiento de análisis e hipótesis
 
 =======================================================================================
 
-3. Planteamiento de análisis e hipótesis
+2.1 ¿Tener un alto KDA te garantiza un gran porcentaje de victorias? (Poner descriptores de variables, análisis , hipótesis)
+
+- -Variable KDA-
+
+
+```{r}
+summary(DF2$KDA)
+```
+```{r}
+boxplot(DF2$KDA, main = "Gráfica de KDA")
+abline(h=mean(DF2$KDA),col="blue",lwd=1)
+```
+Análisis: La variable KDA determina el nivel de habilidad de cada jugador, esta no es mas que la suma de las kills y asistencias realizadas entre el número de muertes. Es lógico ver valores atípicos, extremadamente altos, debido a jugadores "genios" o a la gran diferencia de nivel entre equipos participantes.
+
+(Colocar histograma con rangos)
+
+- Planteamiento:
+
+```{r}
+DFadc<-which(DF2$Pos=="ADC")
+DFtop<-which(DF2$Pos=="Top")
+DFjg<-which(DF2$Pos=="Jungle")
+DFmid<-which(DF2$Pos=="Middle")
+DFsupp<-which(DF2$Pos=="Support")
+```
+
+
+```{r}
+plot(DF2$KDA ~ DF2$`W%`, ylab='KDA', xlab='Porcentaje de victorias')
+abline(h=mean(DF2[DFadc,]$KDA),col="brown")
+abline(h=mean(DF2[DFsupp,]$KDA),col="green")
+abline(h=mean(DF2[DFjg,]$KDA),col="purple")
+abline(h=mean(DF2[DFmid,]$KDA),col="orange")
+abline(h=mean(DF2[DFtop,]$KDA),col="lightcoral")
+legend("topright", 
+       c("ADC","Support","Jungla","Mid","Top"), 
+       lty=1, 
+       fill =c("brown","green","purple","orange","lightcoral"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
+```
+ - Análisis: Relación proporcional entre el KDA y el porcentaje de victoria de los juegos, algo convenientemente lógico dado la ventaja que puede obtener un equipo de su rival.Sin una diferencia significativa de la media de KDA entre posiciones.
+
+¿Si una posición tiene KDA alto, el jugador tiene más victorias?
+```{r}
+DF2 %>% filter(GP>=10)->DFGPok
+DFPokadc<-which(DFGPok$Pos=="ADC")
+DFPoktop<-which(DFGPok$Pos=="Top")
+DFPokjg<-which(DFGPok$Pos=="Jungle")
+DFPokmid<-which(DFGPok$Pos=="Middle")
+DFPoksupp<-which(DFGPok$Pos=="Support")
+```
+
+```{r}
+plot(DFGPok[DFPokadc,]$`KDA` ~ DFGPok[DFPokadc,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias Posición ADC")
+abline(h=mean(DF2[DFadc,]$`KDA`),col="blue")
+abline(v=mean(DF2[DFadc,]$`W%`),col="blue")
+legend("topright", 
+       c("Media KDA"), 
+       lty=1, 
+       fill =c("blue"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
+```
+ - Hipótesis: El rol del ADC es hacer el mayor número de kills a los rivales. En la gráfica se evidencia que entre mayor sea su habilidad o KDA, mayor es el porcentaje de victorias del jugador y por tanto de su equipo. Podemos deducir entonces que la media de KDA del porcentaje de victorias ADC es menor a 4.5
+
+
+
+2.2 ¿Existe una relación entre el porcentaje de muertes de un jugador y el porcentaje de    daño que realiza? 
+
+- --Variable Porcentaje de muertes--
+
+```{r}
+summary(DF2$`DTH%`)
+```
+
+- --Variable Porcentaje de daño--
+
+```{r}
+summary(DF2$`DMG%`)
+```
+- Planteamiento
+
+```{r}
+plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`,ylab="Porcentaje de daño",xlab="Porcentaje de Muertes") 
+abline(h=mean(DF2[DFadc,]$`DMG%`),col="red")
+abline(v=mean(DF2[DFadc,]$`DTH%`),col="red")
+legend("topright", 
+       c("Media"), 
+       lty=1, 
+       fill =c("red"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
+```
+Análisis: De la gráfica no se puede concluir una relación directa entre el porcentaje de daño y de muertes. Como en la gráfica estamos incluyendo a todas las posiciones, los porcentajes de daños pueden ser muy alejados unas posiciones entre otras pero no ocurre de igual manera con las muertes.
+
+Hipótesis: Se plantea entonces, que tener un porcentaje elevado del daño que aplicaste no significa haber tenido un pequeño porcentaje de muertes durante la partida.
+
+
+2.3 ¿Hay una influencia en el porcentaje de daño realizado a mayor número de súbditos por minuto?
+
+2.4 ¿Ser del tipo "Support" determina un bajo número de kills?
 
 =======================================================================================
 
-3.1 ¿Tener un alto KDA te garantiza un gran porcentaje de victorias? (Poner descriptores de variables, análisis , hipótesis)
+3. Intervalos de confianza
 
-3.2 ¿Existe una relación entre el porcentaje de muertes de un jugador y el porcentaje de daño que realiza a los enemigos?
+=======================================================================================
 
-3.3 Daño generado y oro generado
+3.1 Intervalos de confianza para la media de KDA
 
-3.4
+3.2 Intervalos de confianza para la media de porcentaje de victorias 
 
-3.5
+3.3 Intervalos de confianza para la media de "súbditos por minuto"
+
+3.4 Intervalos de confianza para la proporción de los jugadores de posición Support
+
+3.5 Intervalos de confianza para la media porcentaje de muertes 
+
+3.6 Intervalos de confianza para la media porcentaje de daño

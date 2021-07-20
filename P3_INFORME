@@ -233,7 +233,7 @@ Hipótesis: Se plantea entonces, que tener un porcentaje elevado del daño que a
 
 4.1 Variables aleatorias continuas
 
-El porcentaje de victorias total se distribuye normalmente, independientemente de como se distribuyen los porcentajes de victorias individuales.
+El porcentaje de victorias total se distribuye normalmente, independientemente de como se distribuyan los porcentajes de victorias individuales.
 
 ```{r}
 summary(DF2$`W%`)

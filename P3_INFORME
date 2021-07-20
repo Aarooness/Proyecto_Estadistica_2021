@@ -224,3 +224,34 @@ Hipótesis: Se plantea entonces, que tener un porcentaje elevado del daño que a
 3.5 Intervalos de confianza para la media porcentaje de muertes 
 
 3.6 Intervalos de confianza para la media porcentaje de daño
+
+=======================================================================================
+
+4. Variables aleatorias
+
+=======================================================================================
+
+4.1 Variables aleatorias continuas
+
+El porcentaje de victorias total se distribuye normalmente, independientemente de como se distribuyen los porcentajes de victorias individuales.
+
+```{r}
+summary(DF2$`W%`)
+sdw<-sd(DF2$`W%`)
+sdw
+```
+
+```{r}
+hist(DF2$`W%`, freq = F,main = "Grafico de funcion de densidad", xlab = "Porcentaje de victorias")
+curve(dnorm(x, mean = 47.67, sd = sdw), from = 0, to = 100, add = TRUE)
+```
+
+
+4.2 Variables aleatorias discretas
+
+
+=======================================================================================
+
+5. Prueba de hipotesis
+
+=======================================================================================

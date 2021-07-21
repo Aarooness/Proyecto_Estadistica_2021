@@ -17,7 +17,7 @@
 --- 
 =======================================================================================
 
-1. Introducción
+## 1. Introducción
 
 =======================================================================================
 
@@ -88,6 +88,7 @@ formattable(x,align=c('c','c','c'))
 ```
 
 
+
 Se asignan las bases de datos del "campeón" y del "jugador" a analizar a DF1 y DF2 respectivamente.
 
 ```{r}
@@ -103,27 +104,31 @@ DF2
 
 =======================================================================================
 
-2. Planteamiento de análisis e hipótesis
+## 2. Planteamiento de análisis e hipótesis
 
 =======================================================================================
 
-2.1 ¿Tener un alto KDA te garantiza un gran porcentaje de victorias? (Poner descriptores de variables, análisis , hipótesis)
+## 2.1 ¿Tener un alto KDA te garantiza un gran porcentaje de victorias? (Poner descriptores de variables, análisis , hipótesis)
 
-- -Variable KDA-
+### -Variable KDA-
 
 
 ```{r}
 summary(DF2$KDA)
 ```
 ```{r}
-boxplot(DF2$KDA, main = "Gráfica de KDA")
+boxplot(DF2$KDA, main = "Gráfica de KDA",xlab="KDA",ylab="Frecuencia")
 abline(h=mean(DF2$KDA),col="blue",lwd=1)
 ```
+
+
+
+
 Análisis: La variable KDA determina el nivel de habilidad de cada jugador, esta no es mas que la suma de las kills y asistencias realizadas entre el número de muertes. Es lógico ver valores atípicos, extremadamente altos, debido a jugadores "genios" o a la gran diferencia de nivel entre equipos participantes.
 
 (Colocar histograma con rangos)
 
-- Planteamiento:
+### --Planteamiento--
 
 ```{r}
 DFadc<-which(DF2$Pos=="ADC")
@@ -147,7 +152,11 @@ legend("topright",
        fill =c("brown","green","purple","orange","lightcoral"), 
        bty = "o", title="Leyenda",bg="transparent",cex=0.51)
 ```
- - Análisis: Relación proporcional entre el KDA y el porcentaje de victoria de los juegos, algo convenientemente lógico dado la ventaja que puede obtener un equipo de su rival.Sin una diferencia significativa de la media de KDA entre posiciones.
+
+
+
+
+- Análisis: Relación proporcional entre el KDA y el porcentaje de victoria de los juegos, algo convenientemente lógico dado la ventaja que puede obtener un equipo de su rival.Sin una diferencia significativa de la media de KDA entre posiciones.
 
 ¿Si una posición tiene KDA alto, el jugador tiene más victorias?
 ```{r}
@@ -169,24 +178,29 @@ legend("topright",
        fill =c("blue"), 
        bty = "o", title="Leyenda",bg="transparent",cex=0.51)
 ```
- - Hipótesis: El rol del ADC es hacer el mayor número de kills a los rivales. En la gráfica se evidencia que entre mayor sea su habilidad o KDA, mayor es el porcentaje de victorias del jugador y por tanto de su equipo. Podemos deducir entonces que la media de KDA del porcentaje de victorias ADC es menor a 4.5
 
 
 
-2.2 ¿Existe una relación entre el porcentaje de muertes de un jugador y el porcentaje de    daño que realiza? 
 
-- --Variable Porcentaje de muertes--
+- Hipótesis: El rol del ADC es hacer el mayor número de kills a los rivales. En la gráfica se evidencia que entre mayor sea su habilidad o KDA, mayor es el porcentaje de victorias del jugador y por tanto de su equipo. Podemos deducir entonces que la media de KDA del porcentaje de victorias ADC es menor a 4.5
+
+
+
+## 2.2 ¿Existe una relación entre el porcentaje de muertes de un jugador y el porcentaje de    daño que realiza? 
+
+
+### --Variable Porcentaje de muertes--
 
 ```{r}
 summary(DF2$`DTH%`)
 ```
 
-- --Variable Porcentaje de daño--
+### --Variable Porcentaje de daño--
 
 ```{r}
 summary(DF2$`DMG%`)
 ```
-- Planteamiento
+### --Planteamiento--
 
 ```{r}
 plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`,ylab="Porcentaje de daño",xlab="Porcentaje de Muertes") 
@@ -198,14 +212,114 @@ legend("topright",
        fill =c("red"), 
        bty = "o", title="Leyenda",bg="transparent",cex=0.51)
 ```
+
+
+
+
 Análisis: De la gráfica no se puede concluir una relación directa entre el porcentaje de daño y de muertes. Como en la gráfica estamos incluyendo a todas las posiciones, los porcentajes de daños pueden ser muy alejados unas posiciones entre otras pero no ocurre de igual manera con las muertes.
 
 Hipótesis: Se plantea entonces, que tener un porcentaje elevado del daño que aplicaste no significa haber tenido un pequeño porcentaje de muertes durante la partida.
 
 
-2.3 ¿Hay una influencia en el porcentaje de daño realizado a mayor número de súbditos por minuto?
+## 2.3 ¿Hay una influencia en el porcentaje de daño realizado a mayor número de súbditos por minuto?
 
-2.4 ¿Ser del tipo "Support" determina un bajo número de kills?
+
+### --Variable Súbditos por minuto (CSPM)--
+
+```{r}
+summary(DF2$CSPM)
+```
+
+```{r}
+hist(DF2$CSPM,breaks=seq(from=0,to=max(DF2$CSPM)+2,by=0.5),main="Súbditos por minuto",xlab="CSPM",ylab="Frecuencia",col=c("cyan"))
+
+abline(v=mean(DF2$CSPM),col="red",lwd=2)
+legend("topright", 
+       c("Media"), 
+       lty=1, 
+       fill =c("red"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.8)
+```
+
+
+
+
+- Análisis: Notamos un amplio rango para la variable CSPM, esto debido a los distintos tipos de posiciones involucradas, algunas especializadas en obtener oro de los súbditos y otras no. Teniendo un media de 7.7 como resultado
+
+### --Planteamiento--
+
+```{r}
+plot(DF2$`DMG%` ~ DF2$CSPM,ylab="Porcentaje de daño",xlab="Súbditos por minuto") 
+abline(h=mean(DF2$`DMG%`),col="blue")
+abline(v=mean(DF2$CSPM),col="blue")
+legend("topright", 
+       c("Media"), 
+       lty=1, 
+       fill =c("blue"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
+```
+
+
+
+
+
+Análisis: Se observa un escalado de la relación entre el porcentaje de daño  y los súbditos por minuto independientemente de la posición del jugador.
+
+Hipótesis: Se plantea una relación directa, entre más CSPM tengas, mayor es el porcentaje de daño. El oro se obtiene a través de los súbditos entre otros enemigos, a mayor número ,mayor recaudación de oro. Con el oro puedes potenciar el daño de tu campeón mostrado como evidencia en la siguiente gráfica. 
+
+
+## 2.4 ¿Ser del tipo "Support" determina un bajo número de kills?
+
+
+
+### --Variable Kills--
+
+```{r}
+hist(DF2$K,breaks=30,col=c("purple"),main="Histograma de número de kills",xlab="K",ylab="Frecuencia")
+abline(v=mean(DF2$CSPM),col="green",lwd=2)
+legend("topright", 
+       c("Media"), 
+       lty=1, 
+       fill =c("green"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.8)
+```
+
+
+### --Planteamiento--
+
+```{r}
+boxplot(DF2$K ~ DF2$Pos,main="Número de kills vs. Posición",xlab="Posición del jugador",ylab="kills",col=c("brown","green","purple","orange","lightcoral"))
+abline(h=mean(DF2[DFadc,]$K),col="blue",lwd=2)
+abline(h=mean(DF2[DFsupp,]$K),col="red",lwd=2)
+abline(h=mean(DF2[DFmid,]$K),col="yellow",lwd=2)
+legend("topright", 
+       c("Media ADC","Media Supp","Media Middle"), 
+       lty=1, 
+       fill =c("blue","red","yellow"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.8)
+```
+
+
+
+- Análisis: 
+Se aprecia una diferencia significativa entre la media del número de kills del ADC y del Support; una vez más explicado por el rol distinto que tiene uno de otro. Sin embargo Support presenta valores atípicos cercanos a la media de Middle, por lo que se cuestiona el objetivo de la pregunta.
+
+```{r}
+boxplot(DF2[DFsupp,]$K ~ DF2[DFsupp,]$Pos,col=c("purple"),main="Gráfica de kills vs. Posición Support",ylab="Kills",xlab="Support")
+abline(h=mean(DF2[DFsupp,]$K),col="red",lwd=2)
+legend("topright", 
+       c("Media"), 
+       lty=1, 
+       fill =c("red"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.8)
+```
+
+
+
+
+- Hipótesis: La gráfica identifica la media de kills para una posición Support , por lo que podemos concluir de estas que ser de la posición Support induce a una media < 10.
+
+
 
 =======================================================================================
 

@@ -265,9 +265,7 @@ legend("topright",
 
 Análisis: Se observa un escalado de la relación entre el porcentaje de daño  y los súbditos por minuto independientemente de la posición del jugador.
 
-Hipótesis: Se plantea una relación directa, entre más CSPM tengas, mayor es el porcentaje de daño. El oro se obtiene a través de los súbditos entre otros enemigos, a mayor número ,mayor recaudación de oro. Con el oro puedes potenciar el daño de tu campeón mostrado como evidencia en la siguiente gráfica. 
-
-
+Hipótesis: El oro se obtiene a través de los súbditos entre otros enemigos, a mayor número ,mayor recaudación de oro. Con el oro puedes potenciar el daño de tu campeón mostrado como evidencia en la siguiente gráfica. Se plantea entonces una relación directa, entre más CSPM tengas, mayor es el porcentaje de daño.
 ## 2.4 ¿Ser del tipo "Support" determina un bajo número de kills?
 
 

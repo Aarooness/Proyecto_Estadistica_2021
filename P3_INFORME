@@ -10,7 +10,7 @@
 
 - Jean Carlos Colmenares Vera Portocarrero   / 201820128 /
 
-- Aaron Naif Gonzales Torres                 / 201820092 /     Líder
+- Aaron Naif Gonzales Torres                 / 201820092 /
 
 - Hector Alexis Retamozo Ccorahua            / 201820108 /  
 
@@ -31,9 +31,9 @@
 
 2. Comprobar una relación existente entre el porcentaje de muertes de un jugador y el porcentaje de daño que realiza a los enemigos.
 
-3. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje de daño realizado.
+3. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.
 
-4. Corroborar si escoger un campeón del tipo "Support" determina un menor porcentaje de kills.
+4. Corroborar si tener un número alto de asistencias determina un menor porcentaje de victorias.
 
 
 
@@ -221,7 +221,7 @@ Análisis: De la gráfica no se puede concluir una relación directa entre el po
 Hipótesis: Se plantea entonces, que tener un porcentaje elevado del daño que aplicaste no significa haber tenido un pequeño porcentaje de muertes durante la partida.
 
 
-## 2.3 ¿Hay una influencia en el porcentaje de daño realizado a mayor número de súbditos por minuto?
+## 2.3 ¿Hay una influencia en el porcentaje de oro obtenido a mayor número de súbditos por minuto?
 
 
 ### --Variable Súbditos por minuto (CSPM)--
@@ -249,8 +249,8 @@ legend("topright",
 ### --Planteamiento--
 
 ```{r}
-plot(DF2$`DMG%` ~ DF2$CSPM,ylab="Porcentaje de daño",xlab="Súbditos por minuto") 
-abline(h=mean(DF2$`DMG%`),col="blue")
+plot(DF2$`Gold%` ~ DF2$CSPM,ylab="Porcentaje de oro",xlab="Súbditos por minuto") 
+abline(h=mean(DF2$`Gold%`),col="blue")
 abline(v=mean(DF2$CSPM),col="blue")
 legend("topright", 
        c("Media"), 
@@ -263,18 +263,20 @@ legend("topright",
 
 
 
-Análisis: Se observa un escalado de la relación entre el porcentaje de daño  y los súbditos por minuto independientemente de la posición del jugador.
+Análisis: Se observa un escalado de la relación entre el porcentaje de oro  y los súbditos por minuto independientemente de la posición del jugador.
 
-Hipótesis: El oro se obtiene a través de los súbditos entre otros enemigos, a mayor número ,mayor recaudación de oro. Con el oro puedes potenciar el daño de tu campeón mostrado como evidencia en la siguiente gráfica. Se plantea entonces una relación directa, entre más CSPM tengas, mayor es el porcentaje de daño.
-## 2.4 ¿Ser del tipo "Support" determina un bajo número de kills?
-
+Hipótesis: El oro se obtiene a través de los súbditos entre otros enemigos, a mayor número ,mayor recaudación. Se plantea entonces una relación directa, entre más CSPM tengas, mayor es el porcentaje de oro obtenido.
 
 
-### --Variable Kills--
+## 2.4 ¿Tener muchas asistencias determina un alto porcentaje de victorias?
+
+
+
+### --Variable porcentaje de victorias--
 
 ```{r}
-hist(DF2$K,breaks=30,col=c("purple"),main="Histograma de número de kills",xlab="K",ylab="Frecuencia")
-abline(v=mean(DF2$CSPM),col="green",lwd=2)
+hist(DF2$`W%`,breaks=20,col=c("purple"),main="Histograma de porcentaje de wins",xlab="%W",ylab="Frecuencia")
+abline(v=mean(DF2$`W%`),col="green",lwd=2)
 legend("topright", 
        c("Media"), 
        lty=1, 
@@ -286,10 +288,10 @@ legend("topright",
 ### --Planteamiento--
 
 ```{r}
-boxplot(DF2$K ~ DF2$Pos,main="Número de kills vs. Posición",xlab="Posición del jugador",ylab="kills",col=c("brown","green","purple","orange","lightcoral"))
-abline(h=mean(DF2[DFadc,]$K),col="blue",lwd=2)
-abline(h=mean(DF2[DFsupp,]$K),col="red",lwd=2)
-abline(h=mean(DF2[DFmid,]$K),col="yellow",lwd=2)
+boxplot(DF2$`W%` ~ DF2$Pos,main="Porcentaje de wins vs. Posición",xlab="Posición del jugador",ylab="% Victorias",col=c("brown","green","purple","orange","lightcoral"))
+abline(h=mean(DF2[DFadc,]$`W%`),col="blue",lwd=2)
+abline(h=mean(DF2[DFsupp,]$`W%`),col="red",lwd=2)
+abline(h=mean(DF2[DFmid,]$`W%`),col="yellow",lwd=2) 
 legend("topright", 
        c("Media ADC","Media Supp","Media Middle"), 
        lty=1, 
@@ -300,22 +302,25 @@ legend("topright",
 
 
 - Análisis: 
-Se aprecia una diferencia significativa entre la media del número de kills del ADC y del Support; una vez más explicado por el rol distinto que tiene uno de otro. Sin embargo Support presenta valores atípicos cercanos a la media de Middle, por lo que se cuestiona el objetivo de la pregunta.
+Se aprecia una diferencia poco significativa entre la media del número del % victorias del ADC y del Support; lo que quiere decir que independientemente del rol seleccionado, cada posición tiene un número similar de victorias.
 
 ```{r}
-boxplot(DF2[DFsupp,]$K ~ DF2[DFsupp,]$Pos,col=c("purple"),main="Gráfica de kills vs. Posición Support",ylab="Kills",xlab="Support")
-abline(h=mean(DF2[DFsupp,]$K),col="red",lwd=2)
+plot(DF2$`W%` ~ DF2$A,col=c("purple"),main="Gráfica de % Victorias vs. Asistencias",ylab="% Wins",xlab="Asistencias")
+abline(h=mean(DF2$A),col="red",lwd=2)
+abline(v=mean(DF2$`W%`),col="red",lwd=2)
 legend("topright", 
        c("Media"), 
        lty=1, 
        fill =c("red"), 
-       bty = "o", title="Leyenda",bg="transparent",cex=0.8)
+       bty = "o", title="Leyenda",bg="transparent",cex=0.8) 
 ```
 
 
 
 
-- Hipótesis: La gráfica identifica la media de kills para una posición Support , por lo que podemos concluir de estas que ser de la posición Support induce a una media < 10.
+
+- Hipótesis: La gráfica identifica la media del % Victorias para el número de asistencias, variable que por lo general alcanza valores altos para la posición Support, explicando la poca agrupación de los datos. Se infiere entonces que un mayor número de asistencias no garantiza un mayor porcentaje de victorias.
+
 
 
 

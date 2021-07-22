@@ -364,6 +364,219 @@ curve(dnorm(x, mean = 47.67, sd = sdw), from = 0, to = 100, add = TRUE)
 
 =======================================================================================
 
-5. Prueba de hipotesis
+5. Prueba de hipotesis y regresión 
 
 =======================================================================================
+
+###KDA ratio vs porcentajes de victoria del adc
+
+```{r}
+confianza=0.95
+alfa=0.05
+```
+
+```{r}
+DFadc<-read.csv("data_adc.csv" )
+DFadc
+```
+
+###Correlación 
+```{r}
+correlacion_1 <-cor( DFadc$kda_adc ,DFadc$wrate_adc , use="pairwise.complete")
+correlacion_1
+```
+###Regresión
+```{r}
+Reg_1<-lm(DFadc$wrate_adc ~ DFadc$kda_adc)
+summary(Reg_1)
+plot(Reg_1)
+```
+
+orden y ~ x
+
+```{r}
+
+
+plot(DFadc$wrate_adc ~ DFadc$kda_adc  ,ylab ="Porcentaje de victorias" , xlab ="KDA ratio" , main = "Gráfica: KDA ratio vs porcentajes de victoria del adc", pch = 17, cex.axis = 1,cex.main = 1)
+
+
+abline(lm(DFadc$wrate_adc ~ DFadc$kda_adc), col = "#FF00BE")
+abline(h = mean(DFadc$wrate_adc), lty = "dashed")
+abline(v = mean(DFadc$kda_adc), lty = "dashed")
+
+```
+
+###Predicciones
+
+```{r}
+
+
+plot(DFadc$wrate_adc ~ DFadc$kda_adc  ,ylab ="Porcentaje de victorias" , xlab ="KDA ratio" , main = "Gráfica: KDA ratio vs porcentajes de victoria del adc", pch = 17, cex.axis = 1,cex.main = 1)
+legend("bottomright",legend=c("y= 18.547027+ 7.018899x"),col = "#FF00BE",lty=1:2, cex=0.8)
+
+abline(lm(DFadc$wrate_adc ~ DFadc$kda_adc), col = "#FF00BE")
+abline(h = mean(DFadc$wrate_adc), lty = "dashed")
+abline(v = mean(DFadc$kda_adc), lty = "dashed")
+text(x = c(7, 4, 2),
+     y = c(67.67932, 46.622623, 32.584825),
+     labels = c("+", "+", "+"),cex = 2,col="red")
+```
+###Usando la función y= 18.547027+ 7.018899x ingresando los valores de x = (7, 4, 2) obtuvimos los valores y=(67.67932, 46.622623, 32.584825) respectivamente, estas fueron representado por "+" en la gráfica. Podemos notar que si nuestro "KDA" ratio es más alto, nuestro porcentaje de victorias también aumenta a razón de 7.018899 asesinatos por asistencias entre muertes. 
+
+###Prueba de hipótesis
+```{r}
+summary(DFadc$kda_adc)
+```
+###H0:El kda promedio es de 5
+###H1:El kda promedio es diferente de 5
+
+```{r}
+t.test(DFadc$kda_adc, alternative='two.sided',
+       conf.level=0.95, mu=5)
+```
+###Puntos críticos
+```{r}
+pc1<-qt(alfa/2,df=nrow(DFadc)-1)
+pc2<-qt(1-alfa/2,df=nrow(DFadc)-1)
+pc1
+pc2
+```
+### Se rechaza hipotesis HO porque se encuentra en la zona de rechazo, ademas no es significativo.En conclusion el KDA promedio es diferente de 5.
+
+
+###Promedio de porcentaje de oro vs Subditos por minuto
+
+###Correlación 
+```{r}
+correlacion_2 <-cor( DF2$`Gold%`,DF2$CSPM)
+correlacion_2
+```
+###Regresión
+```{r}
+Reg_2<-lm(DF2$CSPM~DF2$`Gold%`)
+summary(Reg_2)
+```
+```{r}
+coefficients(Reg_2)
+```
+```{r}
+plot(DF2$CSPM~DF2$`Gold%`  ,ylab = "Subditos por minuto", xlab = "Promedio de Porcentaje de oro", main = "Gráfica: Promedio de porcentaje de oro vs Subditos por minuto", pch = 17, cex.axis = 1, cex = 1, cex.main = 1)
+
+## Linea de regresión
+abline(lm(DF2$CSPM~DF2$`Gold%`), col = "#FF00BE")
+abline(h = mean(DF2$CSPM), lty = "dashed")
+abline(v = mean(DF2$`Gold%`), lty = "dashed")
+
+```
+
+###Predicciones 
+
+```{r}
+plot(DF2$CSPM~DF2$`Gold%`  ,ylab = "Subditos por minuto", xlab = "Promedio de Porcentaje de oro", main = "Gráfica: Promedio de porcentaje de oro vs Subditos por minuto", pch = 17, cex.axis = 1, cex = 1, cex.main = 1)
+
+## Linea de regresión
+abline(lm(DF2$CSPM~DF2$`Gold%`), col = "#FF00BE")
+abline(h = mean(DF2$CSPM), lty = "dashed")
+abline(v = mean(DF2$`Gold%`), lty = "dashed")
+legend("bottomright",legend=c("y=  -3.472805+0.494126 x"),col = "#FF00BE",lty=1:2, cex=0.8)
+
+text(x = c(25, 20, 15),
+     y = c(8.880345, 6.409715, 3.939085),
+     labels = c("+", "+", "+"),cex = 3,col="red")
+```
+###La relación de Porcentaje de oro vs Súbditos dio una función lineal, la cual era esperada debido a que ambas son dependientes del tiempo y crecen linealmente con esta. Se analizaron 3 puntos en x=(25, 20, 15) y se obtuvo y=(8.880345, 6.409715, 3.939085). La predicción que se espera es que si terminas con más oro al final de la partida tengas , el promedio de súbditos por minuto sea mayor
+
+```{r}
+summary(DF2$`Gold%`)
+```
+###Prueba de hipótesis
+###H0:El promedio de porcentaje de oro es de 22.5 
+###H1:El promedio de porcentaje de oro es diferente de 22.5 
+
+```{r}
+media <- 19.96  
+sd <- sd(DF2$`Gold%`)  
+n <- nrow(DF2)         
+mu <- 22.5      
+
+est <- (curs - mu) / (desvia / sqrt(n))
+est  
+```
+```{r}
+pnorm(est)
+```
+### Se acepta H0 y se rechaza H1, poruqe el p valor es altamente significativo (>0.05)
+
+###Asistencias supp vs Porcentaje de victorias
+
+
+```{r}
+DFsupp2<-read.csv("Suppdata.csv") 
+DFsupp2
+```
+
+###Correlación 
+```{r}
+correlacion_3 <-cor( DFsupp2$A,DFsupp2$W.)
+correlacion_3
+```
+###Regresión
+```{r}
+Reg_3<-lm(DFsupp2$W.~DFsupp2$A)
+summary(Reg_3)
+```
+```{r}
+coefficients(Reg_3)
+```
+```{r}
+plot(DFsupp2$W.~DFsupp2$A  ,ylab = "Porcentaje de victorias", xlab = "Asistencias supp", main = "Gráfica: Asistencias supp vs Porcentaje de victorias", pch = 17, cex.axis = 1, cex = 1, cex.main = 1)
+
+## Linea de regresión
+abline(lm(DFsupp2$W.~DFsupp2$A), col = "#FF00BE")
+abline(h = mean(DFsupp2$W.), lty = "dashed")
+abline(v = mean(DFsupp2$A), lty = "dashed")
+
+```
+
+###Predicciones
+
+```{r}
+plot(DFsupp2$W.~DFsupp2$A  ,ylab = "Porcentaje de victorias", xlab = "Asistencias supp", main = "Gráfica: Asistencias supp vs Porcentaje de victorias", pch = 17, cex.axis = 1, cex = 1, cex.main = 1)
+
+## Linea de regresión
+abline(lm(DFsupp2$W.~DFsupp2$A), col = "#FF00BE")
+abline(h = mean(DFsupp2$W.), lty = "dashed")
+abline(v = mean(DFsupp2$A), lty = "dashed")
+legend("bottomright",legend=c("y=    4.5559935+0.3847497x"),col = "#FF00BE",lty=1:2, cex=0.8)
+
+text(x = c(160, 120, 80),
+     y = c(66.1159455, 50.7259575, 35.3359695),
+     labels = c("+", "+", "+"),cex = 3,col="red")
+```
+###A diferencia de ADC, en el rol Supp analizamos asistencias (contribución en un asesinato) en vez de asesinatos debido a que este es el objetivo del rol Supp. Notamos que mientas mayor es el número de asistencias mayor será el porcentaje de victorias. Se analizaron 3 puntos en x=(160, 120, 80) donde el resultado usando la ecuación lineal y=4.5559935+0.3847497x nos da y=(66.1159455, 50.7259575, 35.3359695), estos puntos son representados con "+".
+
+
+
+
+###Prueba de hipótesis
+```{r}
+summary(DFsupp2$A)
+```
+HO:EL promedio de las asistencias es menor 123
+H1:El promedio de las asistencias es no es menor a 123
+```{r}
+t.test(DFsupp2$A, alternative='less',
+       conf.level=0.95, mu=123)
+```
+###Puntos críticos
+```{r}
+pc6<-qt(alfa/2,df=nrow(DFsupp2)-1)
+pc7<-qt(1-alfa/2,df=nrow(DFsupp2)-1)
+pc6
+pc7
+```
+
+###Se acepta H0 y se rechaza H1 porque el p valor no es significativo. 
+
+
+

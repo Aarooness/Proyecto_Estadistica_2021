@@ -332,15 +332,15 @@ legend("topright",
 
 3.1 Intervalos de confianza para la media de KDA
 
-3.2 Intervalos de confianza para la media de porcentaje de victorias 
+3.2 Intervalos de confianza para la media de porcentaje de victorias
 
 3.3 Intervalos de confianza para la media de "súbditos por minuto"
 
-3.4 Intervalos de confianza para la proporción de los jugadores de posición Support
+3.4 Intervalos de confianza para la media del porcentaje de daño
 
 3.5 Intervalos de confianza para la media porcentaje de muertes 
 
-3.6 Intervalos de confianza para la media porcentaje de daño
+3.6 Intervalos de confianza para la media porcentaje de oro
 
 =======================================================================================
 

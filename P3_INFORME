@@ -326,22 +326,101 @@ legend("topright",
 
 =======================================================================================
 
-3. Intervalos de confianza
+## 3. Intervalos de confianza
 
 =======================================================================================
 
+#### Muestra: Se trabaja con una muestra de tamaño 221, jugadores participantes del torneo.
+
+#### Nivel de confianza: Se toma un nivel de confianza del 95%. Considerado un porcentaje aceptable y válido para la muestra tomada.
+
+#### Nivel de signifcancia: Se toma entonces una significancia de 0.05. Dado por la ecuación 1 − α = nivel de confianza.
+
+```{r}
+#Declaración de variables
+n=221
+alfa=0.05
+z<-qnorm(alfa/2,lower.tail = FALSE)
+```
+
 3.1 Intervalos de confianza para la media de KDA
+
+```{r}
+xt=mean(DF2$KDA)
+st=sd(DF2$KDA)
+
+le<- xt - z*st/sqrt(n)
+ri<- xt + z*st/sqrt(n)
+cat("(",le,",",ri,")\n")
+```
+Intervalo de confianza para: $$KDA  =[3.3 , 4.21 ]$$
+
 
 3.2 Intervalos de confianza para la media de porcentaje de victorias
 
+```{r}
+xt2=mean(DF2$`W%`)
+st2=sd(DF2$`W%`)
+
+le2<- xt2 - z*st2/sqrt(n)
+ri2<- xt2 + z*st2/sqrt(n)
+cat("(",le2,",",ri2,")\n")
+```
+Intervalo de confianza para:
+$$Porcentaje  Wins  =[43.9 , 51.44 ]$$
+
 3.3 Intervalos de confianza para la media de "súbditos por minuto"
+
+```{r}
+xt3=mean(DF2$CSPM)
+st3=sd(DF2$CSPM)
+
+le3<- xt3 - z*st3/sqrt(n)
+ri3<- xt3 + z*st3/sqrt(n)
+cat("(",le3,",",ri3,")\n")
+```
+Intervalo de confianza para: 
+$$Porcentaje Súbditos por minuto  =[5.98 , 6.8 ]$$
+
 
 3.4 Intervalos de confianza para la media del porcentaje de daño
 
+```{r}
+xt4=mean(DF2$`DMG%`)
+st4=sd(DF2$`DMG%`)
+
+le4<- xt4 - z*st4/sqrt(n)
+ri4<- xt4 + z*st4/sqrt(n)
+cat("(",le4,",",ri4,")\n")
+```
+Intervalo de confianza para:
+$$Porcentaje Daño  =[18.94 , 20.97 ]$$
+
 3.5 Intervalos de confianza para la media porcentaje de muertes 
+
+```{r}
+xt5=mean(DF2$`DTH%`)
+st5=sd(DF2$`DTH%`)
+
+le5<- xt5 - z*st5/sqrt(n)
+ri5<- xt5 + z*st5/sqrt(n)
+cat("(",le5,",",ri5,")\n")
+```
+Intervalo de confianza para:
+$$Porcentaje Muertes  =[18.99 , 20.54 ]$$
 
 3.6 Intervalos de confianza para la media porcentaje de oro
 
+```{r}
+xt6=mean(DF2$`Gold%`)
+st6=sd(DF2$`Gold%`)
+
+le6<- xt6 - z*st6/sqrt(n)
+ri6<- xt6 + z*st6/sqrt(n)
+cat("(",le6,",",ri6,")\n")
+```
+Intervalo de confianza para:
+$$Porcentaje Oro  =[19.16 , 20.76 ]$$
 =======================================================================================
 
 4. Variables aleatorias

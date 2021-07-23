@@ -373,7 +373,7 @@ z<-qnorm(alfa/2,lower.tail = FALSE)
 
 ## 4.1 Intervalos de confianza para la media de KDA
 
-```{r,echo=FALSE}
+```{r,include=FALSE}
 xt=mean(DF2$KDA)
 st=sd(DF2$KDA)
 
@@ -387,7 +387,7 @@ $$KDA  =[3.3 , 4.21 ]$$
 
 ## 4.2 Intervalos de confianza para la media de porcentaje de victorias
 
-```{r, echo=FALSE}
+```{r, include=FALSE}
 xt2=mean(DF2$`W%`)
 st2=sd(DF2$`W%`)
 
@@ -400,7 +400,7 @@ $$Porcentaje  Wins  =[43.9 , 51.44 ]$$
 
 ## 4.3 Intervalos de confianza para la media de "súbditos por minuto"
 
-```{r, echo=FALSE}
+```{r, include=FALSE}
 xt3=mean(DF2$CSPM)
 st3=sd(DF2$CSPM)
 
@@ -412,7 +412,7 @@ Intervalo de confianza para:
 $$PorcentajeSúbditos por minuto  =[5.98 , 6.8 ]$$
 ## 4.4 Intervalos de confianza para la media del porcentaje de daño
 
-```{r, echo=FALSE}
+```{r, include=FALSE}
 xt4=mean(DF2$`DMG%`)
 st4=sd(DF2$`DMG%`)
 
@@ -425,7 +425,7 @@ $$Porcentaje Daño  =[18.94 , 20.97 ]$$
 
 ## 4.5 Intervalos de confianza para la media porcentaje de muertes 
 
-```{r echo=FALSE}
+```{r include=FALSE}
 xt5=mean(DF2$`DTH%`)
 st5=sd(DF2$`DTH%`)
 
@@ -474,7 +474,66 @@ curve(dnorm(x, mean = 47.67, sd = sdw), from = 0, to = 100, add = TRUE)
 ## 5.2 Variables aleatorias discretas
 
 
+## Variable KDA
 
+- Variable aleatoria binomial: Búsqueda de la probabilidad que del total de jugadores, 44 sean de la posición ADC.
+
+```{r}
+numADC=sum(DF2$Pos=="ADC")
+numADC
+```
+
+## Probabilidad de éxito: p= Probabilidad de que un jugador sea ADC
+
+```{r}
+padc=numADC/nrow(DF2)
+padc
+```
+
+## Probabilidad de fracaso: probabilidad de que un jugador no sea ADC
+```{r}
+1-padc
+```
+
+## Función de probabilidad:
+```{r}
+round(dbinom(44,n,padc),2)
+```
+
+## Esperanza:
+```{r}
+n*padc
+```
+
+# Variable CSPM
+
+- La variable "Súbditos por minuto" sigue una distribución normal:
+```{r}
+summary(DF2$CSPM)
+sdw1<-sd(DF2$CSPM)
+sdw1
+```
+
+## Funcion de densidad
+```{r,echo=FALSE}
+hist(DF2$CSPM, freq = F,main = "Grafico de función de densidad", xlab = "Súbditos por minuto")
+curve(dnorm(x, mean = 6.39, sd = sdw1),from = 0,to = 100, add = TRUE)
+```
+
+# Variable %DMG
+
+- La variable "Porcentaje de daño" sigue una distribución normal:
+```{r}
+summary(DF2$`DMG%`)
+sdw2<-sd(DF2$`DMG%`)
+sdw2
+```
+
+## Funcion de densidad
+```{r,echo=FALSE}
+hist(DF2$CSPM, freq = F,main = "Grafico de función de densidad", xlab = "Súbditos por minuto")
+curve(dnorm(x, mean = 19.96, sd = sdw2),from = 0,to = 100, add = TRUE)
+```
 
 
 
@@ -507,11 +566,12 @@ correlacion_1
 ```{r, echo=FALSE}
 Reg_1<-lm(DFadc$wrate_adc ~ DFadc$kda_adc)
 summary(Reg_1)
-plot(Reg_1)
 ```
 
 Se observa que es orden y ~ x
 
+
+## Correlación y regresión
 ```{r ,echo=FALSE}
 
 
@@ -552,20 +612,21 @@ summary(DFadc$kda_adc)
 H0:El kda promedio es de 5
 H1:El kda promedio es diferente de 5
 
-```{r}
+```{r,echo=FALSE}
 t.test(DFadc$kda_adc, alternative='two.sided',
        conf.level=0.95, mu=5)
 ```
 
 ## Puntos críticos
-```{r}
+```{r,echo=FALSE}
 pc1<-qt(alfa/2,df=nrow(DFadc)-1)
 pc2<-qt(1-alfa/2,df=nrow(DFadc)-1)
 pc1
 pc2
 ```
+
 ##Conlcusiones
-Se rechaza hipotesis HO porque se encuentra en la zona de rechazo, ademas no es significativo.En conclusión, el KDA promedio es diferente de 5.
+Se acepta hipótesis HO porque se encuentra en la zona de rechazo, ademas no es significativo. En conclusión, el KDA promedio es diferente de 5.
 
 
 # 6.2 Promedio de porcentaje de oro vs Súbditos por minuto
@@ -609,8 +670,8 @@ text(x = c(25, 20, 15),
      y = c(8.880345, 6.409715, 3.939085),
      labels = c("+", "+", "+"),cex = 3,col="red")
 ```
-## Análisis
 
+## Análisis
 La relación de Porcentaje de oro vs Súbditos dio una función lineal, la cual era esperada debido a que ambas son dependientes del tiempo y crecen linealmente con esta. Se analizaron 3 puntos en _x=(25, 20, 15)_ y se obtuvo _y=(8.880345, 6.409715, 3.939085)_. La predicción que se espera es que si terminas con más oro al final de la partida tengas , el promedio de súbditos por minuto sea mayor
 
 ```{r}
@@ -628,24 +689,27 @@ sd <- sd(DF2$`Gold%`)
 n <- nrow(DF2)         
 mu <- 22.5      
 
-est <- (curs - mu) / (desvia / sqrt(n))
+est <- (media - mu) / (sd / sqrt(n))
 est  
 ```
 ```{r}
 pnorm(est)
 ```
 ## Análisis
-Se acepta H0 y se rechaza H1, poruqe el p valor es altamente significativo (>0.05)
+Se acepta H1 y se rechaza H0, poruqe el p valor es altamente significativo (>0.05)
 
 # 6.3 Asistencias supp vs Porcentaje de victorias
 
+
+## Correlación y regresión 
+
+Se lee la tabla de Supp y se obtiene la correlación
 
 ```{r,include=FALSE}
 DFsupp2<-read.csv("Suppdata.csv") 
 DFsupp2
 ```
 
-## Correlación y regresión 
 ```{r,echo=FALSE}
 correlacion_3 <-cor( DFsupp2$A,DFsupp2$W.)
 correlacion_3
@@ -670,7 +734,6 @@ abline(v = mean(DFsupp2$A), lty = "dashed")
 ```
 
 ## Predicciones
-
 ```{r,echo=FALSE}
 plot(DFsupp2$W.~DFsupp2$A  ,ylab = "Porcentaje de victorias", xlab = "Asistencias supp", main = "Gráfica: Asistencias supp vs Porcentaje de victorias", pch = 17, cex.axis = 1, cex = 1, cex.main = 1)
 
@@ -684,10 +747,9 @@ text(x = c(160, 120, 80),
      y = c(66.1159455, 50.7259575, 35.3359695),
      labels = c("+", "+", "+"),cex = 3,col="red")
 ```
+
 ## Análisis
-
 A diferencia de ADC, en el rol Supp analizamos asistencias (contribución en un asesinato) en vez de asesinatos debido a que este es el objetivo del rol Supp. Notamos que mientas mayor es el número de asistencias mayor será el porcentaje de victorias. Se analizaron 3 puntos en _x=(160, 120, 80)_ donde el resultado usando la ecuación lineal _y=4.5559935+0.3847497x_ nos da _y=(66.1159455, 50.7259575, 35.3359695)_, estos puntos son representados con "+".
-
 
 
 
@@ -697,12 +759,14 @@ summary(DFsupp2$A)
 ```
 HO:EL promedio de las asistencias es menor 123
 H1:El promedio de las asistencias es no es menor a 123
+
 ```{r}
 t.test(DFsupp2$A, alternative='less',
        conf.level=0.95, mu=123)
 ```
+
 ## Puntos críticos
-```{r}
+```{r, echo=FALSE}
 pc6<-qt(alfa/2,df=nrow(DFsupp2)-1)
 pc7<-qt(1-alfa/2,df=nrow(DFsupp2)-1)
 pc6
@@ -710,7 +774,7 @@ pc7
 ```
 
 ## Análisis
-Se acepta H0 y se rechaza H1 porque el p valor no es significativo. 
+Se acepta H1 y se rechaza H0 porque el p valor no es significativo. 
 
 
 

@@ -588,7 +588,7 @@ pc2
 ```
 
 
-- Se rechaza hipotesis HO porque se encuentra en la zona de rechazo, ademas no es significativo.En conclusion el KDA promedio es diferente de 5.
+- Se acepta hipotesis HO porque p-value no es significativo.En conclusion el KDA promedio es diferente de 5.
 
 
 ## 5.2. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.
@@ -650,15 +650,15 @@ sd <- sd(DF2$`Gold%`)
 n <- nrow(DF2)         
 mu <- 22.5      
 
-est <- (media - mu) / (sd / sqrt(n))
-est  
+net <- (media - mu) / (sd / sqrt(n))
+net  
 ```
 ```{r}
 pnorm(est)
 ```
 
 
-- Se acepta H0 y se rechaza H1, poruqe el p valor es altamente significativo (>0.05)
+- Se rechaza H0 y se acepta H1, porquee el p valor es altamente significativo (>0.05)
 
 ## 5.3. Corroborar si tener un número alto de asistencias determina un menor porcentaje de victorias
 

@@ -50,11 +50,11 @@ League of Legends es un juego multijugador en línea cuyo objetivo es trabajar e
 
 ## Bases de datos utilizadas
 
-La base de datos usada para este proyecto viene de algunos datos capturados previamente del campeonato de Europa de League of Legends 2019, el cual fue publicado por Stephen O'Farrel. En este caso se trabajara con 2 datas Frame. El primero es el "lec_championdata" el cual tiene como unidad muestral al campeón. El segundo viene a ser el "lec_playerdata" el cual tiene como unidad muestral a los jugadores agrupados por equipo.
+La base de datos usada para este proyecto viene de algunos datos capturados previamente del campeonato de Europa de League of Legends 2019, el cual fue publicado por Stephen O'Farrel. En este caso se trabajará con 2 datas Frame. El primero es el "lec_championdata" el cual tiene como unidad muestral al campeón. El segundo viene a ser el "lec_playerdata" el cual tiene como unidad muestral a los jugadores agrupados por equipo.
 
 ## Uso de librerías
 
-Se cargan las siguientes librerías:
+### Se cargan las siguientes librerías:
 
 - _library(readr)_
 - _library(dplyr)_
@@ -357,22 +357,19 @@ La gráfica identifica la media del % Victorias para el número de asistencias, 
 >- _Nivel de significancia:_ Se toma entonces una significancia de 0.05. Dado por la ecuación 1 − α = nivel de confianza.
 
 
-# Declaración de variables
-
-n=221
-alfa=0.05
-z<-qnorm(alfa/2,lower.tail = FALSE)
+## Declaración de variables
 
 
-```{r,echo=FALSE}
+```{r}
 #Declaración de variables
 n=221
 alfa=0.05
 z<-qnorm(alfa/2,lower.tail = FALSE)
 ```
 
-## 4.1 Intervalos de confianza para la media de KDA
+## 4.1 Intervalos de confianza 
 
+>- Para la media de KDA:
 ```{r,include=FALSE}
 xt=mean(DF2$KDA)
 st=sd(DF2$KDA)
@@ -381,11 +378,7 @@ le<- xt - z*st/sqrt(n)
 ri<- xt + z*st/sqrt(n)
 cat("(",le,",",ri,")\n")
 ```
-Intervalo de confianza para: 
-$$KDA  =[3.3 , 4.21 ]$$
-
-
-## 4.2 Intervalos de confianza para la media de porcentaje de victorias
+>- $$KDA  =[3.3 , 4.21 ]$$
 
 ```{r, include=FALSE}
 xt2=mean(DF2$`W%`)
@@ -395,10 +388,8 @@ le2<- xt2 - z*st2/sqrt(n)
 ri2<- xt2 + z*st2/sqrt(n)
 cat("(",le2,",",ri2,")\n")
 ```
-Intervalo de confianza para: 
-$$Porcentaje  Wins  =[43.9 , 51.44 ]$$
-
-## 4.3 Intervalos de confianza para la media de "súbditos por minuto"
+>- Para la media del porcentaje de victorias:
+>- $$Porcentaje  Wins  =[43.9 , 51.44 ]$$
 
 ```{r, include=FALSE}
 xt3=mean(DF2$CSPM)
@@ -408,9 +399,11 @@ le3<- xt3 - z*st3/sqrt(n)
 ri3<- xt3 + z*st3/sqrt(n)
 cat("(",le3,",",ri3,")\n")
 ```
-Intervalo de confianza para: 
-$$PorcentajeSúbditos por minuto  =[5.98 , 6.8 ]$$
-## 4.4 Intervalos de confianza para la media del porcentaje de daño
+>- Para la media de súbditos por minuto: 
+>- $$PorcentajeSúbditos por minuto  =[5.98 , 6.8 ]$$
+
+## 4.1 Intervalos de confianza
+>- Para la media del porcentaje de daño
 
 ```{r, include=FALSE}
 xt4=mean(DF2$`DMG%`)
@@ -420,10 +413,9 @@ le4<- xt4 - z*st4/sqrt(n)
 ri4<- xt4 + z*st4/sqrt(n)
 cat("(",le4,",",ri4,")\n")
 ```
-Intervalo de confianza para:
-$$Porcentaje Daño  =[18.94 , 20.97 ]$$
+>- $$Porcentaje Daño  =[18.94 , 20.97 ]$$
 
-## 4.5 Intervalos de confianza para la media porcentaje de muertes 
+>- Para la media porcentaje de muertes 
 
 ```{r include=FALSE}
 xt5=mean(DF2$`DTH%`)
@@ -433,12 +425,11 @@ le5<- xt5 - z*st5/sqrt(n)
 ri5<- xt5 + z*st5/sqrt(n)
 cat("(",le5,",",ri5,")\n")
 ```
-Intervalo de confianza para:
-$$Porcentaje Muertes  =[18.99 , 20.54 ]$$
+>- $$Porcentaje Muertes  =[18.99 , 20.54 ]$$
 
-## 4.6 Intervalos de confianza para la media porcentaje de oro
+>- Para la media porcentaje de oro
 
-```{r echo=FALSE}
+```{r include=FALSE}
 xt6=mean(DF2$`Gold%`)
 st6=sd(DF2$`Gold%`)
 
@@ -446,16 +437,15 @@ le6<- xt6 - z*st6/sqrt(n)
 ri6<- xt6 + z*st6/sqrt(n)
 cat("(",le6,",",ri6,")\n")
 ```
-Intervalo de confianza para:
-$$Porcentaje Oro  =[19.16 , 20.76 ]$$
-
+>- $$Porcentaje Oro  =[19.16 , 20.76 ]$$
 
 
 
 # 5. Análisis de variables aleatorias
 
-## 5.1 Variables aleatorias continuas
+# 5.1 Variables aleatorias continuas
 
+## Tipo de variable porcentaje de victorias
 El porcentaje de victorias total se distribuye normalmente, independientemente de como se distribuyan los porcentajes de victorias individuales.
 
 ```{r}
@@ -471,7 +461,7 @@ hist(DF2$`W%`, freq = F,main = "Grafico de funcion de densidad", xlab = "Porcent
 curve(dnorm(x, mean = 47.67, sd = sdw), from = 0, to = 100, add = TRUE)
 ```
 
-## 5.2 Variables aleatorias discretas
+# 5.2 Variables aleatorias discretas
 
 
 ## Variable KDA
@@ -505,33 +495,33 @@ round(dbinom(44,n,padc),2)
 n*padc
 ```
 
-# Variable CSPM
+## Variable CSPM
 
-- La variable "Súbditos por minuto" sigue una distribución normal:
+La variable "Súbditos por minuto" sigue una distribución normal:
 ```{r}
 summary(DF2$CSPM)
 sdw1<-sd(DF2$CSPM)
 sdw1
 ```
 
-## Funcion de densidad
+## Función de densidad
 ```{r,echo=FALSE}
 hist(DF2$CSPM, freq = F,main = "Grafico de función de densidad", xlab = "Súbditos por minuto")
 curve(dnorm(x, mean = 6.39, sd = sdw1),from = 0,to = 100, add = TRUE)
 ```
 
-# Variable %DMG
+## Variable %DMG
 
-- La variable "Porcentaje de daño" sigue una distribución normal:
+La variable "Porcentaje de daño" sigue una distribución normal:
 ```{r}
 summary(DF2$`DMG%`)
 sdw2<-sd(DF2$`DMG%`)
 sdw2
 ```
 
-## Funcion de densidad
+## Función de densidad
 ```{r,echo=FALSE}
-hist(DF2$CSPM, freq = F,main = "Grafico de función de densidad", xlab = "Súbditos por minuto")
+hist(DF2$CSPM, freq = F,main = "Gráfico de función de densidad", xlab = "Súbditos por minuto")
 curve(dnorm(x, mean = 19.96, sd = sdw2),from = 0,to = 100, add = TRUE)
 ```
 
@@ -555,7 +545,7 @@ DFadc<-read.csv("data_adc.csv" )
 DFadc
 ```
 
-## Correlación y regresión
+## Correlación
 
 ```{r, echo=FALSE}
 correlacion_1 <-cor( DFadc$kda_adc ,DFadc$wrate_adc , use="pairwise.complete")
@@ -563,7 +553,7 @@ correlacion_1
 ```
 
 
-```{r, echo=FALSE}
+```{r, include=FALSE}
 Reg_1<-lm(DFadc$wrate_adc ~ DFadc$kda_adc)
 summary(Reg_1)
 ```
@@ -571,7 +561,7 @@ summary(Reg_1)
 Se observa que es orden y ~ x
 
 
-## Correlación y regresión
+## Regresión
 ```{r ,echo=FALSE}
 
 
@@ -606,46 +596,50 @@ text(x = c(7, 4, 2),
 Usando la función _y= 18.547027+ 7.018899x_ ingresando los valores de _x = (7, 4, 2)_ obtuvimos los valores _y=(67.67932, 46.622623, 32.584825)_ respectivamente, estas fueron representado por "+" en la gráfica. Podemos notar que si nuestro "KDA" ratio es más alto, nuestro porcentaje de victorias también aumenta a razón de 7.018899 asesinatos por asistencias entre muertes. 
 
 ## Prueba de hipótesis
-```{r}
+```{r include=FALSE}
 summary(DFadc$kda_adc)
 ```
-H0:El kda promedio es de 5
-H1:El kda promedio es diferente de 5
+- H0:El kda promedio es de 5
+- H1:El kda promedio es diferente de 5
 
+## Prueba de hipótesis
 ```{r,echo=FALSE}
 t.test(DFadc$kda_adc, alternative='two.sided',
        conf.level=0.95, mu=5)
 ```
 
 ## Puntos críticos
-```{r,echo=FALSE}
+```{r}
 pc1<-qt(alfa/2,df=nrow(DFadc)-1)
 pc2<-qt(1-alfa/2,df=nrow(DFadc)-1)
 pc1
 pc2
 ```
 
-##Conlcusiones
+## Conclusiones
 Se acepta hipótesis HO porque se encuentra en la zona de rechazo, ademas no es significativo. En conclusión, el KDA promedio es diferente de 5.
 
 
 # 6.2 Promedio de porcentaje de oro vs Súbditos por minuto
 
-## Correlación y regresión 
+## Correlación 
 ```{r,echo=FALSE}
 correlacion_2 <-cor( DF2$`Gold%`,DF2$CSPM)
 correlacion_2
 ```
 
 
-```{r,echo=FALSE}
+```{r,include=FALSE}
 Reg_2<-lm(DF2$CSPM~DF2$`Gold%`)
 summary(Reg_2)
 ```
-```{r}
+
+```{r include=FALSE}
 coefficients(Reg_2)
 ```
-```{r}
+
+## Regresión
+```{r,echo=FALSE}
 plot(DF2$CSPM~DF2$`Gold%`  ,ylab = "Subditos por minuto", xlab = "Promedio de Porcentaje de oro", main = "Gráfica: Promedio de porcentaje de oro vs Subditos por minuto", pch = 17, cex.axis = 1, cex = 1, cex.main = 1)
 
 ## Linea de regresión
@@ -677,13 +671,13 @@ La relación de Porcentaje de oro vs Súbditos dio una función lineal, la cual 
 ```{r}
 summary(DF2$`Gold%`)
 ```
-## Prueba de hipótesis
-H0:El promedio de porcentaje de oro es de 22.5 
-H1:El promedio de porcentaje de oro es diferente de 22.5 
-
 
 ## Prueba de hipótesis
-```{r, echo=FALSE}
+- H0: El promedio de porcentaje de oro es de 22.5 
+- H1: El promedio de porcentaje de oro es diferente de 22.5 
+
+## Prueba de hipótesis
+```{r}
 media <- 19.96  
 sd <- sd(DF2$`Gold%`)  
 n <- nrow(DF2)         
@@ -692,16 +686,18 @@ mu <- 22.5
 est <- (media - mu) / (sd / sqrt(n))
 est  
 ```
-```{r}
+
+```{r, echo=FALSE}
 pnorm(est)
 ```
+
 ## Análisis
-Se acepta H1 y se rechaza H0, poruqe el p valor es altamente significativo (>0.05)
+Se acepta H1 y se rechaza H0, porque el p valor es altamente significativo (>0.05)
 
 # 6.3 Asistencias supp vs Porcentaje de victorias
 
 
-## Correlación y regresión 
+## Correlación
 
 Se lee la tabla de Supp y se obtiene la correlación
 
@@ -715,14 +711,16 @@ correlacion_3 <-cor( DFsupp2$A,DFsupp2$W.)
 correlacion_3
 ```
 
-## Correlación y regresión
-```{r, echo=FALSE}
+## Regresión
+```{r include=FALSE}
 Reg_3<-lm(DFsupp2$W.~DFsupp2$A)
 summary(Reg_3)
 ```
+
 ```{r,echo=FALSE}
 coefficients(Reg_3)
 ```
+
 ```{r,echo=FALSE}
 plot(DFsupp2$W.~DFsupp2$A  ,ylab = "Porcentaje de victorias", xlab = "Asistencias supp", main = "Gráfica: Asistencias supp vs Porcentaje de victorias", pch = 17, cex.axis = 1, cex = 1, cex.main = 1)
 
@@ -757,16 +755,17 @@ A diferencia de ADC, en el rol Supp analizamos asistencias (contribución en un 
 ```{r}
 summary(DFsupp2$A)
 ```
-HO:EL promedio de las asistencias es menor 123
-H1:El promedio de las asistencias es no es menor a 123
+- HO:EL promedio de las asistencias es menor 123
+- H1:El promedio de las asistencias es no es menor a 123
 
-```{r}
+## Prueba de hipótesis
+```{r,echo=FALSE}
 t.test(DFsupp2$A, alternative='less',
        conf.level=0.95, mu=123)
 ```
 
 ## Puntos críticos
-```{r, echo=FALSE}
+```{r}
 pc6<-qt(alfa/2,df=nrow(DFsupp2)-1)
 pc7<-qt(1-alfa/2,df=nrow(DFsupp2)-1)
 pc6

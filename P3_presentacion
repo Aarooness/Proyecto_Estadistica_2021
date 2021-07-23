@@ -478,12 +478,12 @@ curve(dnorm(x, mean = 47.67, sd = sdw), from = 0, to = 100, add = TRUE)
 
 
 
-## 6. Prueba de hipótesis y regresión 
+# 6. Prueba de hipótesis y regresión 
 
 
-# 6.1 KDA ratio vs porcentajes de victoria del adc
+## 6.1 KDA ratio vs porcentajes de victoria del adc
 
-## Selección del nivel de confianza
+### Selección del nivel de confianza
 ```{r}
 confianza=0.95
 alfa=0.05
@@ -684,7 +684,7 @@ text(x = c(160, 120, 80),
      y = c(66.1159455, 50.7259575, 35.3359695),
      labels = c("+", "+", "+"),cex = 3,col="red")
 ```
-##Análisis
+## Análisis
 
 A diferencia de ADC, en el rol Supp analizamos asistencias (contribución en un asesinato) en vez de asesinatos debido a que este es el objetivo del rol Supp. Notamos que mientas mayor es el número de asistencias mayor será el porcentaje de victorias. Se analizaron 3 puntos en _x=(160, 120, 80)_ donde el resultado usando la ecuación lineal _y=4.5559935+0.3847497x_ nos da _y=(66.1159455, 50.7259575, 35.3359695)_, estos puntos son representados con "+".
 
@@ -711,7 +711,6 @@ pc7
 
 ## Análisis
 Se acepta H0 y se rechaza H1 porque el p valor no es significativo. 
-
 
 
 

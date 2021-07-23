@@ -582,7 +582,7 @@ sd <- sd(DF2$`Gold%`)
 n <- nrow(DF2)         
 mu <- 22.5      
 
-est <- (curs - mu) / (desvia / sqrt(n))
+est <- (media - mu) / (sd / sqrt(n))
 est  
 ```
 ```{r}

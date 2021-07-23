@@ -108,7 +108,7 @@ DF2
 
 =======================================================================================
 
-## 2.1 ¿Tener un alto KDA te garantiza un gran porcentaje de victorias? (Poner descriptores de variables, análisis , hipótesis)
+## 2.1 ¿Tener un alto KDA te garantiza un gran porcentaje de victorias? 
 
 ### -Variable KDA-
 
@@ -126,7 +126,7 @@ abline(h=mean(DF2$KDA),col="blue",lwd=1)
 
 Análisis: La variable KDA determina el nivel de habilidad de cada jugador, esta no es mas que la suma de las kills y asistencias realizadas entre el número de muertes. Es lógico ver valores atípicos, extremadamente altos, debido a jugadores "genios" o a la gran diferencia de nivel entre equipos participantes.
 
-(Colocar histograma con rangos)
+
 
 ### --Planteamiento--
 

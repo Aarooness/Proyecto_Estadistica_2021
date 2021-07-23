@@ -580,9 +580,11 @@ text(x = c(25, 20, 15),
 ```{r}
 summary(DF2$`Gold%`)
 ```
-###Prueba de hipótesis
-###H0:El promedio de porcentaje de oro es de 22.5 
-###H1:El promedio de porcentaje de oro es diferente de 22.5 
+### Prueba de hipótesis
+
+### H0:El promedio de porcentaje de oro es de 22.5 
+
+### H1:El promedio de porcentaje de oro es diferente de 22.5 
 
 ```{r}
 media <- 19.96  

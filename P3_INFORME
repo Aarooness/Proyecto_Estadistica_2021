@@ -448,11 +448,11 @@ curve(dnorm(x, mean = 47.67, sd = sdw), from = 0, to = 100, add = TRUE)
 
 =======================================================================================
 
-5. Prueba de hipotesis y regresión 
+## 5. Prueba de hipotesis y regresión 
 
 =======================================================================================
 
-###Determinar la relación entre la variable "KDA" y el porcentaje de victorias.
+## 5.1. Determinar la relación entre la variable "KDA" y el porcentaje de victorias.
 
 ```{r}
 confianza=0.95
@@ -527,7 +527,7 @@ pc2
 ### Se rechaza hipotesis HO porque se encuentra en la zona de rechazo, ademas no es significativo.En conclusion el KDA promedio es diferente de 5.
 
 
-###Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.
+## 5.2. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.
 
 ###Correlación 
 ```{r}
@@ -590,7 +590,7 @@ pnorm(est)
 ```
 ### Se acepta H0 y se rechaza H1, poruqe el p valor es altamente significativo (>0.05)
 
-###Corroborar si tener un número alto de asistencias determina un menor porcentaje de victorias
+## 5.3. Corroborar si tener un número alto de asistencias determina un menor porcentaje de victorias
 
 ```{r}
 DFsupp2<-read.csv("Suppdata.csv") 

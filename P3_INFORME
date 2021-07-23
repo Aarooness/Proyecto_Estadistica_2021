@@ -423,12 +423,15 @@ Intervalo de confianza para:
 $$Porcentaje Oro  =[19.16 , 20.76 ]$$
 =======================================================================================
 
-4. Variables aleatorias
+=======================================================================================
+
+## 4. Variables aleatorias
 
 =======================================================================================
 
-4.1 Variables aleatorias continuas
+### 4.1 Variables aleatorias continuas
 
+- Porcentaje de victorias: 
 El porcentaje de victorias total se distribuye normalmente, independientemente de como se distribuyan los porcentajes de victorias individuales.
 
 ```{r}
@@ -443,7 +446,62 @@ curve(dnorm(x, mean = 47.67, sd = sdw), from = 0, to = 100, add = TRUE)
 ```
 
 
-4.2 Variables aleatorias discretas
+### 4.2 Variables aleatorias discretas
+
+### Variable KDA
+
+- Variable aleatoria binomial: Búsqueda de la probabilidad que del total de jugadores, 44 sean de la posición ADC.
+
+```{r}
+numADC=sum(DF2$Pos=="ADC")
+numADC
+```
+- Probabilidad de éxito: p= Probabilidad de que un jugador sea ADC
+
+```{r}
+padc=numADC/nrow(DF2)
+padc
+```
+- Probabilidad de fracaso: probabilidad de que un jugador no sea ADC
+```{r}
+1-padc
+```
+- Función de probabilidad:
+```{r}
+round(dbinom(44,n,padc),2)
+```
+- Esperanza:
+```{r}
+n*padc
+```
+### Variable CSPM
+
+- La variable "Súbditos por minuto" sigue una distribución normal:
+```{r}
+summary(DF2$CSPM)
+sdw1<-sd(DF2$CSPM)
+sdw1
+```
+
+```{r}
+hist(DF2$CSPM, freq = F,main = "Grafico de función de densidad", xlab = "Súbditos por minuto")
+curve(dnorm(x, mean = 6.39, sd = sdw1),from = 0,to = 100, add = TRUE)
+```
+
+### Variable %DMG
+
+- La variable "Porcentaje de daño" sigue una distribución normal:
+```{r}
+summary(DF2$`DMG%`)
+sdw2<-sd(DF2$`DMG%`)
+sdw2
+```
+```{r}
+hist(DF2$CSPM, freq = F,main = "Grafico de función de densidad", xlab = "Súbditos por minuto")
+curve(dnorm(x, mean = 19.96, sd = sdw2),from = 0,to = 100, add = TRUE)
+```
+
+
 
 
 =======================================================================================

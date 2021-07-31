@@ -558,4 +558,33 @@ Resultados:
 
 
 
+###################################
+###KDA ratio vs porcentajes de victoria del adc
+###################################
 
+```{r}
+DFadc<-read.csv("data_adc.csv" )
+```
+###Prueba de hipótesis
+```{r}
+summary(DFadc$kda_adc)
+```
+Se sospecha de los mejores adc estan encima de la media, con 4.7.Este valor se eligio porque no esta muy lejado de la media del grupo y se tiene en cuenta que los mejores adc tienen mas kill y menos muertes (KA/D)
+
+H0:mu >= 4.7
+Ha:mu<4.7
+
+El nivel de significancia es del 5%
+
+Estadistico de prueba:
+```{r}
+est<-(4.635-4.7)/sd(DFadc$kda_adc)/nrow(DFadc)
+tcritico <- qt(0.05, df = 25)
+tcritico
+```
+```{r}
+Xs <- seq(-13, 13, by = 0.1)
+plot(Xs, dnorm(Xs), type = "l")
+abline(v=c(tcritico,est), lty = c(1,2), col = c("red", "blue"))
+```
+Como mi estadistico de prueba no cae en la zona de rechazo, no puedo rechazar H0, pues econtre evidencia a favor.Al 5% de significacia se puede justificar que los mejores adc tienen un kda mas alto que la media.

@@ -507,53 +507,24 @@ curve(dnorm(x, mean = 19.96, sd = sdw2),from = 0,to = 100, add = TRUE)
 $$Confianza = 0.95$$
 $$Significancia = 0.05$$
 $$Tamaño-Muestra-Variable ="n"$$
-## 5.1."KDA" media del porcentaje de victorias para la posición ADC.
 
-- Hipótesis: En la gráfica previamente mostrada se evidencia que entre menor sea su habilidad o KDA, menor es el porcentaje de victorias del jugador y por tanto de su equipo. Podemos deducir entonces que la media de KDA del porcentaje de victorias ADC es menor que 5.
+## 6.1."KDA" media del porcentaje de victorias para la posición ADC.
+
+- Hipótesis: En la gráfica previamente mostrada se evidencia que entre mayor sea su habilidad o KDA, mayor es el porcentaje de victorias del jugador. Podemos deducir entonces que los mejores ADC están por encima de la media de KDA del porcentaje de victorias ADC.
+Se toma 5 como valor la hipótesis al ser el valor entero más cercano al promedio real.
 
 - Tamaño de la muestra solo para la posición ADC, n="26"
 
-- H0:El KDA promedio del porcentaje de victorias de la posición ADC es menor que 5
+- H0:El KDA promedio del porcentaje de victorias de la posición ADC es >= 5
 
-- H1:El KDA promedio del porcentaje de victorias de la posición ADC no es menor que 5
-
-```{r}
-t.test(DFadc$kda_adc, alternative='greater',
-       conf.level=0.95, mu=5)
-```
-
-### Puntos críticos
-```{r}
-pc1<-qt(alfa/2,df=nrow(DFadc)-1)
-pc2<-qt(1-alfa/2,df=nrow(DFadc)-1)
-pc1
-pc2
-```
-Resultados:
-
-- No se rechaza la hipótesis nula (H0)
-- El p-value no es significativo.
-
-
-
-### 6.1 KDA ratio vs porcentajes de victoria del adc
-
+- H1:El KDA promedio del porcentaje de victorias de la posición ADC es < 5
 
 ```{r}
 DFadc<-read.csv("data_adc.csv" )
-```
-###Prueba de hipótesis
-```{r}
 summary(DFadc$kda_adc)
 ```
-Se sospecha de los mejores adc estan encima de la media, con 4.7.Este valor se eligio porque no esta muy lejado de la media del grupo y se tiene en cuenta que los mejores adc tienen mas kill y menos muertes (KA/D)
 
-H0:mu >= 4.7
-Ha:mu<4.7
-
-El nivel de significancia es del 5%
-
-Estadistico de prueba:
+- Estadístico de prueba:
 ```{r}
 est<-(4.635-4.7)/sd(DFadc$kda_adc)/nrow(DFadc)
 tcritico <- qt(0.05, df = 25)
@@ -564,7 +535,17 @@ Xs <- seq(-13, 13, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l")
 abline(v=c(tcritico,est), lty = c(1,2), col = c("red", "blue"))
 ```
-Como mi estadistico de prueba no cae en la zona de rechazo, no puedo rechazar H0, pues econtre evidencia a favor.Al 5% de significacia se puede justificar que los mejores adc tienen un kda mas alto que la media.
+
+Análisis: Como mi estadístico de prueba no cae en la zona de rechazo, no se puede rechazar la hipótesis nula, pues no encontré suficiente evidencia en contra.Al 5% de significancia se puede justificar que los mejores ADC tienen un KDA mas alto que la media.
+
+
+Resultados:
+
+- No se rechaza la hipótesis nula (H0).
+- Estadístico de prueba fuera de la región de rechazo.
+
+
+
 
 
 ## 6.2. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.

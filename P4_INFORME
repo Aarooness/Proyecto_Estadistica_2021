@@ -289,6 +289,9 @@ legend("topright",
        fill =c("purple","black","blue","red","green","lightblue"), 
        bty = "o", title="Leyenda",bg="transparent",cex=0.51)
 ```
+
+
+
 - Análisis: La gráfica identifica la media del porcentaje de Victorias para el número de asistencias, variable que por lo general alcanza valores altos para la posición Support, explicando la poca agrupación de los datos. Se infiere entonces que un mayor número de asistencias no garantiza un mayor porcentaje de victorias. 
 
 ```{r}

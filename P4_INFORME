@@ -527,13 +527,22 @@ Resultados:
 
 
 
-## 6.2. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.
 
-### Prueba de hipótesis
+## 6.2. Media de la variable porcentaje de oro generado para los "súbditos por minuto".
 
-### H0:El promedio de porcentaje de oro es de 22.5 
+- Hipótesis: El oro se obtiene a través de los súbditos entre otros enemigos, a mayor número , mayor recaudación. Se plantea entonces de la gráfica previa, una relación directa, entre más Súbditos por minutos generes ("CSPM"), mayor es el porcentaje de oro obtenido. Tomamos como referencia 20, el valor promedio del porcentaje de oro más cercano al real.
 
-### H1:El promedio de porcentaje de oro es diferente de 22.5 
+- Tamaño de la muestra "n=221" : Se incluyen a todos los jugadores participantes.
+
+- H0:El promedio de porcentaje de oro es > 20.
+
+- H1:El promedio de porcentaje de oro es < 20.
+
+```{r}
+summary(DF2$`Gold%`)
+```
+
+CORREGIR EN BASE A LA NUEVA HIPOTESIS//////////////////////
 
 ```{r}
 media <- 19.96  
@@ -547,10 +556,12 @@ net
 ```{r}
 pnorm(net)
 ```
+Análisis:
+
+Resultados:
+- Se rechaza la hipótesis nula (H0) ?????
 
 
-- Se rechaza la hipótesis nula (H0)
-- El p-value es altamente significativo (>0.05)
 
 ## 6.3. Corroborar si tener un número alto de asistencias determina un menor porcentaje de victorias
 

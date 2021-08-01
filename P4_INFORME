@@ -533,14 +533,14 @@ coory1 <- c(0, dt(seq(-10, -1.708141, 0.01), 25), 0)
 polygon(coorx1, coory1, col = "red")
 ```
 
-###Análisis: Como el estadístico de prueba no cae en la zona de rechazo, no puedo rechazar H0, pues encontré evidencia a favor. Además al 5% de significancia, el p-valor=0.4970045 es mayor que la significancia, no hay suficiente evidencia para no rechazar Ha. Se puede justificar que los mejores adc tienen un kda más alto que la media.
+- Análisis: Como el estadístico de prueba no cae en la zona de rechazo, no puedo rechazar H0, pues no encontré suficiente evidencia en contra. Además al 5% de significancia, el p-valor=0.4995 es mayor que la significancia, no hay suficiente evidencia para rechazar la hipótesis nula. Se puede justificar que los mejores ADC tienen un KDA más alto que la media.
 
 
 Resultados:
 
-- No se rechaza la hipótesis nula (H0).
+- No se rechaza la hipótesis nula (p-valor>0.05).
 - Estadístico de prueba fuera de la región de rechazo.
-- Se rechaza Ha (p-valor>0.05)
+
 
 
 

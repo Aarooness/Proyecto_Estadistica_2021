@@ -553,7 +553,7 @@ Resultados:
 
 - Tamaño de la muestra "n=221" : Se incluyen a todos los jugadores participantes.
 
-- H0:El promedio de porcentaje de oro es > 20.
+- H0:El promedio de porcentaje de oro es >= 20.
 
 - H1:El promedio de porcentaje de oro es < 20.
 
@@ -561,20 +561,20 @@ Resultados:
 summary(DF2$`Gold%`)
 ```
 
-CORREGIR EN BASE A LA NUEVA HIPOTESIS//////////////////////
-
-```{r}
-media <- 19.96  
-sd <- sd(DF2$`Gold%`)  
-n <- nrow(DF2)         
-mu <- 22.5      
-
-net <- (media - mu) / (sd / sqrt(n))
-net  
+````{r}
+est2<-(19.96-20)/sd(DF2$`Gold%`)/nrow(DF2)
+zcritico <- qnorm(0.05)
+pvalor2<-pnorm(est2)
 ```
 ```{r}
-pnorm(net)
-```
+x <- seq(-5, 5, by = 0.1)
+y <- dnorm(x)
+plot(x, y, type="l")
+abline(v=c(zcritico,est2), lty = c(1,2), col = c("red", "blue"))
+coordenada4.x1 <- c(-4.5, seq(-4.5, zcritico, 0.01), zcritico)
+coordenada4.y1 <- c(0, dt(seq(-4.5, zcritico, 0.01), 25), 0)
+polygon(coordenada4.x1, coordenada4.y1, col = "red")
+``
 Análisis:
 
 Resultados:

@@ -559,7 +559,7 @@ Resultados:
 
 
 ###################################
-###KDA ratio vs porcentajes de victoria del adc
+### 5.1 KDA ratio vs porcentajes de victoria del adc
 ###################################
 
 ```{r}
@@ -588,3 +588,29 @@ plot(Xs, dnorm(Xs), type = "l")
 abline(v=c(tcritico,est), lty = c(1,2), col = c("red", "blue"))
 ```
 Como mi estadistico de prueba no cae en la zona de rechazo, no puedo rechazar H0, pues econtre evidencia a favor.Al 5% de significacia se puede justificar que los mejores adc tienen un kda mas alto que la media.
+
+
+## 5.2. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.
+
+### Prueba de hipótesis
+
+### H0:El promedio de porcentaje de oro es de 22.5 
+
+### H1:El promedio de porcentaje de oro es diferente de 22.5 
+
+```{r}
+media <- 19.96  
+sd <- sd(DF2$`Gold%`)  
+n <- nrow(DF2)         
+mu <- 22.5      
+
+net <- (media - mu) / (sd / sqrt(n))
+net  
+```
+```{r}
+pnorm(net)
+```
+
+
+- Se rechaza la hipótesis nula (H0)
+- El p-value es altamente significativo (>0.05)

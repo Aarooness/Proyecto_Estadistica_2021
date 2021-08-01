@@ -1,6 +1,6 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output: html_document
 ---
 
 ## Análisis del rendimiento estadístico de jugadores y campeones en LOL
@@ -55,22 +55,6 @@ library(readr)
 library(dplyr)
 library(stringr)
 library(data.table)
-library(formattable)
-```
-
-### Variables más relevantes del estudio
-championdata    WR5 ->"If you have a 12 team league, a WR1 would be a top 12 WR, a WR2 would be receivers 13-24, WR3 would be receivers 25-36, and so on. WR5 49-60"
-
-```{r}
-c1<-c("K","Pos","DMG%","Gold%","W%","<25 win percentage","40-45 win percentage")
-
-c2<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de daño que realizó el jugador en el torneo","Porcentaje de oro que recolectó el jugador","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 minutos","Porcentaje de victorias de entre 40 y 45 minutos")
-
-c3 <-c("Player Data","Player Data","Player Data","Player Data","Player Data","Champion Data","Champion Data")
-
-
-x<-data.table("Nombre_de_la_variable"=c1,"Descripción_de_la_Variable"=c2,"Origen"=c3)
-formattable(x,align=c('c','c','c'))
 ```
 
 
@@ -79,23 +63,18 @@ formattable(x,align=c('c','c','c'))
 
 A continuación se adjunta una tabla con los modelos de variables aleatorias posibles para algunas de las variables de estudio:
 
-```{r}
-c1<-c("Kills del usuario","Posición que tomo el jugador en el mapa","Porcentaje de victorias del jugador","Porcentaje de victorias para menos de 25 minutos","Porcentaje de victorias de entre 40 y 45 minutos","CSPM","Gold%","KDA","DMG%","DTH%")
 
 
-c2<-c("Bernoulli","Geométrica","Bernoulli","Bernoulli","Bernoulli","Discreta","Discreta","Discreta","Discreta","Discreta")
-
-c3 <-c("Player Data","Player Data","Player Data","Champion Data","Champion Data","Player Data","Player Data","Player Data","Player Data","Player Data")
-
-
-x<-data.table("Descripción_de_la _variable"=c1,"Modelo_escogido"=c2,"Origen"=c3)
-formattable(x,align=c('c','c','c'))
-```
-
-
-
-
-- Se asignan las bases de datos del "campeón" y del "jugador" a analizar a DF1 y DF2 respectivamente.
+- Variable kills "K": Bernoulli
+- Variable "KDA" : Discreta
+- Variable posición "Pos": Geométrica
+- Variable porcentaje de victorias "%W" : Discreta
+- Variable Súbditos por minuto "CSPM" : Discreta
+- Variable porcentaje de oro "Gold%" : Discreta
+- Variable porcentaje de daño "DMG%" : Discreta
+- Variable porcentaje de muertes "DTH%" : Discreta
+ 
+Se asignan las bases de datos del "campeón" y del "jugador" a analizar a DF1 y DF2 respectivamente.
 
 ```{r}
 DF1 <- read_csv("lec_championdata.csv")

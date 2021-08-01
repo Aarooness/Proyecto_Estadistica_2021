@@ -621,8 +621,8 @@ pnorm(net)
 ```{r}
 summary(DFsupp2$A)
 ```
-HO:EL promedio de las asistencias es menor 123
-H1:El promedio de las asistencias es no es menor a 123
+HO:EL promedio de las asistencias es menor 122
+H1:El promedio de las asistencias es no es menor a 122
 ```{r}
 t.test(DFsupp2$A, alternative='less',
        conf.level=0.95, mu=123)

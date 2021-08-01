@@ -11,11 +11,11 @@ output: html_notebook
 
 - Andre Brian Bejarano Oliveira              / 201820035 /    
 
-- Viviana Maria Chacchi Guillen              / 201820039 /
+- Viviana Maria Chacchi Guillen              / 201820039 /        Líder
 
 - Jean Carlos Colmenares Vera Portocarrero   / 201820128 /
 
-- Aaron Naif Gonzales Torres                 / 201820092 /        Líder
+- Aaron Naif Gonzales Torres                 / 201820092 /        
 
 - Hector Alexis Retamozo Ccorahua            / 201820108 /  
 
@@ -45,7 +45,7 @@ output: html_notebook
 ### Muestreo
 La base de datos usada para este proyecto viene de algunos datos capturados previamente del campeonato de Europa de League of Legens 2019, el 
 cual fue publicado por Stephen O'Farrel. 
-En este caso se trabajara con 2 datas Frame. El primero es el "lec_championdata" el cual tiene como unidad muestral al campeón. 
+En este caso se trabajará con 2 datas Frame. El primero es el "lec_championdata" el cual tiene como unidad muestral al campeón. 
 El segundo viene a ser el "lec_playerdata" el cual tiene como unidad muestral a los jugadores agrupados por equipo.
 
 
@@ -94,153 +94,48 @@ formattable(x,align=c('c','c','c'))
 
 
 
-Se asignan las bases de datos del "campeón" y del "jugador" a analizar a DF1 y DF2 respectivamente.
+
+- Se asignan las bases de datos del "campeón" y del "jugador" a analizar a DF1 y DF2 respectivamente.
 
 ```{r}
 DF1 <- read_csv("lec_championdata.csv")
-DF1
-```
-
-```{r}
 DF2 <- read_csv("lec_playerdata.csv")
-DF2
-```
-
-- Se derivan también los siguientes dataframe para la obtención de datos relevantes posteriormente. Estos serían referentes a la posición "ADC" y "Support" 
-
-```{r}
-DFadc<-read.csv("data_adc.csv" )
-DFadc
-```
-
-```{r}
-DFsupp2<-read.csv("Suppdata.csv") 
-DFsupp2
 ```
 
 =======================================================================================
 
-## 2. Planteamiento de análisis e hipótesis
+## 2. Análisis Descriptivo
 
 =======================================================================================
 
-## 2.1 ¿Tener un alto KDA te garantiza un gran porcentaje de victorias? 
-
-### -Variable KDA-
-
+## 2.1 Variable KDA
 
 ```{r}
 summary(DF2$KDA)
 ```
+
+
 ```{r}
 boxplot(DF2$KDA, main = "Gráfica de KDA",xlab="KDA",ylab="Frecuencia")
 abline(h=mean(DF2$KDA),col="blue",lwd=1)
 ```
 
 
-
-
 Análisis: La variable KDA determina el nivel de habilidad de cada jugador, esta no es mas que la suma de las kills y asistencias realizadas entre el número de muertes. Es lógico ver valores atípicos, extremadamente altos, debido a jugadores "genios" o a la gran diferencia de nivel entre equipos participantes.
 
 
-
-### --Planteamiento--
-
-```{r}
-DFadc<-which(DF2$Pos=="ADC")
-DFtop<-which(DF2$Pos=="Top")
-DFjg<-which(DF2$Pos=="Jungle")
-DFmid<-which(DF2$Pos=="Middle")
-DFsupp<-which(DF2$Pos=="Support")
-```
-
-
-```{r}
-plot(DF2$KDA ~ DF2$`W%`, ylab='KDA', xlab='Porcentaje de victorias')
-abline(h=mean(DF2[DFadc,]$KDA),col="brown")
-abline(h=mean(DF2[DFsupp,]$KDA),col="green")
-abline(h=mean(DF2[DFjg,]$KDA),col="purple")
-abline(h=mean(DF2[DFmid,]$KDA),col="orange")
-abline(h=mean(DF2[DFtop,]$KDA),col="lightcoral")
-legend("topright", 
-       c("ADC","Support","Jungla","Mid","Top"), 
-       lty=1, 
-       fill =c("brown","green","purple","orange","lightcoral"), 
-       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
-```
-
-
-
-
-- Análisis: Relación proporcional entre el KDA y el porcentaje de victoria de los juegos, algo convenientemente lógico dado la ventaja que puede obtener un equipo de su rival.Sin una diferencia significativa de la media de KDA entre posiciones.
-
-¿Si una posición tiene KDA alto, el jugador tiene más victorias?
-```{r}
-DF2 %>% filter(GP>=10)->DFGPok
-DFPokadc<-which(DFGPok$Pos=="ADC")
-DFPoktop<-which(DFGPok$Pos=="Top")
-DFPokjg<-which(DFGPok$Pos=="Jungle")
-DFPokmid<-which(DFGPok$Pos=="Middle")
-DFPoksupp<-which(DFGPok$Pos=="Support")
-```
-
-```{r}
-plot(DFGPok[DFPokadc,]$`KDA` ~ DFGPok[DFPokadc,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias Posición ADC")
-abline(h=mean(DF2[DFadc,]$`KDA`),col="blue")
-abline(v=mean(DF2[DFadc,]$`W%`),col="blue")
-legend("topright", 
-       c("Media KDA"), 
-       lty=1, 
-       fill =c("blue"), 
-       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
-```
-
-
-
-
-- Hipótesis: El rol del ADC es hacer el mayor número de kills a los rivales. En la gráfica se evidencia que entre mayor sea su habilidad o KDA, mayor es el porcentaje de victorias del jugador y por tanto de su equipo. Podemos deducir entonces que la media de KDA del porcentaje de victorias ADC es menor que 5.
-
-
-
-## 2.2 ¿Existe una relación entre el porcentaje de muertes de un jugador y el porcentaje de    daño que realiza? 
-
-
-### --Variable Porcentaje de muertes--
-
+### 2.2 Variable porcentaje de muerte y porcentaje de daño
 ```{r}
 summary(DF2$`DTH%`)
 ```
 
-### --Variable Porcentaje de daño--
-
 ```{r}
 summary(DF2$`DMG%`)
 ```
-### --Planteamiento--
-
-```{r}
-plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`,ylab="Porcentaje de daño",xlab="Porcentaje de Muertes") 
-abline(h=mean(DF2[DFadc,]$`DMG%`),col="red")
-abline(v=mean(DF2[DFadc,]$`DTH%`),col="red")
-legend("topright", 
-       c("Media"), 
-       lty=1, 
-       fill =c("red"), 
-       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
-```
+Análisis: Se obtiene como media del porcentaje de muertes 20 ,y la media para el porcentaje de daño 20 de igual forma. No se evidencia una gran diferencia entre la mediana y los extremos de la variable para este caso. 
 
 
-
-
-Análisis: De la gráfica no se puede concluir una relación directa entre el porcentaje de daño y de muertes. Como en la gráfica estamos incluyendo a todas las posiciones, los porcentajes de daños pueden ser muy alejados unas posiciones entre otras pero no ocurre de igual manera con las muertes.
-
-Hipótesis: Se plantea entonces, que tener un porcentaje elevado del daño que aplicaste no significa haber tenido un pequeño porcentaje de muertes durante la partida.
-
-
-## 2.3 ¿Hay una influencia en el porcentaje de oro obtenido a mayor número de súbditos por minuto?
-
-
-### --Variable Súbditos por minuto (CSPM)--
+### 2.3 Variable Súbditos por minuto (CSPM)
 
 ```{r}
 summary(DF2$CSPM)
@@ -258,18 +153,76 @@ legend("topright",
 ```
 
 
+- Análisis: Notamos un amplio rango para la variable CSPM, esto debido a los distintos tipos de posiciones involucradas, algunas especializadas en obtener oro de los súbditos y otras no. Teniendo un media de 6.4 como resultado.
 
 
-- Análisis: Notamos un amplio rango para la variable CSPM, esto debido a los distintos tipos de posiciones involucradas, algunas especializadas en obtener oro de los súbditos y otras no. Teniendo un media de 7.7 como resultado
-
-### --Planteamiento--
+### 2.4 Variable porcentaje de victorias
 
 ```{r}
-plot(DF2$`Gold%` ~ DF2$CSPM,ylab="Porcentaje de oro",xlab="Súbditos por minuto") 
-abline(h=mean(DF2$`Gold%`),col="blue")
-abline(v=mean(DF2$CSPM),col="blue")
+hist(DF2$`W%`,breaks=20,col=c("purple"),main="Histograma de porcentaje de wins",xlab="%W",ylab="Frecuencia")
+abline(v=median(DF2$`W%`),col="green",lwd=2)
 legend("topright", 
-       c("Media"), 
+       c("Mediana"), 
+       lty=1, 
+       fill =c("green"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.8)
+```
+
+
+Análisis: Independientemente de la posición de los jugadores se puede concluir que los valores están relativamente distribuidos alrededor de la mediana. 
+
+
+=======================================================================================
+
+## 3. Análisis Inferencial
+
+=======================================================================================
+
+## 3.1 ¿Tener un alto KDA te garantiza un gran porcentaje de victorias? 
+
+
+
+### Planteamiento:
+
+```{r}
+DFadc<-which(DF2$Pos=="ADC")
+DFtop<-which(DF2$Pos=="Top")
+DFjg<-which(DF2$Pos=="Jungle")
+DFmid<-which(DF2$Pos=="Middle")
+DFsupp<-which(DF2$Pos=="Support")
+```
+
+
+```{r}
+plot(DF2$KDA ~ DF2$`W%`, ylab='KDA', xlab='Porcentaje de victorias',col = as.factor(DF2$Pos))
+legend("topright", 
+       c("ADC","Support","Jungla","Mid","Top"), 
+       lty=1, 
+       fill =c("black","blue","red","green","lightblue"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
+```
+
+
+
+
+- Análisis: Relación proporcional entre el KDA y el porcentaje de victoria de los jugadores, algo convenientemente lógico dado la ventaja que puede obtener un equipo de su rival.Con algunas diferencias significativas entre posiciones. Las posiciones no determinan el nivel de habilidad pero ciertamente algunas tienen más ventajas sobre otras para obtener kills y reducir el número de muertes, variables de las que se obtiene el KDA, explicando estos valores tan altos.
+
+
+¿Si una posición (ADC) tiene KDA alto, el jugador tiene más victorias?
+```{r}
+DF2 %>% filter(GP>=10)->DFGPok
+DFPokadc<-which(DFGPok$Pos=="ADC")
+DFPoktop<-which(DFGPok$Pos=="Top")
+DFPokjg<-which(DFGPok$Pos=="Jungle")
+DFPokmid<-which(DFGPok$Pos=="Middle")
+DFPoksupp<-which(DFGPok$Pos=="Support")
+```
+
+```{r}
+plot(DFGPok[DFPokadc,]$`KDA` ~ DFGPok[DFPokadc,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias Posición ADC")
+abline(h=mean(DF2[DFadc,]$`KDA`),col="blue")
+legend("topright", 
+       c("Media KDA"), 
        lty=1, 
        fill =c("blue"), 
        bty = "o", title="Leyenda",bg="transparent",cex=0.51)
@@ -278,28 +231,56 @@ legend("topright",
 
 
 
-
-Análisis: Se observa un escalado de la relación entre el porcentaje de oro  y los súbditos por minuto independientemente de la posición del jugador.
-
-Hipótesis: El oro se obtiene a través de los súbditos entre otros enemigos, a mayor número ,mayor recaudación. Se plantea entonces una relación directa, entre más CSPM tengas, mayor es el porcentaje de oro obtenido.
-
-
-## 2.4 ¿Tener muchas asistencias determina un alto porcentaje de victorias?
+- Hipótesis: El rol del ADC es hacer el mayor número de kills a los rivales. En la gráfica se evidencia que entre mayor sea su habilidad o KDA, mayor es el porcentaje de victorias del jugador y por tanto de su equipo. Podemos deducir entonces que los mejores jugadores superan un valor cercano a la media, el cual puede establecerse como 5 por ejemplo.
 
 
 
-### --Variable porcentaje de victorias--
+## 3.2 ¿Existe una relación entre el porcentaje de muertes de un jugador y el porcentaje de    daño que realiza? 
+
+
+### --Planteamiento--
 
 ```{r}
-hist(DF2$`W%`,breaks=20,col=c("purple"),main="Histograma de porcentaje de wins",xlab="%W",ylab="Frecuencia")
-abline(v=mean(DF2$`W%`),col="green",lwd=2)
+plot(DF2[DFadc,]$`DMG%` ~ DF2[DFadc,]$`DTH%`,ylab="Porcentaje de daño",xlab="Porcentaje de Muertes") 
+abline(h=mean(DF2[DFadc,]$`DMG%`),col="red")
 legend("topright", 
        c("Media"), 
        lty=1, 
-       fill =c("green"), 
-       bty = "o", title="Leyenda",bg="transparent",cex=0.8)
+       fill =c("red"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
 ```
 
+
+Análisis: De la gráfica no se puede concluir una relación directa entre el porcentaje de daño y de muertes. Como en la gráfica estamos incluyendo a todas las posiciones, los porcentajes de daños pueden ser muy alejados unas posiciones entre otras pero no ocurre de igual manera con las muertes.
+
+Hipótesis: Se plantea entonces, que tener un porcentaje elevado del daño que aplicaste no significa haber tenido un pequeño porcentaje de muertes durante la partida.
+
+
+## 3.3 ¿Hay una influencia en el porcentaje de oro obtenido a mayor número de súbditos por minuto?
+
+
+### --Planteamiento--
+
+```{r}
+plot(DF2$`Gold%` ~ DF2$CSPM,ylab="Porcentaje de oro",xlab="Súbditos por minuto",col = as.factor(DF2$Pos) ) 
+abline(h=mean(DF2$`Gold%`),col="purple")
+legend("topright", 
+       c("Media","ADC","Support","Jungla","Mid","Top"), 
+       lty=1, 
+       fill =c("purple","black","blue","red","green","lightblue"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
+```
+
+
+
+
+- Análisis: Se observa un escalado de la relación entre el porcentaje de oro  y los súbditos por minuto independientemente de la posición del jugador.
+
+- Hipótesis: El oro se obtiene a través de los súbditos entre otros enemigos, a mayor número ,mayor recaudación. Se plantea entonces una relación directa, entre más CSPM tengas, mayor es el porcentaje de oro obtenido. En concreto se observan valores más altos para la posición ADC, posición que por lo general realiza más daño y kills en el equipo.
+
+
+
+## 3.4 ¿Tener muchas asistencias determina un alto porcentaje de victorias?
 
 ### --Planteamiento--
 
@@ -318,31 +299,28 @@ legend("topright",
 
 
 - Análisis: 
-Se aprecia una diferencia poco significativa entre la media del número del % victorias del ADC y del Support; lo que quiere decir que independientemente del rol seleccionado, cada posición tiene un número similar de victorias.
+Se aprecia una diferencia poco significativa entre la media del porcentaje de victorias del ADC y del Support; lo que quiere decir que independientemente del rol seleccionado, cada posición tiene un número similar de victorias.
 
 ```{r}
-plot(DF2$`W%` ~ DF2$A,col=c("purple"),main="Gráfica de % Victorias vs. Asistencias",ylab="% Wins",xlab="Asistencias")
-abline(h=mean(DF2$A),col="red",lwd=2)
-abline(v=mean(DF2$`W%`),col="red",lwd=2)
+plot(DF2$`W%` ~ DF2$A, main="Gráfica de % Victorias vs. Asistencias",ylab="% Wins",xlab="Asistencias",col = as.factor(DF2$Pos) )
+abline(h=mean(DF2$A),col="purple",lwd=2)
 legend("topright", 
-       c("Media"), 
+       c("Media","ADC","Support","Jungla","Mid","Top"), 
        lty=1, 
-       fill =c("red"), 
-       bty = "o", title="Leyenda",bg="transparent",cex=0.8) 
+       fill =c("purple","black","blue","red","green","lightblue"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
 ```
 
 
 
-
-
-- Hipótesis: La gráfica identifica la media del % Victorias para el número de asistencias, variable que por lo general alcanza valores altos para la posición Support, explicando la poca agrupación de los datos. Se infiere entonces que un mayor número de asistencias no garantiza un mayor porcentaje de victorias.
+- Hipótesis: La gráfica identifica la media del porcentaje de Victorias para el número de asistencias, variable que por lo general alcanza valores altos para la posición Support, explicando la poca agrupación de los datos. Se infiere entonces que un mayor número de asistencias no garantiza un mayor porcentaje de victorias.
 
 
 
 
 =======================================================================================
 
-## 3. Intervalos de confianza
+## 4. Intervalos de confianza
 
 =======================================================================================
 
@@ -359,7 +337,7 @@ alfa=0.05
 z<-qnorm(alfa/2,lower.tail = FALSE)
 ```
 
-3.1 Intervalos de confianza para la media de KDA
+4.1 Intervalos de confianza para la media de KDA
 
 ```{r}
 xt=mean(DF2$KDA)
@@ -372,7 +350,7 @@ cat("(",le,",",ri,")\n")
 Intervalo de confianza para: $$KDA  =[3.3 , 4.21 ]$$
 
 
-3.2 Intervalos de confianza para la media de porcentaje de victorias
+4.2 Intervalos de confianza para la media de porcentaje de victorias
 
 ```{r}
 xt2=mean(DF2$`W%`)
@@ -385,7 +363,7 @@ cat("(",le2,",",ri2,")\n")
 Intervalo de confianza para:
 $$Porcentaje  Wins  =[43.9 , 51.44 ]$$
 
-3.3 Intervalos de confianza para la media de "súbditos por minuto"
+4.3 Intervalos de confianza para la media de "súbditos por minuto"
 
 ```{r}
 xt3=mean(DF2$CSPM)
@@ -399,7 +377,7 @@ Intervalo de confianza para:
 $$Porcentaje Súbditos por minuto  =[5.98 , 6.8 ]$$
 
 
-3.4 Intervalos de confianza para la media del porcentaje de daño
+4.4 Intervalos de confianza para la media del porcentaje de daño
 
 ```{r}
 xt4=mean(DF2$`DMG%`)
@@ -412,7 +390,7 @@ cat("(",le4,",",ri4,")\n")
 Intervalo de confianza para:
 $$Porcentaje Daño  =[18.94 , 20.97 ]$$
 
-3.5 Intervalos de confianza para la media porcentaje de muertes 
+4.5 Intervalos de confianza para la media porcentaje de muertes 
 
 ```{r}
 xt5=mean(DF2$`DTH%`)
@@ -425,7 +403,7 @@ cat("(",le5,",",ri5,")\n")
 Intervalo de confianza para:
 $$Porcentaje Muertes  =[18.99 , 20.54 ]$$
 
-3.6 Intervalos de confianza para la media porcentaje de oro
+4.6 Intervalos de confianza para la media porcentaje de oro
 
 ```{r}
 xt6=mean(DF2$`Gold%`)
@@ -437,15 +415,15 @@ cat("(",le6,",",ri6,")\n")
 ```
 Intervalo de confianza para:
 $$Porcentaje Oro  =[19.16 , 20.76 ]$$
-=======================================================================================
+
 
 =======================================================================================
 
-## 4. Variables aleatorias
+## 5. Variables aleatorias
 
 =======================================================================================
 
-### 4.1 Variables aleatorias discretas
+### 5.1 Variables aleatorias discretas
 
 ### Porcentaje de victorias: 
 
@@ -522,7 +500,7 @@ curve(dnorm(x, mean = 19.96, sd = sdw2),from = 0,to = 100, add = TRUE)
 
 =======================================================================================
 
-## 5. Prueba de hipotesis 
+## 6. Prueba de hipotesis 
 
 =======================================================================================
 
@@ -558,9 +536,8 @@ Resultados:
 
 
 
-###################################
-### 5.1 KDA ratio vs porcentajes de victoria del adc
-###################################
+### 6.1 KDA ratio vs porcentajes de victoria del adc
+
 
 ```{r}
 DFadc<-read.csv("data_adc.csv" )
@@ -590,7 +567,7 @@ abline(v=c(tcritico,est), lty = c(1,2), col = c("red", "blue"))
 Como mi estadistico de prueba no cae en la zona de rechazo, no puedo rechazar H0, pues econtre evidencia a favor.Al 5% de significacia se puede justificar que los mejores adc tienen un kda mas alto que la media.
 
 
-## 5.2. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.
+## 6.2. Encontrar la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.
 
 ### Prueba de hipótesis
 
@@ -615,7 +592,7 @@ pnorm(net)
 - Se rechaza la hipótesis nula (H0)
 - El p-value es altamente significativo (>0.05)
 
-## 5.3. Corroborar si tener un número alto de asistencias determina un menor porcentaje de victorias
+## 6.3. Corroborar si tener un número alto de asistencias determina un menor porcentaje de victorias
 
 ### Prueba de hipótesis
 ```{r}
@@ -638,3 +615,10 @@ pc7
 - No se rechaza la hipótesis nula (H0)
 - El p-value no es significativo. 
 
+
+
+=======================================================================================
+
+## 7. Regresión
+
+=======================================================================================

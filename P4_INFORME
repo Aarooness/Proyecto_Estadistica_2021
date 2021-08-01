@@ -517,25 +517,30 @@ DFadc<-read.csv("data_adc.csv" )
 summary(DFadc$kda_adc)
 ```
 
-- Estadístico de prueba:
+
 ```{r}
 est<-(4.635-4.7)/sd(DFadc$kda_adc)/nrow(DFadc)
 tcritico <- qt(0.05, df = 25)
-tcritico
+pvalor<-pt(est, df=25)
 ```
 ```{r}
-Xs <- seq(-13, 13, by = 0.1)
-plot(Xs, dnorm(Xs), type = "l")
+x <- seq(-4, 4, by = 0.1)
+y <- dnorm(x)
+plot(x, y, type="l")
 abline(v=c(tcritico,est), lty = c(1,2), col = c("red", "blue"))
+coorx1 <- c(-10, seq(-10, -1.708141, 0.01), -1.708141)
+coory1 <- c(0, dt(seq(-10, -1.708141, 0.01), 25), 0)
+polygon(coorx1, coory1, col = "red")
 ```
 
-Análisis: Como mi estadístico de prueba no cae en la zona de rechazo, no se puede rechazar la hipótesis nula, pues no encontré suficiente evidencia en contra.Al 5% de significancia se puede justificar que los mejores ADC tienen un KDA mas alto que la media.
+###Análisis: Como el estadístico de prueba no cae en la zona de rechazo, no puedo rechazar H0, pues encontré evidencia a favor. Además al 5% de significancia, el p-valor=0.4995 es mayor que la significancia, no hay suficiente evidencia para no rechazar Ha. Se puede justificar que los mejores adc tienen un kda más alto que la media.
 
 
 Resultados:
 
 - No se rechaza la hipótesis nula (H0).
 - Estadístico de prueba fuera de la región de rechazo.
+- Se rechaza Ha (p-valor>0.05)
 
 
 

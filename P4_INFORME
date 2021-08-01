@@ -559,18 +559,27 @@ pnorm(net)
 Análisis:
 
 Resultados:
-- Se rechaza la hipótesis nula (H0) ?????
+- Se rechaza la hipótesis nula (H0) ?
 
 
 
-## 6.3. Corroborar si tener un número alto de asistencias determina un menor porcentaje de victorias
+## 6.3. Determinar la relevancia del número de asistencias siendo de la posición Support.
 
-### Prueba de hipótesis
+- Hipótesis: De gráficas previas en las que se señalaba la media de Asistencias de las posiciones, se plantea que la media de las asistencias del Support es mayor que la de los jugadores en general, resaltando la predilección de esta posición para aumentar el valor en la variable Asistencias.
+
+- Tamaño de la muestra "n=25" : Jugadores que tomaron la posición Support 
+
+- HO:EL promedio de las asistencias es > 60
+
+- H1:El promedio de las asistencias es < 60
+
+
 ```{r}
-summary(DFsupp2$A)
+DFsupp2<-read.csv("Suppdata.csv") 
+summary(DF2$A)
 ```
-HO:EL promedio de las asistencias es menor 122
-H1:El promedio de las asistencias es no es menor a 122
+
+
 ```{r}
 t.test(DFsupp2$A, alternative='less',
        conf.level=0.95, mu=123)
@@ -582,9 +591,11 @@ pc7<-qt(1-alfa/2,df=nrow(DFsupp2)-1)
 pc6
 pc7
 ```
+Análisis:
 
-- No se rechaza la hipótesis nula (H0)
-- El p-value no es significativo. 
+Resultados:
+- No se rechaza la hipótesis nula (H0) ???
+
 
 
 

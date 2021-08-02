@@ -1,0 +1,377 @@
+---
+title: "4ta Presentación"
+author: Equipo 09
+date: 22 Jul 2021
+output: ioslides_presentation
+widescreen: true
+smaller: true
+incremental: true
+---
+
+---
+title: "Presentación 4"
+output:
+  html_document:
+    df_print: paged
+    
+---
+
+## Análisis del rendimiento estadístico de jugadores y campeones en LOL
+ 
+
+## Integrantes
+
+
+>- Andre Brian Bejarano Oliveira              / 201820035 /    
+
+>- Viviana Maria Chacchi Guillen              / 201820039 /    Líder
+
+>- Jean Carlos Colmenares Vera Portocarrero   / 201820128 /
+
+>- Aaron Naif Gonzales Torres                 / 201820092 /      
+
+>- Hector Alexis Retamozo Ccorahua            / 201820108 / 
+
+
+
+# 1. Introducción
+
+
+## Objetivo principal :
+
+>- __Analizar__ las variables que mejor describen el comportamiento y rendimiento de los campeones y jugadores respectivamente.
+
+### Objetivos Secundarios :
+
+>- __Determinar__ la relación entre la variable "KDA" y el porcentaje de victorias.
+
+>- __Comprobar__ una relación existente entre el porcentaje de muertes de un jugador y el porcentaje de daño que realiza a los enemigos.
+
+>- __Encontrar__ la influencia de la variable "súbditos por minuto" en el porcentaje oro generado.
+
+>- __Corroborar__ si tener un número alto de asistencias determina un menor porcentaje de victorias.
+
+
+
+
+# 2. Muestreo y datos recopilados
+
+## Bases de datos utilizadas
+
+La base de datos usada para este proyecto viene de algunos datos capturados previamente del campeonato de Europa de League of Legends 2019, el cual fue publicado por Stephen O'Farrel. En este caso se trabajará con 2 datas Frame. El primero es el "lec_championdata" el cual tiene como unidad muestral al campeón. El segundo viene a ser el "lec_playerdata" el cual tiene como unidad muestral a los jugadores agrupados por equipo.
+
+
+### Se cargan las siguientes librerías:
+
+- _library(readr)_
+- _library(dplyr)_
+- _library(stringr)_
+- _library(data.table)_
+
+```{r include=FALSE}
+library(readr)
+library(dplyr)
+library(stringr)
+library(data.table)
+```
+
+Se asignan las bases de datos del "campeón" y del "jugador" a analizar a DF1 y DF2 respectivamente.
+
+```{r,echo=FALSE}
+DF1 <- read_csv("lec_championdata.csv")
+DF2 <- read_csv("lec_playerdata.csv")
+```
+
+## Modelos de variables aleatorias en el estudio
+
+
+A continuación se adjunta una tabla con los modelos de variables aleatorias posibles para algunas de las variables de estudio:
+
+
+- Variable kills "K": Bernoulli
+- Variable "KDA" : Discreta
+- Variable posición "Pos": Geométrica
+- Variable porcentaje de victorias "%W" : Discreta
+- Variable Súbditos por minuto "CSPM" : Discreta
+- Variable porcentaje de oro "Gold%" : Discreta
+- Variable porcentaje de daño "DMG%" : Discreta
+- Variable porcentaje de muertes "DTH%" : Discreta
+ 
+ 
+ 
+# 2. Análisis Descriptivo
+
+## Variable KDA
+
+```{r}
+summary(DF2$KDA)
+```
+
+Análisis: La variable KDA determina el nivel de habilidad de cada jugador, esta no es mas que la suma de las kills y asistencias realizadas entre el número de muertes. Es lógico ver valores atípicos, extremadamente altos, debido a jugadores "genios" o a la gran diferencia de nivel entre equipos participantes.
+
+## Caja de bigotes de KDA para todas las posiciones
+
+```{r,echo=FALSE}
+boxplot(DF2$KDA, main = "Gráfica de KDA",xlab="KDA",ylab="Frecuencia")
+abline(h=mean(DF2$KDA),col="blue",lwd=1)
+```
+
+
+
+# 3. Análisis Inferencial
+```{r,echo=FALSE}
+DFadc<-which(DF2$Pos=="ADC")
+DFtop<-which(DF2$Pos=="Top")
+DFjg<-which(DF2$Pos=="Jungle")
+DFmid<-which(DF2$Pos=="Middle")
+DFsupp<-which(DF2$Pos=="Support")
+```
+
+## 3.1 ¿Tener un alto KDA te garantiza un gran porcentaje de victorias? 
+#### Análisis: Relación proporcional entre el KDA y el porcentaje de victoria de los jugadores.Con algunas diferencias significativas entre posiciones. 
+```{r,echo=FALSE}
+plot(DF2$KDA ~ DF2$`W%`, ylab='KDA', xlab='Porcentaje de victorias',col = as.factor(DF2$Pos))
+legend("topright", 
+       c("ADC","Support","Jungla","Mid","Top"), 
+       lty=1, 
+       fill =c("black","blue","red","green","lightblue"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
+```
+```{r,echo=FALSE}
+DF2 %>% filter(GP>=10)->DFGPok
+DFPokadc<-which(DFGPok$Pos=="ADC")
+DFPoktop<-which(DFGPok$Pos=="Top")
+DFPokjg<-which(DFGPok$Pos=="Jungle")
+DFPokmid<-which(DFGPok$Pos=="Middle")
+DFPoksupp<-which(DFGPok$Pos=="Support")
+```
+
+## Se plantea entonces ¿Si una posición (ADC) tiene KDA alto, el jugador tiene más victorias?
+#### Hipótesis: Podemos deducir que los mejores jugadores superan un valor cercano a la media, el cual puede establecerse como 5 por ejemplo.
+```{r,echo=FALSE}
+plot(DFGPok[DFPokadc,]$`KDA` ~ DFGPok[DFPokadc,]$`W%`,ylab="KDA",xlab="Porcentaje de Victorias Posición ADC")
+abline(h=mean(DF2[DFadc,]$`KDA`),col="blue")
+legend("topright", 
+       c("Media KDA"), 
+       lty=1, 
+       fill =c("blue"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
+```
+
+
+
+## 3.2 ¿Hay una influencia en el porcentaje de oro obtenido a mayor número de súbditos por minuto?
+
+```{r,echo=FALSE}
+plot(DF2$`Gold%` ~ DF2$CSPM,ylab="Porcentaje de oro",xlab="Súbditos por minuto",col = as.factor(DF2$Pos),main="Plot del porcentaje de oro y la variable CSPM" ) 
+abline(h=mean(DF2$`Gold%`),col="purple")
+legend("topright", 
+       c("Media","ADC","Support","Jungla","Mid","Top"), 
+       lty=1, 
+       fill =c("purple","black","blue","red","green","lightblue"), 
+       bty = "o", title="Leyenda",bg="transparent",cex=0.51)
+```
+
+## Resultados
+
+- Análisis: Se observa un escalado de la relación entre el porcentaje de oro  y los súbditos por minuto independientemente de la posición del jugador.
+
+- Hipótesis: El oro se obtiene a través de los súbditos entre otros enemigos, a mayor número ,mayor recaudación. Se plantea entonces una relación directa, entre más CSPM tengas, mayor es el porcentaje de oro obtenido. En concreto se observan valores más altos para la posición ADC, posición que por lo general realiza más daño y kills en el equipo.
+
+
+
+
+# 4. Intervalos de confianza
+
+## Parámetros:
+
+### *Muestra*: Se trabaja con una muestra de tamaño 221, jugadores participantes del torneo.
+
+### *Nivel de confianza*: Se toma un nivel de confianza del 95%. Considerado un porcentaje aceptable y válido para la muestra tomada.
+
+### *Nivel de significancia*: Se toma entonces una significancia de 0.05 . Dado por la ecuación 1 − α = nivel de confianza.
+
+```{r,echo=FALSE}
+#Declaración de variables
+n=221
+alfa=0.05
+z<-qnorm(alfa/2,lower.tail = FALSE)
+```
+
+## 4.1 Intervalos de confianza para la media de KDA
+
+```{r,echo=FALSE}
+xt=mean(DF2$KDA)
+st=sd(DF2$KDA)
+
+le<- xt - z*st/sqrt(n)
+ri<- xt + z*st/sqrt(n)
+cat("(",le,",",ri,")\n")
+```
+Intervalo de confianza para: $$KDA  =[3.3 , 4.21 ]$$
+
+### 4.2 Intervalos de confianza para la media de porcentaje de victorias
+
+```{r,echo=FALSE}
+xt2=mean(DF2$`W%`)
+st2=sd(DF2$`W%`)
+
+le2<- xt2 - z*st2/sqrt(n)
+ri2<- xt2 + z*st2/sqrt(n)
+cat("(",le2,",",ri2,")\n")
+```
+Intervalo de confianza para:
+$$Porcentaje  Wins  =[43.9 , 51.44 ]$$
+
+
+
+
+# 5. Variables aleatorias
+
+## Variable Posición ADC
+
+- Variable aleatoria binomial: Búsqueda de la probabilidad que del total de jugadores, 44 sean de la posición ADC.
+
+```{r,echo=FALSE}
+numADC=sum(DF2$Pos=="ADC")
+numADC
+```
+
+- Probabilidad de éxito: p= Probabilidad de que un jugador sea ADC
+
+```{r,echo=FALSE}
+padc=numADC/nrow(DF2)
+padc
+```
+
+- Probabilidad de fracaso: probabilidad de que un jugador no sea ADC
+```{r,echo=FALSE}
+1-padc
+```
+
+## Función de probabilidad:
+```{r}
+round(dbinom(44,n,padc),2)
+```
+
+- Esperanza:
+```{r,echo=FALSE}
+n*padc
+```
+
+
+
+
+# 6. Prueba de hipotesis 
+
+## Parámetros :
+$$Confianza = 0.95$$
+$$Significancia = 0.05$$
+$$Tamaño-Muestra-Variable ="n"$$
+
+
+
+### 6.1.Determinamos "KDA" media del porcentaje de victorias para la posición ADC.
+
+
+## Hipótesis: 
+En gráficas previas se evidenció que entre mayor sea su habilidad o KDA, mayor es el porcentaje de victorias del jugador. Podemos deducir entonces que los mejores ADC están por encima de la media de KDA del porcentaje de victorias ADC.
+Se toma 5 como valor de la hipótesis al ser el valor entero más cercano al promedio real.
+
+- Tamaño de la muestra solo para la posición ADC, n="26"
+
+- H0:El KDA promedio del porcentaje de victorias de la posición ADC es >= 5
+
+- H1:El KDA promedio del porcentaje de victorias de la posición ADC es < 5
+
+```{r,echo=FALSE}
+DFadc<-read.csv("data_adc.csv" )
+summary(DFadc$KDA)
+```
+
+##
+Análisis: Como el estadístico de prueba no cae en la zona de rechazo, no puedo rechazar H0, pues no encontré suficiente evidencia en contra. Además al 5% de significancia, el p-valor es mayor que la significancia, no hay suficiente evidencia para rechazar la hipótesis nula. Se puede justificar que los mejores ADC tienen un KDA más alto que la media.
+
+```{r,echo=FALSE}
+est<-(4.635-5)/sd(DFadc$KDA)/nrow(DFadc)
+tcritico <- qt(0.05, df = 25)
+pvalor<-pt(est, df=25)
+```
+
+```{r,echo=FALSE}
+x <- seq(-4, 4, by = 0.1)
+y <- dnorm(x)
+plot(x, y, type="l")
+abline(v=c(tcritico,est), lty = c(1,2), col = c("red", "blue"))
+coorx1 <- c(-10, seq(-10, -1.708141, 0.01), -1.708141)
+coory1 <- c(0, dt(seq(-10, -1.708141, 0.01), 25), 0)
+polygon(coorx1, coory1, col = "red")
+```
+
+
+## Resultados:
+
+Z crítico / Pvalue
+```{r,echo=FALSE}
+cat("(",tcritico,",",pvalor,")\n")
+```
+
+- No se rechaza la hipótesis nula (p-valor>0.05).
+
+- Estadístico de prueba fuera de la región de rechazo.
+
+# 7. Regresión y predicciones
+
+## KDA del porcentaje de victorias para ADC
+
+```{r,echo=FALSE}
+plot(DFadc$W. ~ DFadc$KDA  ,ylab ="Porcentaje de victorias" , xlab ="KDA ratio" , main = "Gráfica: KDA ratio vs porcentajes de victoria del adc", pch = 17, cex.axis = 1,cex.main = 1)
+legend("bottomright",legend=c("y= 18.547027+ 7.018899x"),col = "#FF00BE",lty=1:2, cex=0.8)
+
+abline(lm(DFadc$W. ~ DFadc$KDA), col = "#FF00BE")
+abline(h = mean(DFadc$W.), lty = "dashed")
+abline(v = mean(DFadc$KDA), lty = "dashed")
+text(x = c(7, 4, 2),
+     y = c(67.67932, 46.622623, 32.584825),
+     labels = c("+", "+", "+"),cex = 2,col="red")
+```
+
+## 
+```{r,echo=FALSE}
+Reg_1<-lm(DFadc$W. ~ DFadc$KDA)
+summary(Reg_1)
+```
+
+##
+```{r}
+par(mfrow=c(2,2))
+plot(Reg_1)
+```
+
+
+##
+Análisis:
+
+- El modelo muestra coeficientes significativos, en concreto el P-value siendo menor a la significancia establecida como 5%, estos pueden predecir confiablemente al porcentaje de victorias. Sin embargo solo puede describir 57.62% de la variaciones del porcentaje de victoria. 
+
+
+Conclusión: Se rechaza el modelo de regresión KDA y porcentaje de victorias
+
+
+
+# 8. Conclusiones
+
+## 8.1 ¿ Se pudo determinar la relación entre la variable "KDA" y el porcentaje de victorias?
+
+- Se comprueba que existe una relación proporcional entre las variables. Además se comprobó que existen jugadores "genios" de la posición ADC que se destacan por tener una media superior al resto de jugadores.
+
+## 8.2 ¿Encontramos influencia de la variable "súbditos por minuto" en el porcentaje oro generado?
+
+- A través del análisis inferencial entre las variables se descubrió una relación directa independientemente de la posición que tome el jugador. Aunque como se explicó, existen algunas posiciones, como ADC, con más ventaja sobre otras para obtener mayor "Súbditos por minuto" (CSPM).
+
+## 8.3 ¿Las asistencias del Support determinan un mayor Porcentaje de victorias?
+
+- Como se validó en prueba de hipótesis, la media de las asistencias del Support es mayor a la media de los jugadores en general y específicamente de la posición ADC. Con esto en mente se evidenció en un previo análisis una relación directa entre el número de posiciones y el porcentaje de victorias independientemente de la posición.
+
+
+- Finalmente se pudo realizar un correcto análisis del rendimiento de los jugadores en el torneo, estableciendo y validando posibles relaciones y predicciones entre variables relevantes de las cuales un jugador promedio puede obtener jugosa información. 

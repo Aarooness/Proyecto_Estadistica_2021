@@ -590,14 +590,14 @@ Resultados:
 
 - Tamaño de la muestra "n=25" : Jugadores que tomaron la posición Support 
 
-- HO:EL promedio de las asistencias es > 74
+- HO:EL promedio de las asistencias es >= 97
 
-- H1:El promedio de las asistencias es < 74
+- H1:El promedio de las asistencias es < 97
 
 
 ```{r}
 DFsupp2<-read.csv("Suppdata.csv") 
-summary(DFadc$A)
+summary(DFadcsupp$A)
 ```
 
 ```{r}

@@ -633,22 +633,12 @@ Resultados:
 ## 7. Regresión y predicciones
 
 =======================================================================================
-### 7.1 KDA del porcentaje de victorias para ADC
+## 7.1 KDA del porcentaje de victorias para ADC
 
 ```{r}
-DFadc<-read.csv("data_adc.csv" )
-```
-```{r}
-Reg_1<-lm(DFadc$W. ~ DFadc$KDA)
-summary(Reg_1)
-par(mfrow=c(2,2))
-plot(Reg_1)
-```
-
-
-```{r}
-plot(DFadc$W. ~ DFadc$KDA,ylab ="Porcentaje de victorias" , xlab ="KDA ratio" , main = "Gráfica: KDA ratio vs porcentajes de victoria del adc", pch = 17, cex.axis = 1,cex.main = 1)
+plot(DFadc$W. ~ DFadc$KDA  ,ylab ="Porcentaje de victorias" , xlab ="KDA ratio" , main = "Gráfica: KDA ratio vs porcentajes de victoria del adc", pch = 17, cex.axis = 1,cex.main = 1)
 legend("bottomright",legend=c("y= 18.547027+ 7.018899x"),col = "#FF00BE",lty=1:2, cex=0.8)
+
 abline(lm(DFadc$W. ~ DFadc$KDA), col = "#FF00BE")
 abline(h = mean(DFadc$W.), lty = "dashed")
 abline(v = mean(DFadc$KDA), lty = "dashed")
@@ -657,7 +647,37 @@ text(x = c(7, 4, 2),
      labels = c("+", "+", "+"),cex = 2,col="red")
 ```
 
-###Asistencias supp vs Porcentaje de victorias
+```{r}
+Reg_1<-lm(DFadc$W. ~ DFadc$KDA)
+summary(Reg_1)
+par(mfrow=c(2,2))
+plot(Reg_1)
+```
+
+Análisis: 
+- El modelo muestra coeficientes significativos, en concreto el P-value siendo menor a la significancia establecida como 5%, se puede por lo tanto obtener información de la relación entre variables.
+- Se explica cerca del 58% de variabilidad de la variable Porcentaje de victorias respecto al KDA.
+- Hay mucha dispersión de los residuos a excepción del rango entre 50 y 70 aproximadamente, en el cual se presenta poca homocedasticidad.
+- Los residuos son un poco más pequeños en la cola derecha de lo que esperaríamos ver de acuerdo a la teoría.
+- Algunos elementos poseen un efecto palanca en el modelo.
+
+
+##7.2 Promedio de porcentaje de oro vs Subditos por minuto
+
+```{r}
+DFprueba<-read.csv("PruebaReg.csv")
+```
+```{r}
+plot(DFprueba)
+```
+```{r}
+mulreg<-lm(DFprueba$CSPM~DFprueba$DMG.+DFprueba$Gold.)
+summary(mulreg)
+par(mfrow=c(2,2))
+plot(mulreg)
+```
+
+## 7.3 Asistencias del Support y el Porcentaje de victorias
 
 ```{r}
 DFsupp2<-read.csv("Suppdata.csv") 
@@ -680,18 +700,4 @@ legend("bottomright",legend=c("y=    4.5559935+0.3847497x"),col = "#FF00BE",lty=
 text(x = c(160, 120, 80),
      y = c(66.1159455, 50.7259575, 35.3359695),
      labels = c("+", "+", "+"),cex = 3,col="red")
-```
-###Promedio de porcentaje de oro vs Subditos por minuto
-
-```{r}
-DFprueba<-read.csv("PruebaReg.csv")
-```
-```{r}
-plot(DFprueba)
-```
-```{r}
-mulreg<-lm(DFprueba$CSPM~DFprueba$DMG.+DFprueba$Gold.)
-summary(mulreg)
-par(mfrow=c(2,2))
-plot(mulreg)
 ```

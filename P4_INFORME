@@ -573,7 +573,7 @@ abline(v=c(zcritico,est2), lty = c(1,2), col = c("red", "blue"))
 coordenada4.x1 <- c(-4.5, seq(-4.5, zcritico, 0.01), zcritico)
 coordenada4.y1 <- c(0, dt(seq(-4.5, zcritico, 0.01), 25), 0)
 polygon(coordenada4.x1, coordenada4.y1, col = "red")
-``
+```
 Análisis:
 ### El estadístico de prueba cayo fuera de la zona de rechazo, por lo que H0 no se rechaza, además el P-valor (0.4999) es mayor que la significancia por lo que no tenemos evidencia para respaldar Ha.
 Resultados:

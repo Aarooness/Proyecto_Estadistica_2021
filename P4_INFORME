@@ -589,7 +589,7 @@ Resultados:
 
 ## 6.3. Determinar la relevancia del número de asistencias siendo de la posición Support.
 
-- Hipótesis: De gráficas previas en las que se señalaba la media de Asistencias de las posiciones, se plantea que la media de las asistencias del Support es mayor que la de los jugadores en general, por ello se plantea una comparativa entre la media de las asistencias de Support y la media de esta misma posición más otra posición como puede ser ADC, determinando si se mantiene mayor. Se toma 97 como el valor entero más cercano al promedio real de las asistencias de ADC y Support juntos.
+- Hipótesis: De gráficas previas en las que se señalaba la media de Asistencias de las posiciones, se plantea que la media de las asistencias del Support es mayor que la de los jugadores en general, por ello se plantea una comparativa entre la media de las asistencias de Support y la media de esta misma posición más otra posición como puede ser ADC, determinando si se mantiene mayor. Se toma 100 como un valor entero referencial cercano al promedio real de las asistencias de ADC y Support juntos.
 
 - Tamaño de la muestra "n=25" : Jugadores que tomaron la posición Support 
 
@@ -607,6 +607,7 @@ summary(DFadcsupp$A)
 est3<-(96.96-100)/sd(DFadcsupp$A)/nrow(DFadcsupp)
 zcritico2 <- qnorm(0.05)
 pvalor3<-pnorm(est3)
+cat("(",zcritico2,",",pvalor3,")\n")
 ```
 ```{r}
 x <- seq(-5, 5, by = 0.1)
@@ -617,12 +618,15 @@ coordenada4.x1 <- c(-4.5, seq(-4.5, zcritico2, 0.01), zcritico2)
 coordenada4.y1 <- c(0, dt(seq(-4.5, zcritico2, 0.01), 25), 0)
 polygon(coordenada4.x1, coordenada4.y1, col = "red")
 ```
-###Análisis: El estadístico de prueba cayo fuera de la zona de rechazo, por lo que H0 no se rechaza, además el P-valor (0.4994) es mayor que la significancia por lo que no tenemos evidencia para respaldar Ha. Se valida que los supp tienen más asistencias que los adc.
+###Análisis: El estadístico de prueba cae fuera de la zona de rechazo, por lo que H0 no se rechaza, además el P-valor (0.4994) es mayor que la significancia por lo que no tenemos suficiente evidencia para rechazar la hipótesis nula. Se valida entonces que los Support tienen más asistencias que los jugadores de la posición ADC por ejemplo.
 
 Resultados:
-- No se rechaza la hipótesis nula (H0).
+- No se rechaza la hipótesis nula (p-valor>0.05).
+
 - Estadístico de prueba fuera de la región de rechazo.
-- Se rechaza Ha (p-valor>0.05)
+
+
+
 
 =======================================================================================
 

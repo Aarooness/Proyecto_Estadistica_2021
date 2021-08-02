@@ -596,7 +596,10 @@ Resultados:
 
 
 ```{r}
-DFsupp2<-read.csv("Suppdata.csv") 
+DFadcsupp<- read_csv("ADC-SUPP.csv")
+DFsupp2<-read_csv("Suppdata.csv") 
+```
+```{r}
 summary(DFadcsupp$A)
 ```
 

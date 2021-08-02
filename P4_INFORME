@@ -653,8 +653,15 @@ summary(Reg_1)
 par(mfrow=c(2,2))
 plot(Reg_1)
 ```
+###Análisis: 
+###Con la información de summary(reg1), notamos que al ser el p-value significativo(menor que la significancia)  el coeficiente estimado de KDA del jugador en la posición ADC y el porcentaje de victorias del jugador pueden predecir confiablemente al porcentaje de victorias. Sin embargo solo puede describir 57.62% de la variaciones del porcentaje de victoria.
 
-Análisis: 
+###Para poder aprobar el modelo analizaremos los resultados del diagnóstico de regresión plot(reg1). Residuals vs Fitted: nos da la advertencia que existe problemas con la linealidad de nuestra relación. Scale vs Location: sugiere que la varianza de los errores no es constante, existe heterocedasticidad. Residuals vs Leverage: Existen valores atípicos que afectaran de manera significativa a la función de regresión si es que son excluidos del análisis.
+
+###Conclusión: Se rechaza el modelo de regresión KDA y porcentaje de victorias
+
+Análisis:
+
 - El modelo muestra coeficientes significativos, en concreto el P-value siendo menor a la significancia establecida como 5%, se puede por lo tanto obtener información de la relación entre variables.
 - Se explica cerca del 58% de variabilidad de la variable Porcentaje de victorias respecto al KDA.
 - Hay mucha dispersión de los residuos entre distintos rangos, de los cuales se presenta poca homocedasticidad.
@@ -688,6 +695,11 @@ summary(Reg_2)
 par(mfrow=c(2,2))
 plot(Reg_2)
 ```
+###Análisis:
+###El p-value encontrado en summary(reg2) nos indica que el coeficiente de asistencias es suficientemente significativo al 5% para describir un modelo de regresión. Sin embargo solo puede describir 53.76% de la variaciones del porcentaje de victoria para el rol Supp. 
+###Tomando en cuenta el diagnostico de regresión. Residuals vs Fitted: Existe un patrón no linear. Scale vs Location: sugiere que la varianza de los errores no es constante, existe heterocedasticidad. Residuals vs Leverage: Aunque las líneas de Cook aparecen en la gráfica, los valores atípicos de los que se nos advierte, como el punto 10, no son muy influyentes en el modelo de regresión, ya que se mantienen en el rango de residuos estandarizados.
+###Conclusión: Se rechaza el modelo de regresión asistencias y porcentaje de victorias de rol soporte
+
 
 ```{r}
 plot(DFsupp2$W.~DFsupp2$A  ,ylab = "Porcentaje de victorias", xlab = "Asistencias supp", main = "Gráfica: Asistencias supp vs Porcentaje de victorias", pch = 17, cex.axis = 1, cex = 1, cex.main = 1)
@@ -701,3 +713,4 @@ text(x = c(160, 120, 80),
      y = c(66.1159455, 50.7259575, 35.3359695),
      labels = c("+", "+", "+"),cex = 3,col="red")
 ```
+###Análisis:

@@ -633,7 +633,9 @@ Resultados:
 ## 7. Regresión y predicciones
 
 =======================================================================================
-###KDA ratio vs porcentajes de victoria del adc
+## 7.1 KDA del porcentaje de victorias para ADC
+
+
 ```{r}
 Reg_1<-lm(DFadc$W. ~ DFadc$KDA)
 summary(Reg_1)

@@ -633,9 +633,11 @@ Resultados:
 ## 7. Regresión y predicciones
 
 =======================================================================================
-## 7.1 KDA del porcentaje de victorias para ADC
+### 7.1 KDA del porcentaje de victorias para ADC
 
-
+```{r}
+DFadc<-read.csv("data_adc.csv" )
+```
 ```{r}
 Reg_1<-lm(DFadc$W. ~ DFadc$KDA)
 summary(Reg_1)
@@ -643,17 +645,53 @@ par(mfrow=c(2,2))
 plot(Reg_1)
 ```
 
+
 ```{r}
-
-
-plot(DFadc$wrate_adc ~ DFadc$kda_adc  ,ylab ="Porcentaje de victorias" , xlab ="KDA ratio" , main = "Gráfica: KDA ratio vs porcentajes de victoria del adc", pch = 17, cex.axis = 1,cex.main = 1)
+plot(DFadc$W. ~ DFadc$KDA,ylab ="Porcentaje de victorias" , xlab ="KDA ratio" , main = "Gráfica: KDA ratio vs porcentajes de victoria del adc", pch = 17, cex.axis = 1,cex.main = 1)
 legend("bottomright",legend=c("y= 18.547027+ 7.018899x"),col = "#FF00BE",lty=1:2, cex=0.8)
-
-abline(lm(DFadc$wrate_adc ~ DFadc$kda_adc), col = "#FF00BE")
-abline(h = mean(DFadc$wrate_adc), lty = "dashed")
-abline(v = mean(DFadc$kda_adc), lty = "dashed")
+abline(lm(DFadc$W. ~ DFadc$KDA), col = "#FF00BE")
+abline(h = mean(DFadc$W.), lty = "dashed")
+abline(v = mean(DFadc$KDA), lty = "dashed")
 text(x = c(7, 4, 2),
      y = c(67.67932, 46.622623, 32.584825),
      labels = c("+", "+", "+"),cex = 2,col="red")
 ```
 
+###Asistencias supp vs Porcentaje de victorias
+
+```{r}
+DFsupp2<-read.csv("Suppdata.csv") 
+```
+```{r}
+Reg_2<-lm(DFsupp2$W.~DFsupp2$A)
+summary(Reg_2)
+par(mfrow=c(2,2))
+plot(Reg_2)
+```
+
+```{r}
+plot(DFsupp2$W.~DFsupp2$A  ,ylab = "Porcentaje de victorias", xlab = "Asistencias supp", main = "Gráfica: Asistencias supp vs Porcentaje de victorias", pch = 17, cex.axis = 1, cex = 1, cex.main = 1)
+
+## Linea de regresión
+abline(lm(DFsupp2$W.~DFsupp2$A), col = "#FF00BE")
+abline(h = mean(DFsupp2$W.), lty = "dashed")
+abline(v = mean(DFsupp2$A), lty = "dashed")
+legend("bottomright",legend=c("y=    4.5559935+0.3847497x"),col = "#FF00BE",lty=1:2, cex=0.8)
+text(x = c(160, 120, 80),
+     y = c(66.1159455, 50.7259575, 35.3359695),
+     labels = c("+", "+", "+"),cex = 3,col="red")
+```
+###Promedio de porcentaje de oro vs Subditos por minuto
+
+```{r}
+DFprueba<-read.csv("PruebaReg.csv")
+```
+```{r}
+plot(DFprueba)
+```
+```{r}
+mulreg<-lm(DFprueba$CSPM~DFprueba$DMG.+DFprueba$Gold.)
+summary(mulreg)
+par(mfrow=c(2,2))
+plot(mulreg)
+```

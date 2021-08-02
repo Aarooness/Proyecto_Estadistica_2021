@@ -673,12 +673,15 @@ DFprueba<-read.csv("PruebaReg.csv")
 ```{r}
 plot(DFprueba)
 ```
+###El porcentaje de oro puede depender de diferentes variables, decidimos usar porcentaje de daño y súbditos por minuto. De plot(DFprueba)encontramos una correlación entre porcentaje de oro y porcentaje de daño o súbditos por minuto, por lo que pueden ser predictores razonables para el porcentaje de  oro. Además también existe una relación entre porcentaje de daño y súbditos por minuto, lo que puede significar que no sea necesario usar las dos.
 ```{r}
-mulreg<-lm(DFprueba$CSPM~DFprueba$DMG.+DFprueba$Gold.)
+mulreg<-lm(DFprueba$Gold.~DFprueba$DMG.+DFprueba$CSPM)
 summary(mulreg)
 par(mfrow=c(2,2))
 plot(mulreg)
 ```
+###Los p-valores en summary(mulreg), son significativos tanto para describir el porcentaje de oro en base al daño ajustando por promedio de Súbditos por minuto o describir el porcentaje de oro en base al promedio de Súbditos por minuto ajustando por el porcentaje de daño. Sin embargo la segunda al ser más significativa describe mejor el porcentaje de oro si usamos los dos variables independientes en vez de solo promedio de súbditos por minuto. El modelo “Promedio de porcentaje de oro= Intercepto + (pendiente1*D%)+(pendiente2*CSPM)” podría ser usado, después de analizar el diagnostico de regresión. Residuals vs Fitted: Se puede asumir un patrón linear. Scale vs Location: Presenta heterocedasticidad leve. . Residuals vs Leverage: Existen puntos atípicos con influencia en la regresión, pero todos los puntos están dentro de las líneas de Cook.
+###Conclusión: No se rechaza el modelo de regresión porcentaje de oro en base al promedio de Súbditos por minuto ajustando por el porcentaje de daño “Promedio de porcentaje de oro= Intercepto + (pendiente1*D%)+(pendiente2*CSPM)”
 
 ## 7.3 Asistencias del Support y el Porcentaje de victorias
 

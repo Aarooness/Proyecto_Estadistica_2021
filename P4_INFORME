@@ -538,10 +538,9 @@ polygon(coorx1, coory1, col = "red")
 
 Resultados:
 
-- No se rechaza la hipótesis nula (H0).
-- Estadístico de prueba fuera de la región de rechazo.
-- Se rechaza Ha (p-valor>0.05)
+- No se rechaza la hipótesis nula (p-valor>0.05).
 
+- Estadístico de prueba fuera de la región de rechazo.
 
 
 

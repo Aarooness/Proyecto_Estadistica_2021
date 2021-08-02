@@ -435,7 +435,7 @@ curve(dnorm(x, mean = 47.67, sd = sdw), from = 0, to = 100, add = TRUE)
 
 
 
-### Variable KDA
+### Variable Posición ADC
 
 - Variable aleatoria binomial: Búsqueda de la probabilidad que del total de jugadores, 44 sean de la posición ADC.
 

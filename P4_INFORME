@@ -584,22 +584,21 @@ Resultados:
 
 
 
-## 6.3. Determinar la relevancia del número de asistencias .
+## 6.3. Determinar la relevancia del número de asistencias siendo de la posición Support.
 
-- Hipótesis: De gráficas previas en las que se señalaba la media de Asistencias de las posiciones, se plantea que la media de las asistencias del Support es mayor que la de los jugadores en general, resaltando la predilección de esta posición para aumentar el valor en la variable Asistencias.
+- Hipótesis: De gráficas previas en las que se señalaba la media de Asistencias de las posiciones, se plantea que la media de las asistencias del Support es mayor que la de los jugadores de posición ADC, resaltando la predilección de esta posición Support para aumentar el valor en la variable Asistencias. Se toma 74 como el valor entero más cercano al promedio real de las asistencias de ADC.
 
 - Tamaño de la muestra "n=25" : Jugadores que tomaron la posición Support 
 
-- HO:EL promedio de las asistencias es > 60
+- HO:EL promedio de las asistencias es > 74
 
-- H1:El promedio de las asistencias es < 60
+- H1:El promedio de las asistencias es < 74
 
 
 ```{r}
 DFsupp2<-read.csv("Suppdata.csv") 
-summary(DF2$A)
+summary(DFadc$A)
 ```
-
 
 ```{r}
 t.test(DFsupp2$A, alternative='less',

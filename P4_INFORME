@@ -654,20 +654,15 @@ summary(Reg_1)
 par(mfrow=c(2,2))
 plot(Reg_1)
 ```
-###Análisis: 
-###Con la información de summary(reg1), notamos que al ser el p-value significativo(menor que la significancia)  el coeficiente estimado de KDA del jugador en la posición ADC y el porcentaje de victorias del jugador pueden predecir confiablemente al porcentaje de victorias. Sin embargo solo puede describir 57.62% de la variaciones del porcentaje de victoria.
-
-###Para poder aprobar el modelo analizaremos los resultados del diagnóstico de regresión plot(reg1). Residuals vs Fitted: nos da la advertencia que existe problemas con la linealidad de nuestra relación. Scale vs Location: sugiere que la varianza de los errores no es constante, existe heterocedasticidad. Residuals vs Leverage: Existen valores atípicos que afectaran de manera significativa a la función de regresión si es que son excluidos del análisis.
-
-###Conclusión: Se rechaza el modelo de regresión KDA y porcentaje de victorias
-
 Análisis:
 
-- El modelo muestra coeficientes significativos, en concreto el P-value siendo menor a la significancia establecida como 5%, se puede por lo tanto obtener información de la relación entre variables.
-- Se explica cerca del 58% de variabilidad de la variable Porcentaje de victorias respecto al KDA.
-- Hay mucha dispersión de los residuos entre distintos rangos, de los cuales se presenta poca homocedasticidad.
+- El modelo muestra coeficientes significativos, en concreto el P-value siendo menor a la significancia establecida como 5%, estos pueden predecir confiablemente al porcentaje de victorias. Sin embargo solo puede describir 57.62% de la variaciones del porcentaje de victoria. 
+- Hay mucha dispersión de los residuos entre distintos rangos, de los cuales se presenta poca homocedasticidad.Y existe problemas con la linealidad de nuestra relación.
 - Los residuos son un poco más pequeños en la cola derecha de lo que esperaríamos ver de acuerdo a la teoría.
+- Scale vs Location: sugiere que la varianza de los errores no es constante, existe heterocedasticidad.
 - Algunos elementos poseen un efecto palanca en el modelo.
+
+Conclusión: Se rechaza el modelo de regresión KDA y porcentaje de victorias
 
 
 ##7.2 Promedio de porcentaje de oro vs Subditos por minuto

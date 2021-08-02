@@ -576,7 +576,7 @@ coordenada4.y1 <- c(0, dt(seq(-4.5, zcritico, 0.01), 25), 0)
 polygon(coordenada4.x1, coordenada4.y1, col = "red")
 ``
 Análisis:
-### El estadístico de prueba cayo fuera de la zona de rechazo, por lo que H0 no se rechaza, además el P-valor (0.4999) es mayor que la significancia por lo que no tenemos evidencia para respaldar H0.
+### El estadístico de prueba cayo fuera de la zona de rechazo, por lo que H0 no se rechaza, además el P-valor (0.4999) es mayor que la significancia por lo que no tenemos evidencia para respaldar Ha.
 Resultados:
 - No se rechaza la hipótesis nula (H0).
 - Estadístico de prueba fuera de la región de rechazo.
@@ -590,37 +590,36 @@ Resultados:
 
 - Tamaño de la muestra "n=25" : Jugadores que tomaron la posición Support 
 
-- HO:EL promedio de las asistencias es >= 97
+- HO:EL promedio de las asistencias es >= 100
 
-- H1:El promedio de las asistencias es < 97
+- H1:El promedio de las asistencias es < 100
 
 
 ```{r}
-DFadcsupp<- read_csv("ADC-SUPP.csv")
-DFsupp2<-read_csv("Suppdata.csv") 
-```
-```{r}
+DFsupp2<-read.csv("Suppdata.csv") 
 summary(DFadcsupp$A)
 ```
 
 ```{r}
-t.test(DFsupp2$A, alternative='less',
-       conf.level=0.95, mu=123)
+est3<-(96.96-100)/sd(DFadcsupp$A)/nrow(DFadcsupp)
+zcritico2 <- qnorm(0.05)
+pvalor3<-pnorm(est3)
 ```
-### Puntos críticos
 ```{r}
-pc6<-qt(alfa/2,df=nrow(DFsupp2)-1)
-pc7<-qt(1-alfa/2,df=nrow(DFsupp2)-1)
-pc6
-pc7
+x <- seq(-5, 5, by = 0.1)
+y <- dnorm(x)
+plot(x, y, type="l")
+abline(v=c(zcritico2,est3), lty = c(1,2), col = c("red", "blue"))
+coordenada4.x1 <- c(-4.5, seq(-4.5, zcritico2, 0.01), zcritico2)
+coordenada4.y1 <- c(0, dt(seq(-4.5, zcritico2, 0.01), 25), 0)
+polygon(coordenada4.x1, coordenada4.y1, col = "red")
 ```
-Análisis:
+###Análisis: El estadístico de prueba cayo fuera de la zona de rechazo, por lo que H0 no se rechaza, además el P-valor (0.4994) es mayor que la significancia por lo que no tenemos evidencia para respaldar Ha. Se valida que los supp tienen más asistencias que los adc.
 
 Resultados:
-- No se rechaza la hipótesis nula (H0) ???
-
-
-
+- No se rechaza la hipótesis nula (H0).
+- Estadístico de prueba fuera de la región de rechazo.
+- Se rechaza Ha (p-valor>0.05)
 
 =======================================================================================
 

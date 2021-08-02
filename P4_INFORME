@@ -680,8 +680,12 @@ summary(mulreg)
 par(mfrow=c(2,2))
 plot(mulreg)
 ```
-###Los p-valores en summary(mulreg), son significativos tanto para describir el porcentaje de oro en base al daño ajustando por promedio de Súbditos por minuto o describir el porcentaje de oro en base al promedio de Súbditos por minuto ajustando por el porcentaje de daño. Sin embargo la segunda al ser más significativa describe mejor el porcentaje de oro si usamos los dos variables independientes en vez de solo promedio de súbditos por minuto. El modelo “Promedio de porcentaje de oro= Intercepto + (pendiente1*D%)+(pendiente2*CSPM)” podría ser usado, después de analizar el diagnostico de regresión. Residuals vs Fitted: Se puede asumir un patrón linear. Scale vs Location: Presenta heterocedasticidad leve. . Residuals vs Leverage: Existen puntos atípicos con influencia en la regresión, pero todos los puntos están dentro de las líneas de Cook.
-###Conclusión: No se rechaza el modelo de regresión porcentaje de oro en base al promedio de Súbditos por minuto ajustando por el porcentaje de daño “Promedio de porcentaje de oro= Intercepto + (pendiente1*D%)+(pendiente2*CSPM)”
+- Los p-valores en summary(mulreg), son significativos tanto para describir el porcentaje de oro en base al daño ajustando por promedio de Súbditos por minuto o describir el porcentaje de oro en base al promedio de Súbditos por minuto ajustando por el porcentaje de daño. Sin embargo la segunda al ser más significativa describe mejor el porcentaje de oro si usamos las dos variables independientes en vez de solo promedio de súbditos por minuto. 
+- El modelo “Promedio de porcentaje de oro= Intercepto + (pendiente1* D%)+(pendiente2 * CSPM)” podría ser usado, después de analizar el diagnostico de regresión. 
+- Residuals vs Fitted: Se puede asumir un patrón linear. Scale vs Location: Presenta heterocedasticidad leve. . Residuals vs Leverage: Existen puntos atípicos con influencia en la regresión, pero todos los puntos están dentro de las líneas de Cook.
+
+
+Conclusión: No se rechaza el modelo de regresión porcentaje de oro en base al promedio de Súbditos por minuto ajustando por el porcentaje de daño “Promedio de porcentaje de oro= Intercepto + (pendiente1 * D%)+(pendiente2 * CSPM)”
 
 ## 7.3 Asistencias del Support y el Porcentaje de victorias
 
@@ -715,4 +719,23 @@ Análisis:
 Conclusión: Se rechaza el modelo de regresión asistencias y porcentaje de victorias de rol soporte
 
 
+=======================================================================================
 
+# 8. Conclusiones
+
+=======================================================================================
+
+## 8.1 ¿ Se pudo determinar la relación entre la variable "KDA" y el porcentaje de victorias?
+
+- Se comprueba que existe una relación proporcional entre las variables. Además se comprobó que existen jugadores "genios" de la posición ADC que se destacan por tener una media superior al resto de jugadores.
+
+## 8.2 ¿Encontramos influencia de la variable "súbditos por minuto" en el porcentaje oro generado?
+
+- A través del análisis inferencial entre las variables se descubrió una relación directa independientemente de la posición que tome el jugador. Aunque como se explicó, existen algunas posiciones, como ADC, con más ventaja sobre otras para obtener mayor "Súbditos por minuto" (CSPM).
+
+## 8.3 ¿Las asistencias del Support determinan un mayor Porcentaje de victorias?
+
+- Como se validó en prueba de hipótesis, la media de las asistencias del Support es mayor a la media de los jugadores en general y específicamente de la posición ADC. Con esto en mente se evidenció en un previo análisis una relación directa entre el número de posiciones y el porcentaje de victorias independientemente de la posición.
+
+
+- Finalmente se pudo realizar un correcto análisis del rendimiento de los jugadores en el torneo, estableciendo y validando posibles relaciones y predicciones entre variables relevantes de las cuales un jugador promedio puede obtener jugosa información. 

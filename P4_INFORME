@@ -586,7 +586,7 @@ Resultados:
 
 ## 6.3. Determinar la relevancia del número de asistencias siendo de la posición Support.
 
-- Hipótesis: De gráficas previas en las que se señalaba la media de Asistencias de las posiciones, se plantea que la media de las asistencias del Support es mayor que la de los jugadores de posición ADC, resaltando la predilección de esta posición Support para aumentar el valor en la variable Asistencias. Se toma 74 como el valor entero más cercano al promedio real de las asistencias de ADC.
+- Hipótesis: De gráficas previas en las que se señalaba la media de Asistencias de las posiciones, se plantea que la media de las asistencias del Support es mayor que la de los jugadores en general, por ello se plantea una comparativa entre la media de las asistencias de Support y la media de esta misma posición más otra posición como puede ser ADC, determinando si se mantiene mayor. Se toma 97 como el valor entero más cercano al promedio real de las asistencias de ADC y Support juntos.
 
 - Tamaño de la muestra "n=25" : Jugadores que tomaron la posición Support 
 

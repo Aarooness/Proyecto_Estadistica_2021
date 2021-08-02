@@ -633,3 +633,25 @@ Resultados:
 ## 7. Regresión y predicciones
 
 =======================================================================================
+
+```{r}
+Reg_1<-lm(DFadc$W. ~ DFadc$KDA)
+summary(Reg_1)
+par(mfrow=c(2,2))
+plot(Reg_1)
+```
+
+```{r}
+
+
+plot(DFadc$wrate_adc ~ DFadc$kda_adc  ,ylab ="Porcentaje de victorias" , xlab ="KDA ratio" , main = "Gráfica: KDA ratio vs porcentajes de victoria del adc", pch = 17, cex.axis = 1,cex.main = 1)
+legend("bottomright",legend=c("y= 18.547027+ 7.018899x"),col = "#FF00BE",lty=1:2, cex=0.8)
+
+abline(lm(DFadc$wrate_adc ~ DFadc$kda_adc), col = "#FF00BE")
+abline(h = mean(DFadc$wrate_adc), lty = "dashed")
+abline(v = mean(DFadc$kda_adc), lty = "dashed")
+text(x = c(7, 4, 2),
+     y = c(67.67932, 46.622623, 32.584825),
+     labels = c("+", "+", "+"),cex = 2,col="red")
+```
+
